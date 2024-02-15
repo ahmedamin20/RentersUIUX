@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "837528480218",
+    "project_id": "rayed-7b109",
+    "storage_bucket": "rayed-7b109.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:837528480218:android:e5f326218df8db4365b8e3",
+        "android_client_info": {
+          "package_name": "com.drcode.ksb"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBRlkwAHI_eiMZvx6X4HDFrkfhH3GhEEKE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:837528480218:android:3a1c998bb718c08c65b8e3",
+        "android_client_info": {
+          "package_name": "com.example.a_to_z_delivery"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBRlkwAHI_eiMZvx6X4HDFrkfhH3GhEEKE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
