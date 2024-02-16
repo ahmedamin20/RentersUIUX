@@ -8,7 +8,6 @@ import 'package:ksb/core/resource/text_style_manager.dart';
 import 'package:ksb/views/componants/custom_elevated_button.dart';
 import 'package:ksb/views/componants/custom_text_form_field.dart';
 import 'package:ksb/views/pages/edit_profile/widget/edit_profile_form.dart';
-import 'package:ksb/views/pages/notification/widget/notification_app_bar.dart';
 
 class EditProfile extends StatelessWidget {
   const  EditProfile({super.key});
@@ -16,7 +15,6 @@ class EditProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-      appBar: const CustomAppBar(title: TextManager.editProfile),
       body: SingleChildScrollView(
         child: Column(
           children: [

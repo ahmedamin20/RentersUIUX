@@ -19,11 +19,6 @@ import 'package:ksb/data/repository/favoutite_repo/favoutite_repo.dart';
 import 'package:ksb/data/repository/get_product_repo/gert_product_repo.dart';
 import 'package:ksb/data/repository/home_repo/home_repo.dart';
 import 'package:ksb/data/repository/profile_repo/profile_repo.dart';
-import 'package:ksb/modlue/chat_module/view_model/cubit/bind_channel/bind_cubit.dart';
-import 'package:ksb/modlue/chat_module/view_model/cubit/chat_cubit.dart';
-import 'package:ksb/modlue/chat_module/view_model/cubit/users_chat_cubit/user_chat_cubit.dart';
-import 'package:ksb/notification_module/data/repositories/notification_repo_impl/notification_repo_impl.dart';
-import 'package:ksb/notification_module/presentation/manager/notification_cubit/notification_cubit.dart';
 import 'package:ksb/view_model/cubit/cart_cubit/cart_cubit.dart';
 import 'package:ksb/view_model/cubit/category_cubit/category_cubit.dart';
 import 'package:ksb/view_model/cubit/favourite_cubit/favourite_cubit.dart';
@@ -34,16 +29,10 @@ import 'package:ksb/view_model/cubit/layout_cubit/layout_cubit.dart';
 import 'package:ksb/view_model/cubit/location_cubit/location_cubit.dart';
 import 'package:ksb/view_model/cubit/product_cubit/product_cubit.dart';
 import 'package:ksb/view_model/cubit/profile_cubit/profile_cubit.dart';
-import 'package:ksb/view_model/cubit/visit_history_cubit/visit_history_cubit.dart';
-import 'package:ksb/view_model/cubit/visitor_car_cubit/visitor_car_cubit.dart';
 import 'package:lottie/lottie.dart';
 import 'core/BlocObserver.dart';
 import 'core/services/app_router.dart';
-import 'data/repository/visite_history_repo/visit_history_repo.dart';
-import 'data/repository/visitor_car_repo.dart';
 import 'firebase_options.dart';
-import 'modlue/notification_module/helpers/firebase_notification.dart';
-import 'notification_module/presentation/manager/notification_controller/notificaiton_controller.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async
@@ -64,15 +53,7 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   // initialize FirebaseMessageing
-  FirebaseNotification.instance.init();
-  // forground message
-  FirebaseNotification.instance.onMessage((message) {
-    print('onMessage $message');
-  });
-  // background message
-  FirebaseNotification.instance.onBackgroundMessage((message) {
-    print('onBackgroundMessage $message');
-  });
+
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
   // initialize awesome notification
@@ -135,14 +116,6 @@ class _MyAppState extends State<MyApp> {
       }
     });
     // TODO: implement initState
-    AwesomeNotifications().setListeners(
-        onActionReceivedMethod: NotificationController.onActionReceivedMethod,
-        onNotificationCreatedMethod:
-            NotificationController.onNotificationCreatedMethod,
-        onNotificationDisplayedMethod:
-            NotificationController.onNotificationDisplayedMethod,
-        onDismissActionReceivedMethod:
-            NotificationController.onDismissActionReceivedMethod);
     super.initState();
   }
 
@@ -158,16 +131,7 @@ class _MyAppState extends State<MyApp> {
             create: (context) => FavouriteCubit(
                 sl<FavouriteRepoImpl>(), sl<GetProductRepoImpl>())),
         BlocProvider(create: (context) => ProfileCubit(sl<ProfileRepoImpl>())),
-        BlocProvider(
-            create: (context) => VisitHistoryCubit(sl<VisitHistoryRepoImpl>())),
-        BlocProvider(
-            create: (context) => NotificationCubit(sl<NotificationRepoImpl>())
-              ..getNotification(reset: true)
-              ..getNotificationCount()
-              ..subscribe()
-              ..bindNotification()),
-        BlocProvider(
-            create: (context) => VisitorCarCubit(sl<VisitorCarRepoImpl>())),
+
         BlocProvider(
             create: (context) => InformationCubit(sl<InformationRepoImpl>())
               ..getTermsAndCondation()
@@ -176,10 +140,7 @@ class _MyAppState extends State<MyApp> {
         BlocProvider(create: (context) => sl<CategoryCubit>()..getCategory()),
         BlocProvider(create: (context) => sl<CategoryCubit>()..getCategory()),
         BlocProvider(create: (context) =>LocationCubit()..getLocation()),
-        BlocProvider(create: (context) =>sl<ChatCubit>()),
-        BlocProvider(create: (context) =>sl<BindCubit>()..subscribe(context)),
-        BlocProvider(create: (context) =>sl<UserChatCubit>()..getUserChat(1)),
-        
+
         
         ////////////////////a to z /////////////////////////
 
@@ -191,64 +152,59 @@ class _MyAppState extends State<MyApp> {
         designSize: const Size(360, 690),
         minTextAdapt: true,
         splitScreenMode: true,
-        child: BlocListener<BindCubit, BindState>(
-  listener: (context, state) {
-    // TODO: implement listener
-  },
-  child: BlocConsumer<LayoutCubit, LayoutState>(
-          listener: (context, state) {
-            // TODO: implement listener
-          },
-          builder: (context, state) {
-            return BlocConsumer<InternetCubit, InternetState>(
-              listener: (context, state) {},
-              builder: (context, state) {
-                return
-                    state is InternetConnected?
-                    MaterialApp.router(
-                  localizationsDelegates: context.localizationDelegates,
-                  supportedLocales: context.supportedLocales,
-                  locale: context.locale,
-                  key: navigatorKey,
-                  builder: EasyLoading.init(),
-                  routerConfig: AppRouter.router,
-                  debugShowCheckedModeBanner: false,
-                  theme: LayoutCubit.get(context).isDark
-                      ? AppTheme.dark
-                      : AppTheme.light,
-                  title: 'A to Z',
+        child: BlocConsumer<LayoutCubit, LayoutState>(
+                listener: (context, state) {
+                  // TODO: implement listener
+                },
+                builder: (context, state) {
+                  return BlocConsumer<InternetCubit, InternetState>(
+                    listener: (context, state) {},
+                    builder: (context, state) {
+                      return
+                          state is InternetConnected?
+                          MaterialApp.router(
+                        localizationsDelegates: context.localizationDelegates,
+                        supportedLocales: context.supportedLocales,
+                        locale: context.locale,
+                        key: navigatorKey,
+                        builder: EasyLoading.init(),
+                        routerConfig: AppRouter.router,
+                        debugShowCheckedModeBanner: false,
+                        theme: LayoutCubit.get(context).isDark
+                            ? AppTheme.dark
+                            : AppTheme.light,
+                        title: 'A to Z',
 
-                ):   MaterialApp(
-                      localizationsDelegates: context.localizationDelegates,
-                      supportedLocales: context.supportedLocales,
-                      locale: context.locale,
-                      key: navigatorKey,
-                      builder: EasyLoading.init(),
-                      home:  Scaffold(
-                          body: Column(
-                            children:
-                            [
-                              SizedBox(height: 100.h,),
-                              Lottie.asset('assets/json/no_internet.json'),
-                              SizedBox(height: 20.h,),
-                              Text('no_internet'.tr(), style: TextStyle(
-                                fontSize: 20.sp,
-                                fontWeight: FontWeight.bold,
-                              ),),
-                            ],
-                          )
-                      ),
-                      debugShowCheckedModeBanner: false,
-                      theme: LayoutCubit.get(context).isDark ?
-                      AppTheme.dark:AppTheme.light,
-                      title: 'KSB',
-                    );
+                      ):   MaterialApp(
+                            localizationsDelegates: context.localizationDelegates,
+                            supportedLocales: context.supportedLocales,
+                            locale: context.locale,
+                            key: navigatorKey,
+                            builder: EasyLoading.init(),
+                            home:  Scaffold(
+                                body: Column(
+                                  children:
+                                  [
+                                    SizedBox(height: 100.h,),
+                                    Lottie.asset('assets/json/no_internet.json'),
+                                    SizedBox(height: 20.h,),
+                                    Text('no_internet'.tr(), style: TextStyle(
+                                      fontSize: 20.sp,
+                                      fontWeight: FontWeight.bold,
+                                    ),),
+                                  ],
+                                )
+                            ),
+                            debugShowCheckedModeBanner: false,
+                            theme: LayoutCubit.get(context).isDark ?
+                            AppTheme.dark:AppTheme.light,
+                            title: 'KSB',
+                          );
 
-              },
-            );
-          },
-        ),
-),
+                    },
+                  );
+                },
+              ),
       ),
     );
   }

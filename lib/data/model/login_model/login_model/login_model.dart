@@ -29,7 +29,7 @@ class LoginModel {
 }
 
 class Data {
-  int? id;
+  dynamic id;
   String? name;
   String? email;
   String? avatar;

@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ksb/view_model/cubit/category_cubit/category_cubit.dart';
-import 'package:ksb/views/pages/notification/widget/notification_app_bar.dart';
 
 import '../../../../../../core/resource/text_manager.dart';
 import '../../../../../../core/resource/text_style_manager.dart';
@@ -33,7 +32,6 @@ class _RecommendedScreenState extends State<RecommendedScreen> {
   Widget build(BuildContext context) {
     sl<CategoryCubit>().getCategory();
     return Scaffold(
-      appBar: const CustomAppBar(title:TextManager.recommended),
       body: Column(
         children: [
           SizedBox(

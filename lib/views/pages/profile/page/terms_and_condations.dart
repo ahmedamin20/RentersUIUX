@@ -7,7 +7,6 @@ import 'package:ksb/data/repository/profile_repo/profile_repo.dart';
 import 'package:ksb/view_model/cubit/layout_cubit/layout_cubit.dart';
 import 'package:ksb/view_model/cubit/profile_cubit/profile_cubit.dart';
 import 'package:ksb/views/componants/custom_app_bar/custom_app_bar.dart';
-import 'package:ksb/views/pages/notification/widget/notification_app_bar.dart';
 import 'package:ksb/views/pages/profile/page/profile_screen.dart';
 
 import '../../../../core/services/service_locator/service_locator.dart';
@@ -27,7 +26,6 @@ class TermsAndCondationScreen extends StatelessWidget {
         },
         builder: (context, state) {
           return Scaffold(
-            appBar:const CustomAppBar(title: TextManager.termsAndConditions),
             body:
             (state is GetTermsAndCondationLoading)?
             const Center(child: CircularProgressIndicator(),) :

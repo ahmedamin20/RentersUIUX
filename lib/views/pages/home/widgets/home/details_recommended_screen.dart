@@ -5,7 +5,6 @@ import 'package:ksb/core/resource/colors_manager.dart';
 import 'package:ksb/views/pages/home/widgets/home/all_recommended_list_view.dart';
 import 'package:ksb/views/pages/home/widgets/home/recommended_details_item.dart';
 import 'package:ksb/views/pages/home/widgets/home/top_list_recommende_details.dart';
-import 'package:ksb/views/pages/notification/widget/notification_app_bar.dart';
 
 import '../../../../../core/resource/text_manager.dart';
 import '../../../../../core/resource/text_style_manager.dart';
@@ -19,7 +18,6 @@ class DetailsRecommendedScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(title:TextManager.recommended),
       body: Column(
         children: [
           SizedBox(height: 15.h,),

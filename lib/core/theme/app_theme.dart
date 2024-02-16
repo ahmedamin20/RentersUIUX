@@ -9,7 +9,7 @@ abstract class AppTheme {
         centerTitle: true,
         titleTextStyle: TextStyle(color: ColorsManager.blue),
         iconTheme: IconThemeData(color: ColorsManager.grayDark),
-        color: ColorsManager.white,
+        color: ColorsManager.primaryColor,
         elevation: 0),
 
     checkboxTheme: CheckboxThemeData(
@@ -28,7 +28,7 @@ abstract class AppTheme {
         centerTitle: true,
         titleTextStyle: TextStyle(color: ColorsManager.blue),
         iconTheme: IconThemeData(color: ColorsManager.grayDark),
-        color: ColorsManager.white,
+        color: ColorsManager.primaryColor,
         elevation: 0),
     scaffoldBackgroundColor: ColorsManager.blackColor,
 

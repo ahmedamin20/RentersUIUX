@@ -41,7 +41,7 @@ class CustomTextFormField extends StatelessWidget {
     return TextFormField(
       obscuringCharacter: obscuringCharacter,
       style: TextStyleManager.textStyle14w500
-          .copyWith(color:LayoutCubit.get(context).isDark?ColorsManager.white: ColorsManager.colorText),
+          .copyWith( color:ColorsManager.gray2),
 
       controller: controller,
       cursorColor: ColorsManager.primaryColor,

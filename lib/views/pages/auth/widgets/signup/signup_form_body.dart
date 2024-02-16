@@ -7,10 +7,9 @@ import 'package:ksb/core/constants.dart';
 import 'package:ksb/core/resource/space_manager.dart';
 import 'package:ksb/core/resource/text_manager.dart';
 import 'package:ksb/view_model/cubit/auth_cubit/register_cubit/cubit/register_cubit_cubit.dart';
-import 'package:ksb/views/componants/custom_text_form_field.dart';
-import 'package:pluto_grid/pluto_grid.dart';
 
 import '../../../../../core/resource/text_style_manager.dart';
+import '../../../../componants/custom_text_form_field.dart';
 
 class SignupFormBody extends StatelessWidget {
   const SignupFormBody({super.key});

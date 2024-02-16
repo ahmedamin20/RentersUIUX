@@ -60,10 +60,10 @@ class LoginView extends StatelessWidget {
       print(errors);
       bool isEmailVerified = false ;
 
-      if(state.code ==403)
-        {
-          isEmailVerified =   bool.parse(errors[0].toString().trim());
-        }
+      // if(state.code ==403)
+      //   {
+      //     isEmailVerified =   bool.parse(errors[0].toString().trim());
+      //   }
 
       false ;
       if(isEmailVerified)

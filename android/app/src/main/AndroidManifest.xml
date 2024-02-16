@@ -10,7 +10,7 @@
 
 
     <application
-        android:label="A to Z"
+        android:label="Renters"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
 

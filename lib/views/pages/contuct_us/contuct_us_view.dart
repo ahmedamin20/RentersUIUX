@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ksb/core/resource/colors_manager.dart';
 import 'package:ksb/views/pages/contuct_us/widget/contuct_us_widget.dart';
-import 'package:ksb/views/pages/notification/widget/notification_app_bar.dart';
 
 import '../../../core/resource/text_manager.dart';
 import '../../../core/services/service_locator/service_locator.dart';
@@ -29,9 +28,7 @@ class ContactUs extends StatelessWidget {
               height: ScreenUtil().screenHeight,
               child: Column(
                 children: [
-                  const CustomAppBar(
-                    title: TextManager.contactUs,
-                  ),
+
                   SizedBox(
                     height: ScreenUtil().setHeight(10.h),
                   ),

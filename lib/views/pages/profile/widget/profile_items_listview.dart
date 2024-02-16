@@ -9,7 +9,6 @@ import '../../../../core/resource/assets_manager.dart';
 import '../../../../core/resource/colors_manager.dart';
 import '../../../../core/resource/text_manager.dart';
 import '../../../../data/model/profile_ui_model/profile_ui_model.dart';
-import '../../notes/widget/delete_note_dialog.dart';
 import '../components/custom_card_profile/custom_card_profile.dart';
 
 class ProfileItemListView extends StatelessWidget {
@@ -121,27 +120,6 @@ class ProfileItemListView extends StatelessWidget {
         onTap: ()
         {
           context.push((AppRouter.supportChat));
-        },
-      ),
-      ProfileUiModel(
-        Colors.red,
-        isArrow: false,
-        title:  TextManager.logout.tr(),
-        iconData: AssetsManager.logOutIcon,
-        onTap: ()
-        {
-          showDialog(context: context, builder: (context){
-            return  Dialog(
-              child: DeleteNoteDialogWidget(text: TextManager.areYouSureLogOut,
-                onPressedYes: () {
-                  ProfileCubit.get(context).logout();
-
-                }
-
-                ,),
-            );
-          });
-          // context.push((AppRouter.loginView));
         },
       ),
 

@@ -9,7 +9,6 @@ import '../../../core/resource/colors_manager.dart';
 import '../../../core/resource/text_manager.dart';
 import '../../../core/resource/text_style_manager.dart';
 import '../../../data/repository/about_us_repo/about_us_repo.dart';
-import '../notification/widget/notification_app_bar.dart';
 import '../../../view_model/cubit/about_us_cubit/about_us_cubit.dart';
 import 'widget/about_us_form_widget.dart';
 import 'widget/show_video_dialog.dart';
@@ -27,9 +26,6 @@ class AboutUsScreen extends StatelessWidget {
           child: Center(
             child: Column(
               children: [
-                 const CustomAppBar(
-                  title: TextManager.aboutUs,
-                ),
                 SizedBox(
                   height: 32.h,
                 ),
