@@ -52,10 +52,12 @@ class SignupView extends StatelessWidget
           }
         },
 
-        child:  const Scaffold(
-          // resizeToAvoidBottomInset: false,
-          appBar:CustomAuthAppBar(),
-          body: SignupViewBody(),
+        child:  SafeArea(
+          child: const Scaffold(
+            // resizeToAvoidBottomInset: false,
+            appBar:CustomAuthAppBar(),
+            body: SignupViewBody(),
+          ),
         ),
       ),
     );

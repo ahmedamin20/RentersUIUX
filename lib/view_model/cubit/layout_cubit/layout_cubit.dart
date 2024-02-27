@@ -9,10 +9,8 @@ import 'package:meta/meta.dart';
 
 import '../../../core/helpers/cach_helpers/cach_helpers.dart';
 import '../../../core/resource/text_manager.dart';
-import '../../../data/model/get_info_data_model/get_info_data_model.dart';
 import '../../../views/home/page/home_screen.dart';
 import '../../../views/pages/profile/page/profile_screen.dart';
-import '../../../views/pages/reem_screens/cart_screen/component/cart_listview_item.dart';
 import '../../../views/pages/reem_screens/search_screens/my_order_screen/my_order_screen_layout.dart';
 import '../../../views/pages/reem_screens/search_screens/search_screen.dart';
 
@@ -33,10 +31,6 @@ class LayoutCubit extends Cubit<LayoutState> {
   [
     const HomeScreen(),
     const MyOrderScreenLayOut(),
-    // const VisitorCar(),
-    // const CarsView(),
-    const ListViewCartItem()  ,  //const VisitorCar(),
-    // const GrageCar(),
     SearchScreen(),
     const ProfileScreen(),
   ];

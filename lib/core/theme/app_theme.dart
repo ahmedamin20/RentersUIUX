@@ -9,7 +9,7 @@ abstract class AppTheme {
         centerTitle: true,
         titleTextStyle: TextStyle(color: ColorsManager.blue),
         iconTheme: IconThemeData(color: ColorsManager.grayDark),
-        color: ColorsManager.primaryColor,
+        color: ColorsManager.white,
         elevation: 0),
 
     checkboxTheme: CheckboxThemeData(

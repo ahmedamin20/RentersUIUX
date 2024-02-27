@@ -279,21 +279,21 @@ class HomeLayout extends StatelessWidget {
                           ? ColorsManager.primaryColor
                           : ColorsManager.gray2),
                   label: TextManager.orders),
-              BottomNavigationBarItem(
-                  icon: SvgPicture.asset(AssetsManager.cart,
-                      color: cubit.currentIndex == 2
-                          ? ColorsManager.primaryColor
-                          : ColorsManager.gray2),
-                  label: TextManager.cart),
+              // BottomNavigationBarItem(
+              //     icon: SvgPicture.asset(AssetsManager.cart,
+              //         color: cubit.currentIndex == 2
+              //             ? ColorsManager.primaryColor
+              //             : ColorsManager.gray2),
+              //     label: TextManager.cart),
               BottomNavigationBarItem(
                   icon: SvgPicture.asset(AssetsManager.search,
-                      color: cubit.currentIndex == 3
+                      color: cubit.currentIndex == 2
                           ? ColorsManager.primaryColor
                           : ColorsManager.gray2),
                   label: TextManager.search),
               BottomNavigationBarItem(
                   icon: SvgPicture.asset(AssetsManager.profile,
-                      color: cubit.currentIndex == 4
+                      color: cubit.currentIndex == 3
                           ? ColorsManager.primaryColor
                           : ColorsManager.gray2),
                   label: TextManager.profile),

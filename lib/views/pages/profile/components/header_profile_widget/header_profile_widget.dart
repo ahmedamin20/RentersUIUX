@@ -18,26 +18,29 @@ import '../../../../componants/custom_cached_network_image/custom_cached_network
 import '../custom_image_profile/custom_image_profile.dart';
 
 class HeaderProfileWidget extends StatelessWidget {
-  const HeaderProfileWidget({Key? key,
-    this.isProfile = true,
-    this.onTap ,
-    this.titlePage,
- required this.userModel,
-    required this.image
-  })
+  const HeaderProfileWidget(
+      {Key? key,
+      this.isProfile = true,
+      this.onTap,
+      this.titlePage,
+      required this.userModel,
+      required this.image})
       : super(key: key);
   final bool isProfile;
   final UserModel userModel;
   final Function? onTap;
-  final String ?image;
-  final String ?titlePage;
+  final String? image;
+  final String? titlePage;
+
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 270.h,
       width: 1.sw,
-      decoration:  BoxDecoration(
-        color:LayoutCubit.get(context).isDark? ColorsManager.blackColor:ColorsManager.colorPink,
+      decoration: BoxDecoration(
+        color: LayoutCubit.get(context).isDark
+            ? ColorsManager.blackColor
+            : ColorsManager.colorPink,
       ),
       child: Padding(
         padding: EdgeInsets.only(top: 30.h),
@@ -45,41 +48,41 @@ class HeaderProfileWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Padding(
-              padding:  EdgeInsets.only(top: 24.h,bottom: 10.h,left: 24.w,right: 24.w),
+              padding: EdgeInsets.only(
+                  top: 24.h, bottom: 10.h, left: 24.w, right: 24.w),
               child: Row(
                 children: [
                   (isProfile)
                       ? const SizedBox.shrink()
                       : GestureDetector(
-                    onTap: () => context.pop(),
-                        child: const Icon
-                          (
+                          onTap: () => context.pop(),
+                          child: const Icon(
                             Icons.arrow_back_ios_new_rounded,
                             color: ColorsManager.colorText,
                           ),
-                      ),
-                 //  isProfile?
-                 // // InkWell(
-                 // //   onTap: (){
-                 // //     LayoutCubit.get(context).changeDarkMood();
-                 // //   },
-                 // //   child: Column(
-                 // //     children: [
-                 // //       LayoutCubit.get(context).isDark==false?  const CircleAvatar(
-                 // //          backgroundColor: ColorsManager.grayDark,
-                 // //          radius: 15,
-                 // //          child:  Icon(Icons.dark_mode,color: ColorsManager.white,),
-                 // //        ): const CircleAvatar(
-                 // //          backgroundColor: ColorsManager.white,
-                 // //          radius: 15,
-                 // //          child:  Icon(Icons.light_mode,color: ColorsManager.primaryColor,)),
-                 // //     ],
-                 // //   ),
-                 // // )
-                 //  :const SizedBox.shrink(),
+                        ),
+                  //  isProfile?
+                  // // InkWell(
+                  // //   onTap: (){
+                  // //     LayoutCubit.get(context).changeDarkMood();
+                  // //   },
+                  // //   child: Column(
+                  // //     children: [
+                  // //       LayoutCubit.get(context).isDark==false?  const CircleAvatar(
+                  // //          backgroundColor: ColorsManager.grayDark,
+                  // //          radius: 15,
+                  // //          child:  Icon(Icons.dark_mode,color: ColorsManager.white,),
+                  // //        ): const CircleAvatar(
+                  // //          backgroundColor: ColorsManager.white,
+                  // //          radius: 15,
+                  // //          child:  Icon(Icons.light_mode,color: ColorsManager.primaryColor,)),
+                  // //     ],
+                  // //   ),
+                  // // )
+                  //  :const SizedBox.shrink(),
                   const Spacer(),
                   Text(
-                    titlePage??TextManager.profile.tr(),
+                    titlePage ?? TextManager.profile.tr(),
                     style: TextStyleManager.textStyle18w700
                         .copyWith(color: ColorsManager.white),
                   ),
@@ -88,7 +91,10 @@ class HeaderProfileWidget extends StatelessWidget {
                       ? GestureDetector(
                           onTap: () =>
                               context.push(AppRouter.profileSettingScreen),
-                          child: SvgPicture.asset(AssetsManager.settingsIcon,color: ColorsManager.colorText,))
+                          child: SvgPicture.asset(
+                            AssetsManager.settingsIcon,
+                            color: ColorsManager.colorText,
+                          ))
                       : const SizedBox.shrink(),
                 ],
               ),
@@ -99,9 +105,8 @@ class HeaderProfileWidget extends StatelessWidget {
               onTap: () {
                 if (onTap != null) onTap!();
               },
-              isProfile: titlePage!=null? true: isProfile,
-              url:
-              image!,
+              isProfile: titlePage != null ? true : isProfile,
+              url: image!,
             ),
             SizedBox(
               height: SpaceManager.sizedBox16h(context).height,
@@ -123,7 +128,8 @@ class HeaderProfileWidget extends StatelessWidget {
             ),
             SizedBox(
               height: SpaceManager.sizedBox16h(context).height,
-            ),          ],
+            ),
+          ],
         ),
       ),
     );

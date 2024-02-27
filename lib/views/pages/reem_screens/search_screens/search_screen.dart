@@ -84,7 +84,9 @@ class _SearchScreenState extends State<SearchScreen> {
                           ),
                           Text(
                             searchItems.description,
-                            style: TextStyleManager.textStyle12w400,
+                            style: TextStyleManager.textStyle12w400.copyWith(
+                              color: ColorsManager.primaryColor,
+                            ),
                             maxLines: 5,
                             overflow: TextOverflow.ellipsis,
                             softWrap: false,

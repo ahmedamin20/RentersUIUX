@@ -1,105 +1,157 @@
-
-class CategoryModel
-{
+class CategoryModel {
   CategoryModel({
-      List<BaseCategoryModel>? data,
-      String? message, 
-      String? type, 
-      num? code,
-      bool? showToast,}){
-    _data = data;
-    _message = message;
-    _type = type;
-    _code = code;
-    _showToast = showToast;
-}
+      this.data, 
+      this.links, 
+      this.meta, 
+      this.message, 
+      this.code, 
+      this.type,});
 
   CategoryModel.fromJson(dynamic json) {
     if (json['data'] != null) {
-      _data = [];
+      data = [];
       json['data'].forEach((v) {
-        _data?.add(BaseCategoryModel.fromJson(v));
+        data?.add(Data.fromJson(v));
       });
     }
-    _message = json['message'];
-    _type = json['type'];
-    _code = json['code'];
-    _showToast = json['showToast'];
+    links = json['links'] != null ? Links.fromJson(json['links']) : null;
+    meta = json['meta'] != null ? Meta.fromJson(json['meta']) : null;
+    message = json['message'];
+    code = json['code'];
+    type = json['type'];
   }
-  List<BaseCategoryModel>? _data;
-  String? _message;
-  String? _type;
-  num? _code;
-  bool? _showToast;
-CategoryModel copyWith({  List<BaseCategoryModel>? data,
+  List<Data>? data;
+  Links? links;
+  Meta? meta;
+  String? message;
+  num? code;
+  String? type;
+CategoryModel copyWith({  List<Data>? data,
+  Links? links,
+  Meta? meta,
   String? message,
-  String? type,
   num? code,
-  bool? showToast,
-}) => CategoryModel(  data: data ?? _data,
-  message: message ?? _message,
-  type: type ?? _type,
-  code: code ?? _code,
-  showToast: showToast ?? _showToast,
+  String? type,
+}) => CategoryModel(  data: data ?? this.data,
+  links: links ?? this.links,
+  meta: meta ?? this.meta,
+  message: message ?? this.message,
+  code: code ?? this.code,
+  type: type ?? this.type,
 );
-  List<BaseCategoryModel>? get data => _data;
-  String? get message => _message;
-  String? get type => _type;
-  num? get code => _code;
-  bool? get showToast => _showToast;
-
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
-    if (_data != null) {
-      map['data'] = _data?.map((v) => v.toJson()).toList();
+    if (data != null) {
+      map['data'] = data?.map((v) => v.toJson()).toList();
     }
-    map['message'] = _message;
-    map['type'] = _type;
-    map['code'] = _code;
-    map['showToast'] = _showToast;
+    if (links != null) {
+      map['links'] = links?.toJson();
+    }
+    if (meta != null) {
+      map['meta'] = meta?.toJson();
+    }
+    map['message'] = message;
+    map['code'] = code;
+    map['type'] = type;
     return map;
   }
 
 }
 
-/// id : 63
-/// name : "Mrs. Dorothea Toy"
-/// image : "https://rayed-api.ksbgarage.com/storage/default/store.png"
+class Meta {
+  Meta({
+      this.currentPage, 
+      this.from, 
+      this.lastPage,});
 
-class BaseCategoryModel {
-  BaseCategoryModel({
-      String? id,
-      String? name, 
-      String? image,}){
-    _id = id;
-    _name = name;
-    _image = image;
-}
-
-  BaseCategoryModel.fromJson(dynamic json) {
-    _id = json['id'];
-    _name = json['name'];
-    _image = json['image'];
+  Meta.fromJson(dynamic json) {
+    currentPage = json['current_page'];
+    from = json['from'];
+    lastPage = json['last_page'];
   }
-  String? _id;
-  String? _name;
-  String? _image;
-BaseCategoryModel copyWith({  String? id,
-  String? name,
-  String? image,
-}) => BaseCategoryModel(  id: id ?? _id,
-  name: name ?? _name,
-  image: image ?? _image,
+  num? currentPage;
+  num? from;
+  num? lastPage;
+Meta copyWith({  num? currentPage,
+  num? from,
+  num? lastPage,
+}) => Meta(  currentPage: currentPage ?? this.currentPage,
+  from: from ?? this.from,
+  lastPage: lastPage ?? this.lastPage,
 );
-  String? get id => _id;
-  String? get name => _name;
-  String? get image => _image;
-
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
-    map['id'] = _id;
-    map['name'] = _name;
-    map['image'] = _image;
+    map['current_page'] = currentPage;
+    map['from'] = from;
+    map['last_page'] = lastPage;
+    return map;
+  }
+
+}
+
+class Links {
+  Links({
+      this.first, 
+      this.last, 
+      this.next, 
+      this.prev,});
+
+  Links.fromJson(dynamic json) {
+    first = json['first'];
+    last = json['last'];
+    next = json['next'];
+    prev = json['prev'];
+  }
+  String? first;
+  String? last;
+  String? next;
+  dynamic prev;
+Links copyWith({  String? first,
+  String? last,
+  String? next,
+  dynamic prev,
+}) => Links(  first: first ?? this.first,
+  last: last ?? this.last,
+  next: next ?? this.next,
+  prev: prev ?? this.prev,
+);
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['first'] = first;
+    map['last'] = last;
+    map['next'] = next;
+    map['prev'] = prev;
+    return map;
+  }
+
+}
+
+class Data {
+  Data({
+      this.id, 
+      this.name, 
+      this.image,});
+
+  Data.fromJson(dynamic json) {
+    id = json['id'];
+    name = json['name'];
+    image = json['image'];
+  }
+  num? id;
+  String? name;
+  String? image;
+Data copyWith({  num? id,
+  String? name,
+  String? image,
+}) => Data(  id: id ?? this.id,
+  name: name ?? this.name,
+  image: image ?? this.image,
+);
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['id'] = id;
+    map['name'] = name;
+    map['image'] = image;
     return map;
   }
 

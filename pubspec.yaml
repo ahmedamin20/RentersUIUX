@@ -86,6 +86,7 @@ dependencies:
   firebase_messaging: ^14.7.15
   flutter_map: ^5.0.0
   flutter_form_builder: ^9.2.1
+  infinite_scroll_pagination: ^4.0.0
 
 
 

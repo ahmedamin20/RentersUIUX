@@ -111,7 +111,7 @@ abstract class TextManager {
 
   //home Screen
   static const String location = "location";
-  static const String searsh = "Searsh cars...";
+  static const String searsh = "Search...";
   static const String search = "Search";
   static const String home = "Home";
   static const String name = "Name";
@@ -210,7 +210,7 @@ abstract class TextManager {
   static const String no = "No";
   static const String yes = "Yes";
   static const String historyNotesOrder = "History Notes Orders";
-  static const String orders = "Orders";
+  static const String orders = "Requests";
 
   static const String reNote = "Re Notes";
   static const String contactUs = "Contact us";

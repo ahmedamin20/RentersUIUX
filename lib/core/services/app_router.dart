@@ -11,7 +11,6 @@ import 'package:ksb/views/pages/auth/sign_up_view.dart';
 import 'package:ksb/views/pages/auth/verification_view.dart';
 import 'package:ksb/views/pages/contuct_us/contuct_us_view.dart';
 import 'package:ksb/views/pages/edit_profile/edit_profile_screen.dart';
-import 'package:ksb/views/pages/home/antoneos_home/recomended_item_details/recomended_item_details_screen.dart';
 import 'package:ksb/views/pages/home_layout/page/home_layout.dart';
 import 'package:ksb/views/pages/home/pick_interest.dart';
 import 'package:ksb/views/pages/onbording/hello_screen.dart';
@@ -26,8 +25,7 @@ import '../../views/pages/abous_us/about_app_view.dart';
 import '../../views/pages/auth/antoneos_auth/congrats_screen.dart';
 import '../../views/pages/auth/antoneos_auth/reset_password_Screen.dart';
 import '../../views/pages/auth/antoneos_auth/widget/reset_password_widget.dart';
-import '../../views/pages/home/widgets/home/details_recommended_screen.dart';
-import '../../views/pages/home/widgets/home/recommended_screen.dart';
+import '../../views/pages/product_details/product_details_screen.dart';
 import '../../views/pages/profile/page/terms_and_condations.dart';
 
 abstract class AppRouter {
@@ -78,6 +76,7 @@ abstract class AppRouter {
   static const String allRestaurantScreen = "/AllRestaurantScreen";
   static const String contactUs = "/contactUs";
   static const String supportChat = "/supportChat";
+  static const String productDetailsScreen = "/productDetailsScreen";
 
   static final router = GoRouter(
     initialLocation: loginView,
@@ -115,18 +114,7 @@ abstract class AppRouter {
       path: onBoardingHello,
       builder: (context, state) => const HelloScreen(),
     ),
-    GoRoute(
-      path: recommendedScreen,
-      builder: (context, state) => const RecommendedScreen(),
-    ),
-    GoRoute(
-      path: detailsRecommendedScreen,
-      builder: (context, state)
-      {
-        //final id = state.extra as Map;
-        return DetailsRecommendedScreen(idStor: '',);
-      },
-    ),
+
     GoRoute(
       path: startView,
       builder: (context, state) => const StartView(),
@@ -206,18 +194,7 @@ abstract class AppRouter {
         GoRoute(
             path: termsAndCondationView,
             builder: (context, state) => const TermsAndCondationScreen()),
-        GoRoute(
-            path: recommendedItemDetails,
 
-            builder: (context, state) {
-              final id = state.extra as Map;
-
-              return RecommendedItemDetailsScreen(
-                productId: id['id'],
-              );
-  }
-
-        ),
         GoRoute(
             path: language,
             builder: (context, state) => const LanguageScreen()),
@@ -233,6 +210,11 @@ abstract class AppRouter {
         GoRoute(
             path: contactUs,
             builder: (context, state) => const ContactUs()),
+        GoRoute(
+            path: productDetailsScreen,
+            builder: (context, state) =>  ProductDetails(
+              productId: state.extra as int,
+            )),
         // Gor
   ]);
 

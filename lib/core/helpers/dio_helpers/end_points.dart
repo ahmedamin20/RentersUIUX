@@ -66,6 +66,7 @@ abstract class EndPoint {
 
   static const String  showAllBranch= "/public/branches?page=";
   static const String  getAllCartItem= "/api/cart";
+  static const String  productEndPoint= "client/products";
 
 
 }

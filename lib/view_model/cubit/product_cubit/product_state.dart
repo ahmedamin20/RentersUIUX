@@ -4,28 +4,17 @@ part of 'product_cubit.dart';
 abstract class ProductState {}
 
 class ProductInitial extends ProductState {}
-class GetProductLoading extends ProductState {}
-class GetProductSuccess extends ProductState
-{
-
-  GetProductSuccess();
+class ProductLoading extends ProductState {}
+class ProductLoaded extends ProductState {
 }
-class GetProductError extends ProductState
-{
-  final Failure failure;
-
-  GetProductError(this.failure);
+class ProductError extends ProductState {
+  final String error;
+  ProductError(this.error);
 }
-
-class ProductDetilesLoading extends ProductState {}
-class ProductDetilesSuccess extends ProductState
-{
-  GetProductDetilesModel getProductDetilesModel;
-  ProductDetilesSuccess(this.getProductDetilesModel);
+class ProductDetailsLoading extends ProductState {}
+class ProductDetailsLoaded extends ProductState {
 }
-class ProductDetilesError extends ProductState
-{
-  final Failure failure;
-
-  ProductDetilesError(this.failure);
+class ProductDetailsError extends ProductState {
+  final String error;
+  ProductDetailsError(this.error);
 }

@@ -15,18 +15,14 @@ import 'package:ksb/core/services/service_locator/service_locator.dart';
 import 'package:ksb/core/theme/app_theme.dart';
 import 'package:ksb/data/repository/Information_repo/information_repo.dart';
 import 'package:ksb/data/repository/cart_repo/cart_repo.dart';
+import 'package:ksb/data/repository/category_repo/category_repo.dart';
 import 'package:ksb/data/repository/favoutite_repo/favoutite_repo.dart';
-import 'package:ksb/data/repository/get_product_repo/gert_product_repo.dart';
-import 'package:ksb/data/repository/home_repo/home_repo.dart';
 import 'package:ksb/data/repository/profile_repo/profile_repo.dart';
 import 'package:ksb/view_model/cubit/cart_cubit/cart_cubit.dart';
 import 'package:ksb/view_model/cubit/category_cubit/category_cubit.dart';
-import 'package:ksb/view_model/cubit/favourite_cubit/favourite_cubit.dart';
-import 'package:ksb/view_model/cubit/home_cubit/home_cubit.dart';
 import 'package:ksb/view_model/cubit/information_cubit/information_cubit.dart';
 import 'package:ksb/view_model/cubit/internet_cubit/internet_cubit.dart';
 import 'package:ksb/view_model/cubit/layout_cubit/layout_cubit.dart';
-import 'package:ksb/view_model/cubit/location_cubit/location_cubit.dart';
 import 'package:ksb/view_model/cubit/product_cubit/product_cubit.dart';
 import 'package:ksb/view_model/cubit/profile_cubit/profile_cubit.dart';
 import 'package:lottie/lottie.dart';
@@ -35,14 +31,15 @@ import 'core/services/app_router.dart';
 import 'firebase_options.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
-Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async
-{
+
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // If you're going to use other Firebase services in the background, such as Firestore,
   // make sure you call `initializeApp` before using other Firebase services.
   await Firebase.initializeApp();
 
   print("Handling a background message: ${message.messageId}");
 }
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
@@ -125,11 +122,6 @@ class _MyAppState extends State<MyApp> {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => LayoutCubit()),
-        BlocProvider(
-            create: (context) => ProductCubit(sl<GetProductRepoImpl>())),
-        BlocProvider(
-            create: (context) => FavouriteCubit(
-                sl<FavouriteRepoImpl>(), sl<GetProductRepoImpl>())),
         BlocProvider(create: (context) => ProfileCubit(sl<ProfileRepoImpl>())),
 
         BlocProvider(
@@ -139,30 +131,29 @@ class _MyAppState extends State<MyApp> {
         BlocProvider(create: (context) => InternetCubit()..checkConnectivity()),
         BlocProvider(create: (context) => sl<CategoryCubit>()..getCategory()),
         BlocProvider(create: (context) => sl<CategoryCubit>()..getCategory()),
-        BlocProvider(create: (context) =>LocationCubit()..getLocation()),
 
-        
         ////////////////////a to z /////////////////////////
 
-        BlocProvider(create: (context) => HomeCubit(sl<HomeRepoImpl>())..getAllBranch(page: 1)),
         BlocProvider(create: (context) => CartCubit(sl<CartRepoImpl>())),
-
+        BlocProvider(create: (context) => ProductCubit()),
+        BlocProvider(
+            create: (context) =>
+                CategoryCubit(sl<CategoryRepoImpl>())..getCategory()),
       ],
       child: ScreenUtilInit(
         designSize: const Size(360, 690),
         minTextAdapt: true,
         splitScreenMode: true,
         child: BlocConsumer<LayoutCubit, LayoutState>(
-                listener: (context, state) {
-                  // TODO: implement listener
-                },
-                builder: (context, state) {
-                  return BlocConsumer<InternetCubit, InternetState>(
-                    listener: (context, state) {},
-                    builder: (context, state) {
-                      return
-                          state is InternetConnected?
-                          MaterialApp.router(
+          listener: (context, state) {
+            // TODO: implement listener
+          },
+          builder: (context, state) {
+            return BlocConsumer<InternetCubit, InternetState>(
+              listener: (context, state) {},
+              builder: (context, state) {
+                return state is InternetConnected
+                    ? MaterialApp.router(
                         localizationsDelegates: context.localizationDelegates,
                         supportedLocales: context.supportedLocales,
                         locale: context.locale,
@@ -174,37 +165,42 @@ class _MyAppState extends State<MyApp> {
                             ? AppTheme.dark
                             : AppTheme.light,
                         title: 'A to Z',
-
-                      ):   MaterialApp(
-                            localizationsDelegates: context.localizationDelegates,
-                            supportedLocales: context.supportedLocales,
-                            locale: context.locale,
-                            key: navigatorKey,
-                            builder: EasyLoading.init(),
-                            home:  Scaffold(
-                                body: Column(
-                                  children:
-                                  [
-                                    SizedBox(height: 100.h,),
-                                    Lottie.asset('assets/json/no_internet.json'),
-                                    SizedBox(height: 20.h,),
-                                    Text('no_internet'.tr(), style: TextStyle(
-                                      fontSize: 20.sp,
-                                      fontWeight: FontWeight.bold,
-                                    ),),
-                                  ],
-                                )
+                      )
+                    : MaterialApp(
+                        localizationsDelegates: context.localizationDelegates,
+                        supportedLocales: context.supportedLocales,
+                        locale: context.locale,
+                        key: navigatorKey,
+                        builder: EasyLoading.init(),
+                        home: Scaffold(
+                            body: Column(
+                          children: [
+                            SizedBox(
+                              height: 100.h,
                             ),
-                            debugShowCheckedModeBanner: false,
-                            theme: LayoutCubit.get(context).isDark ?
-                            AppTheme.dark:AppTheme.light,
-                            title: 'KSB',
-                          );
-
-                    },
-                  );
-                },
-              ),
+                            Lottie.asset('assets/json/no_internet.json'),
+                            SizedBox(
+                              height: 20.h,
+                            ),
+                            Text(
+                              'no_internet'.tr(),
+                              style: TextStyle(
+                                fontSize: 20.sp,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        )),
+                        debugShowCheckedModeBanner: false,
+                        theme: LayoutCubit.get(context).isDark
+                            ? AppTheme.dark
+                            : AppTheme.light,
+                        title: 'Renters',
+                      );
+              },
+            );
+          },
+        ),
       ),
     );
   }

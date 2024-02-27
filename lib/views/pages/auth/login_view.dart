@@ -29,7 +29,7 @@ class LoginView extends StatelessWidget {
       create: (context) => LoginCubit(sl<LoginRepoImpl>()),
       child: SafeArea(
         child: Scaffold(
-          appBar:const CustomAuthAppBar(),
+          // appBar:const CustomAuthAppBar(),
           resizeToAvoidBottomInset: false,
           // appBar: const AuthAppBar(),
           body: SingleChildScrollView(
