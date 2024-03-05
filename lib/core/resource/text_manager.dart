@@ -13,6 +13,10 @@ abstract class TextManager {
   static const String logout = "Log Out";
   static const String supportChat = "Support Chat";
   static const String signUp = "Sign Up";
+    static const String categories= "Categories";
+        static const String HpmeData= "Home Appliance";
+
+
     static const String signUpDonotHaveAccount = "Don’t have an account? Create Account";
 
   static const String WALLET_AMOUNT = "WALLET AMOUNT";

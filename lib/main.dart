@@ -162,10 +162,8 @@ class _MyAppState extends State<MyApp> {
                         builder: EasyLoading.init(),
                         routerConfig: AppRouter.router,
                         debugShowCheckedModeBanner: false,
-                        theme: LayoutCubit.get(context).isDark
-                            ? AppTheme.dark
-                            : AppTheme.light,
-                        title: 'A to Z',
+                        theme: AppTheme.light,
+                        title: 'Renters',
                       )
                     : MaterialApp(
                         localizationsDelegates: context.localizationDelegates,

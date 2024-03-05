@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
@@ -44,6 +46,11 @@ class HomeScreen extends StatelessWidget {
                 const CustomAddsHomeView(),
                 SizedBox(
                   height: 14.h,
+                ),
+                Text(
+                  TextManager.categories.tr(),
+                  style: TextStyleManager.textStyle18w600.copyWith(
+                      color: ColorsManager.blackColor),
                 ),
                 BlocConsumer<CategoryCubit, CategoryState>(
                   listener: (context, state) 
@@ -108,6 +115,14 @@ class HomeScreen extends StatelessWidget {
                 SizedBox(
                   height: 12.h,
                 ),
+                 Text(
+                  TextManager.HpmeData.tr(),
+                  style: TextStyleManager.textStyle18w600.copyWith(
+                      color: ColorsManager.blackColor),
+                ),
+                 SizedBox(
+                  height: 12.h,
+                ),
                 BlocProvider.value(
                   value: ProductCubit.get(context)
                     ..scrollListener()
@@ -130,7 +145,7 @@ class HomeScreen extends StatelessWidget {
                           gridDelegate:
                               const SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 2,
-                                  childAspectRatio: 0.7,
+                                  childAspectRatio: 0.85,
                                   crossAxisSpacing: 10,
                                   mainAxisSpacing: 10),
                           itemBuilder: (context, index) {
@@ -141,29 +156,85 @@ class HomeScreen extends StatelessWidget {
                                         .productModel!.data![index].id);
                               },
                               child: Card(
+                                color: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  side: BorderSide(
+                                    color: ColorsManager.primaryColor.withOpacity(0.5),
+                                    width: 1,
+                                  
+                                  )),
+                                elevation: 5,
                                 child: Column(
                                   children: [
-                                    Image.network(
-                                      productCubit.productModel!.data![index]
-                                          .mainImage!,
-                                      fit: BoxFit.cover,
-                                      height: 100.h,
+                                   
+                                      
+                                      Expanded(
+                                        flex: 3,
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.only(
+                                              topLeft: Radius.circular(10),
+                                              topRight: Radius.circular(10),
+                                            ),
+                                            image: DecorationImage(
+                                              image: CachedNetworkImageProvider(
+                                                  productCubit
+                                                      .productModel!
+                                                      .data![index]
+                                                      .mainImage!),
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                        
+                                        ),
+                                      ),
+                                      
+                                    Expanded(
+                                      flex: 2,
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(left:5 , right: 5),
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: 
+                                         [
+                                          SizedBox(height: 10.h,),
+                                           Text(
+                                            productCubit
+                                                .productModel!.data![index].name!,
+                                                maxLines: 1,
+                                                overflow: TextOverflow.ellipsis,
+                                            style: TextStyleManager.textStyle16w500
+                                                .copyWith(
+                                                    color:
+                                                        ColorsManager.primaryColor),
+                                          ),
+                                          Row(children: 
+                                          [
+                                            Text(
+                                              'EGP ${productCubit.productModel!.data![index].price!.toStringAsFixed(2)}',
+                                              style: TextStyleManager
+                                                  .textStyle14w400
+                                                  .copyWith(
+                                                      color: ColorsManager
+                                                          .primaryColor)),
+                                                          const Spacer(),
+                                                       const   CircleAvatar(
+                                                        backgroundColor: ColorsManager.primaryColor,
+                                                            radius: 14,
+                                                            child: Icon(Icons.add ,
+                                                            color: ColorsManager.white,
+                                                            size: 15,
+                                                            ),
+                                                          ),
+                                        
+                                                          
+                                          ],)
+                                        
+                                         ],),
+                                      ),
                                     ),
-                                    Text(
-                                      productCubit
-                                          .productModel!.data![index].name!,
-                                      style: TextStyleManager.textStyle16w500
-                                          .copyWith(
-                                              color:
-                                                  ColorsManager.primaryColor),
-                                    ),
-                                    Text(
-                                        '${productCubit.productModel!.data![index].price!.toStringAsFixed(2)} EGP',
-                                        style: TextStyleManager
-                                            .textStyle14w400
-                                            .copyWith(
-                                                color: ColorsManager
-                                                    .primaryColor)),
+                                   
                                   ],
                                 ),
                               ),

@@ -43,7 +43,7 @@ class RegisterRepoImpl extends RegisterRepo
       "address": address,
       "phone": phone,
       "password": password,
-      "approve_terms": 1,
+      "approve_terms": true,
       "password_confirmation": password,
          });
 

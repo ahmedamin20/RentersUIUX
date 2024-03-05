@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:ksb/core/resource/colors_manager.dart';
 
 import '../../../../../../../core/resource/text_style_manager.dart';
 import '../../../../component/app_button.dart';
@@ -50,11 +51,11 @@ class BuildListViewInProgressItem extends StatelessWidget {
                       children: [
                         TextSpan(
                           text: 'Request number: ',
-                          style: TextStyleManager.textStyle12w700,
+                          style: TextStyleManager.textStyle12w700.copyWith(color: ColorsManager.primaryColor),
                         ),
                         TextSpan(
                           text: '124116',
-                          style: TextStyleManager.textStyle12w700,
+                          style: TextStyleManager.textStyle12w700.copyWith(color: ColorsManager.primaryColor),
                         ),
                       ],
                     ),
@@ -75,11 +76,11 @@ class BuildListViewInProgressItem extends StatelessWidget {
                   children: [
                     TextSpan(
                       text: 'Date: ',
-                      style: TextStyleManager.textStyle12w700,
+                      style: TextStyleManager.textStyle12w700.copyWith(color: ColorsManager.primaryColor),
                     ),
                     TextSpan(
                       text: '26-12-202',
-                      style: TextStyleManager.textStyle12w700,
+                      style: TextStyleManager.textStyle12w700.copyWith(color: ColorsManager.primaryColor),
                     ),
                   ],
                 ),
@@ -90,11 +91,11 @@ class BuildListViewInProgressItem extends StatelessWidget {
                   children: [
                     TextSpan(
                       text: 'Method: ',
-                      style: TextStyleManager.textStyle12w700,
+                      style: TextStyleManager.textStyle12w700.copyWith(color: ColorsManager.primaryColor),
                     ),
                     TextSpan(
                       text: 'Online',
-                      style: TextStyleManager.textStyle12w700,
+                      style: TextStyleManager.textStyle12w700.copyWith(color: ColorsManager.primaryColor),
                     ),
                   ],
                 ),

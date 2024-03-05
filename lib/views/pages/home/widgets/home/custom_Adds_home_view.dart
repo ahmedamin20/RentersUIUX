@@ -1,9 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ksb/views/pages/home/widgets/home/show_dialog_ads.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../../../../core/resource/colors_manager.dart';
 import '../../../../../core/resource/text_style_manager.dart';
@@ -57,41 +59,61 @@ class _CustomAddsHomeViewState extends State<CustomAddsHomeView> {
                     },
                   );
                 },
-                child: Container(
-                  padding: const EdgeInsets.all(8),
-                  width: 343.w,
-                  height: 170.h,
-                  decoration: ShapeDecoration(
-                    color: ColorsManager.primaryColor,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    image: DecorationImage(
-                      image: CachedNetworkImageProvider(
-                      state.adsModel.data![index].image!
-                      ),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-
-                  child: Row(
-                    children: [
-                      Column(
-                        children: [
-                          SizedBox(height: 15.h,),
-                          SizedBox(
-                            width: 108.w,
-                            child: Text(
-                              state.adsModel.data![index].title! ,
-                              style:  TextStyleManager.textStyle20w600.copyWith(color: Colors.white)
-                            ),
+                child: Stack(
+                  children: [
+                 
+                    Container(
+                      padding: const EdgeInsets.all(8),
+                      width: 343.w,
+                      height: 170.h,
+                      decoration: ShapeDecoration(
+                        color: ColorsManager.primaryColor,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        image: DecorationImage(
+                          image: CachedNetworkImageProvider(
+                          state.adsModel.data![index].image!
                           ),
-                      
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    
+                      child: Row(
+                        children: [
+                          Column(
+                            children: [
+                              SizedBox(height: 15.h,),
+                              SizedBox(
+                                width: 108.w,
+                                child: Text(
+                                  state.adsModel.data![index].title! ,
+                                  style:  TextStyleManager.textStyle20w600.copyWith(color: Colors.white)
+                                ),
+                              ),
+                          
+                            ],
+                          ),
+                          SizedBox(width: 40.w,),
                         ],
                       ),
-                      SizedBox(width: 40.w,),
-                    ],
-                  ),
+                    ),
+            
+               Align(
+                alignment: Alignment.bottomCenter,
+                 child: Padding(
+                  padding: EdgeInsets.all( 10.h),
+                   child: SmoothPageIndicator(  
+                      controller: _pageController,  // PageController  
+                      count:  6,  
+                      effect:  const WormEffect(),  // your preferred effect  
+                      onDotClicked: (index){  
+                            
+                      }  
+                   ),
+                 ),
+               )  ,
+                 ],
                 ),
               );
             
