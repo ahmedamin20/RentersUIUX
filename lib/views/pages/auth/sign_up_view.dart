@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:go_router/go_router.dart';
+import 'package:ksb/core/resource/colors_manager.dart';
 import 'package:ksb/core/resource/text_manager.dart';
 import 'package:ksb/core/services/service_locator/service_locator.dart';
 import 'package:ksb/view_model/cubit/auth_cubit/register_cubit/cubit/register_cubit_cubit.dart';
@@ -52,14 +53,14 @@ class SignupView extends StatelessWidget
           }
         },
 
-        child:  SafeArea(
+       
           child: const Scaffold(
+            backgroundColor: ColorsManager.primaryColor,
             // resizeToAvoidBottomInset: false,
-            appBar:CustomAuthAppBar(),
             body: SignupViewBody(),
           ),
         ),
-      ),
+      
     );
   }
 }

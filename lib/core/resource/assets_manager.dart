@@ -72,6 +72,8 @@ abstract class AssetsManager {
   static const String tesla = "${rootImagesPath}tesla.png";
   static const String logOut = "${rootImagesPath}logout.jpeg";
   static const String foodImage = "${rootImagesPath}food_image.png";
+    static const String logoImage = "${rootImagesPath}logo.png";
+
 
 
   // animayion json

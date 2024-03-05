@@ -13,6 +13,8 @@ abstract class TextManager {
   static const String logout = "Log Out";
   static const String supportChat = "Support Chat";
   static const String signUp = "Sign Up";
+    static const String signUpDonotHaveAccount = "Don’t have an account? Create Account";
+
   static const String WALLET_AMOUNT = "WALLET AMOUNT";
   static const String recommended = "Recommended";
   static const String titleDetails = "Find the best car without headaches";
@@ -57,7 +59,10 @@ abstract class TextManager {
   static const String resetIt = "Reset it";
   static const String signIn = "Sign In";
   static const String termsAndConditions = " terms and conditions";
-  static const String loginIn = "Login In";
+  static const String welcomeBackToRenterloginIn = "Login In";
+    static const String welcomeBackToRenter = "Welcome Back To Renter";
+    static const String pleaseSignInWithYourMail = "Please sign in with your mail";
+
   static const String ex_phone = "010XXXXXXXX";
   static const String signInWithGoogle = "$signIn With Google";
   static const String signInWithFacebook = "$signIn With Facebook";

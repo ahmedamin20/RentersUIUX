@@ -6,6 +6,7 @@ import 'package:ksb/core/resource/space_manager.dart';
 import 'package:ksb/core/resource/text_manager.dart';
 import 'package:ksb/core/resource/text_style_manager.dart';
 import 'package:ksb/view_model/cubit/layout_cubit/layout_cubit.dart';
+import 'package:ksb/views/componants/custom_logo/custom_logo.dart';
 import 'package:ksb/views/componants/custom_text_Button.dart';
 import 'package:ksb/views/pages/auth/widgets/signup/signup_buttons.dart';
 import 'package:ksb/views/pages/auth/widgets/signup/signup_form_body.dart';
@@ -20,23 +21,21 @@ class SignupViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Padding(
-        padding: EdgeInsets.all(24.r),
+        padding: EdgeInsets.all(12.r),
         child: SizedBox(
           width: double.infinity,
-          // height: MediaQuery.of(context).size.height,
           child: Column(
-            // crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(TextManager.signUp.tr(),
-                  style: TextStyleManager.textStyle24w600.copyWith(
-                    color: LayoutCubit.get(context).isDark
-                        ? Colors.white
-                        : Colors.black,
-                  )),
+             
+                    Center(
+          child: ConstrainedBox(
+              constraints: BoxConstraints(maxHeight: 200.h, maxWidth: 200.w),
+              child: const CustomLogoWidget()),
+        ),
               const SignupFormBody(),
-              SpaceManager.sizedBox24h(context),
+              SpaceManager.sizedBox12h(context),
               // const TermsAndPolicy(),
-              SpaceManager.sizedBox24h(context),
+              SpaceManager.sizedBox12h(context),
               const SignupButtons(),
               // const Spacer(),
               Text.rich(

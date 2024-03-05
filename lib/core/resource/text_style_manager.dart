@@ -64,7 +64,7 @@ abstract class TextStyleManager {
   static final TextStyle textStyle14w500 = TextStyle(
     fontSize: 14.sp,
     fontWeight: FontWeight.w500,
-      color: ColorsManager.colorText
+      color: ColorsManager.white
 
   );
 
@@ -72,7 +72,7 @@ abstract class TextStyleManager {
   static final TextStyle textStyle12w500 = TextStyle(
     fontSize: 12.sp,
     fontWeight: FontWeight.w500,
-      color: ColorsManager.colorText
+      color: ColorsManager.white
 
   );
   static final TextStyle textStyle12w400 = TextStyle(

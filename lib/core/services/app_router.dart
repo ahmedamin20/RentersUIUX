@@ -21,6 +21,7 @@ import 'package:ksb/views/pages/profile/page/profile_settings_screen.dart';
 import 'package:ksb/views/pages/settings/pages/settings_screen.dart';
 import 'package:ksb/views/pages/start/start_view.dart';
 import 'package:ksb/views/pages/splash/splash_view.dart';
+import 'package:ksb/views/splash_screen/splash_screen.dart';
 import '../../views/pages/abous_us/about_app_view.dart';
 import '../../views/pages/auth/antoneos_auth/congrats_screen.dart';
 import '../../views/pages/auth/antoneos_auth/reset_password_Screen.dart';
@@ -77,13 +78,19 @@ abstract class AppRouter {
   static const String contactUs = "/contactUs";
   static const String supportChat = "/supportChat";
   static const String productDetailsScreen = "/productDetailsScreen";
+    static const String splashScreen = "/spalsh";
+
 
   static final router = GoRouter(
-    initialLocation: loginView,
+    initialLocation: splashScreen,
       routes: [
+    // GoRoute(
+    //   path: splashView,
+    //   builder: (context, state) => const SplashView(),
+    // ),
     GoRoute(
-      path: splashView,
-      builder: (context, state) => const SplashView(),
+      path: splashScreen,
+      builder: (context, state) => const SplashScreen(),
     ),
     //     GoRoute(
     //   path: supportChat,

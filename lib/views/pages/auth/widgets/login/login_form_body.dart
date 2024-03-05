@@ -27,11 +27,11 @@ class LoginFormBody extends StatelessWidget {
           Text(
             TextManager.email.tr(),
             style: TextStyleManager.textStyle12w500.copyWith(
-              color: Colors.black,
+              color: Colors.white,
             )
           ),
 
-          SpaceManager.sizedBox24h(context),
+          SpaceManager.sizedBox12h(context),
 
           CustomTextFormField(
             // validator: (value) {
@@ -44,18 +44,19 @@ class LoginFormBody extends StatelessWidget {
             obscureText: false,
             controller: loginCubit.emailController,
           ),
-          SpaceManager.sizedBox24h(context),
+          SpaceManager.sizedBox12h(context),
 
           Text(
               TextManager.password.tr(),
               style: TextStyleManager.textStyle12w500.copyWith(
-                color: Colors.black,
+                color: Colors.white,
               )
           ),
-          SpaceManager.sizedBox16h(context),
+          SpaceManager.sizedBox12h(context),
           BlocBuilder<LoginCubit, LoginState>(
             builder: (context, state) {
               return CustomTextFormField(
+                
                 textHint: TextManager.password.tr(),
                 suffixIcon: context.read<LoginCubit>().isPassword ? Icons.remove_red_eye_outlined : Icons.visibility_off_outlined,
                 obscureText: context.read<LoginCubit>().isPassword,

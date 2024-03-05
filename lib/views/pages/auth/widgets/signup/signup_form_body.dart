@@ -24,10 +24,12 @@ class SignupFormBody extends StatelessWidget {
         return Form(
           key: RegisterCubitCubit.get(context).formKeyRegister,
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-            SpaceManager.sizedBox24h(context),
             Text(TextManager.name,style: TextStyleManager.textStyle12w700,),
+                    SpaceManager.sizedBox12h(context),
+
             CustomTextFormField(
               textHint: TextManager.fullName.tr(),
               prefixIcon: Icons.person_outline_outlined,
@@ -43,6 +45,7 @@ class SignupFormBody extends StatelessWidget {
             SpaceManager.sizedBox16h(context),
 
                 Text(TextManager.email,style: TextStyleManager.textStyle12w700,),
+            SpaceManager.sizedBox12h(context),
 
                 CustomTextFormField(
               textHint: TextManager.exampleEmail.tr(),
@@ -56,7 +59,10 @@ class SignupFormBody extends StatelessWidget {
                       : null,
             ),
             SpaceManager.sizedBox16h(context),
+              
                 Text(TextManager.phone,style: TextStyleManager.textStyle12w700,),
+                           SpaceManager.sizedBox16h(context),
+
                 CustomTextFormField(
 
                   textHint: TextManager.ex_phone.tr(),
@@ -65,7 +71,10 @@ class SignupFormBody extends StatelessWidget {
                   validator: (p0) =>
                   p0!.isEmpty ? TextManager.pleaseEnterValidAddress.tr() : null,
                 ),
+                       SpaceManager.sizedBox16h(context),
+
                 Text(TextManager.password,style: TextStyleManager.textStyle12w700,),
+            SpaceManager.sizedBox12h(context),
 
                 CustomTextFormField(
               textHint: TextManager.password.tr(),

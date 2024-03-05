@@ -1,15 +1,19 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ksb/core/resource/colors_manager.dart';
 import 'package:ksb/core/resource/text_manager.dart';
 import 'package:ksb/core/resource/text_style_manager.dart';
+import 'package:ksb/data/model/cart_model/cart_model.dart';
 import 'package:ksb/view_model/cubit/category_cubit/category_cubit.dart';
 import 'package:ksb/view_model/cubit/ads_cubit/ads_cubit.dart';
 import 'package:ksb/view_model/cubit/product_cubit/product_cubit.dart';
+import 'package:ksb/views/componants/custom_text_form_field.dart';
 import '../../../../../core/services/app_router.dart';
 import '../../../../../core/services/service_locator/service_locator.dart';
 import '../../../../../data/repository/ads_repo/ads_repo.dart';
@@ -29,6 +33,11 @@ class HomeScreen extends StatelessWidget {
             child: ListView(
               controller: ProductCubit.get(context).scrollController,
               children: [
+                const CustomTextFormField(
+
+                  textHint: "Search" , 
+                suffixIcon: Icons.search,
+                ),
                 SizedBox(
                   height: 15.h,
                 ),
@@ -37,8 +46,8 @@ class HomeScreen extends StatelessWidget {
                   height: 14.h,
                 ),
                 BlocConsumer<CategoryCubit, CategoryState>(
-                  listener: (context, state) {
-                    // TODO: implement listener
+                  listener: (context, state) 
+                  {
                   },
                   builder: (context, state) {
                     if (state is CategoryLoading) {
@@ -48,8 +57,8 @@ class HomeScreen extends StatelessWidget {
                     } else if (CategoryCubit.get(context).categoryModel !=
                         null) {
                       return SizedBox(
-                        height: 100.h,
-                        width: 50.w,
+                        height: 160.h,
+                        width: 100.w,
                         child: ListView.builder(
                           itemCount: CategoryCubit.get(context)
                               .categoryModel!
@@ -61,19 +70,30 @@ class HomeScreen extends StatelessWidget {
                               padding: const EdgeInsets.all(18.0),
                               child: Column(
                                 children: [
-                                  Image(
-                                    width: 50.w,
-                                    height: 50.h,
-                                      image: NetworkImage(
-                                          CategoryCubit.get(context)
-                                              .categoryModel!
-                                              .data![index]
-                                              .image!
-                                              .toString())),
-                                  Text(CategoryCubit.get(context)
-                                      .categoryModel!
-                                      .data![index]
-                                      .name!)
+                                  CircleAvatar(
+                                    radius: 40.r,
+                                    backgroundImage: CachedNetworkImageProvider(
+                                            CategoryCubit.get(context)
+                                                .categoryModel!
+                                                .data![index]
+                                                .image!
+                                                .toString()),
+                                  ),
+                                  const SizedBox(height: 10,),
+                                  SizedBox(
+                                    
+                                    width: 100.w,
+                                    child: Text(
+                                      
+                                      CategoryCubit.get(context)
+                                        .categoryModel!
+                                        .data![index]
+                                        .name! ,
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                        textAlign: TextAlign.center,
+                                        style: TextStyleManager.textStyle16w500.copyWith(color: ColorsManager.primaryColor)),
+                                  )
                                 ],
                               ),
                             );
@@ -81,12 +101,12 @@ class HomeScreen extends StatelessWidget {
                         ),
                       );
                     } else {
-                      return SizedBox();
+                      return const SizedBox();
                     }
                   },
                 ),
                 SizedBox(
-                  height: 14.h,
+                  height: 12.h,
                 ),
                 BlocProvider.value(
                   value: ProductCubit.get(context)

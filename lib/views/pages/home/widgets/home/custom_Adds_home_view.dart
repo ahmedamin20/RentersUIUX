@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,9 +11,18 @@ import '../../../../../view_model/cubit/ads_cubit/ads_cubit.dart';
 import '../../../../componants/custom_cached_network_image/custom_cached_network_image.dart';
 import '../../../../componants/custom_card_shimmer/custom_card_shimmer.dart';
 
-class CustomAddsHomeView extends StatelessWidget {
+class CustomAddsHomeView extends StatefulWidget {
   const CustomAddsHomeView({super.key});
 
+  @override
+  State<CustomAddsHomeView> createState() => _CustomAddsHomeViewState();
+}
+
+class _CustomAddsHomeViewState extends State<CustomAddsHomeView> {
+  PageController _pageController = PageController(
+    initialPage: 0,
+    keepPage: true,
+  );
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AdsCubit,AdsState>(
@@ -32,7 +42,8 @@ class CustomAddsHomeView extends StatelessWidget {
         state is AdsSuccess?
         SizedBox(
           height: 170.h,
-          child: ListView.separated(
+          child: PageView.builder(
+            controller: _pageController,
             scrollDirection: Axis.horizontal,
             itemCount: state.adsModel.data!.length,
             itemBuilder: (context,index){
@@ -55,7 +66,14 @@ class CustomAddsHomeView extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16),
                     ),
+                    image: DecorationImage(
+                      image: CachedNetworkImageProvider(
+                      state.adsModel.data![index].image!
+                      ),
+                      fit: BoxFit.cover,
+                    ),
                   ),
+
                   child: Row(
                     children: [
                       Column(
@@ -68,32 +86,15 @@ class CustomAddsHomeView extends StatelessWidget {
                               style:  TextStyleManager.textStyle20w600.copyWith(color: Colors.white)
                             ),
                           ),
-                          // const Spacer(),
-                          // ElevatedButton(
-                          //     onPressed: (){},
-                          //     style:ElevatedButton.styleFrom(
-                          //         backgroundColor: ColorsManager.white2,
-                          //     ) ,
-                          //     child:   Row(
-                          //       children: [
-                          //         Text(
-                          //           'More',
-                          //           style: TextStyleManager.textStyle14w500
-                          //         ),
-                          //         const SizedBox(width: 5,),
-                          //         const Icon(Icons.arrow_forward_rounded)
-                          //       ],
-                          //     ))
+                      
                         ],
                       ),
                       SizedBox(width: 40.w,),
-                      Expanded(child: CustomCachedNetworkImage(url: state.adsModel.data![index].image!))
                     ],
                   ),
                 ),
               );
-            }, separatorBuilder: (BuildContext context, int index) {
-            return SizedBox(width: 10.w,);
+            
           },),
         ):
         const Center(child: Text("Error"),);

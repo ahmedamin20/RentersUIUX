@@ -27,8 +27,8 @@ class LoginView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => LoginCubit(sl<LoginRepoImpl>()),
-      child: SafeArea(
-        child: Scaffold(
+      child: Scaffold(
+          backgroundColor: ColorsManager.primaryColor,
           // appBar:const CustomAuthAppBar(),
           resizeToAvoidBottomInset: false,
           // appBar: const AuthAppBar(),
@@ -47,7 +47,7 @@ class LoginView extends StatelessWidget {
             ),
           ),
         ),
-      ),
+      
     );
   }
 

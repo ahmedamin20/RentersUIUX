@@ -19,41 +19,13 @@ class LogInButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
+    return 
         CustomElevatedButton(
             text: TextManager.signIn.tr(),
+            color: ColorsManager.white,
+            textColor: ColorsManager.primaryColor,
             onPressed: () {
-              print('sss');
-              // context.goNamed(AppRouter.homeLayOut);
-              LoginCubit.get(context).loginWithEmailAndPassword();
-            }),
-        SpaceManager.sizedBox16h(context),
-        // CutomOutlindSocialButton(
-        //   text: TextManager.signInWithGoogle,
-        //   logo: AssetsManager.googleIcon,
-        //   textColor: ColorsManager.grayDark,
-        //   borderColor: ColorsManager.gray,
-        //   onPressed: ()
-        //   {
-        //     LoginCubit.get(context).signIInWithGoogle();
-        //
-        //   },
-        // ),
-        // SpaceManager.sizedBox16h(context),
-        // CutomOutlindSocialButton(
-        //   text: TextManager.signInWithFacebook,
-        //   logo: AssetsManager.faceBookIcon,
-        //   logoColor: ColorsManager.primaryColor,
-        //   textColor: ColorsManager.grayDark,
-        //   borderColor: ColorsManager.gray,
-        //   onPressed: ()
-        //   {
-        //     LoginCubit.get(context).signInWithFacebook();
-        //   },
-        // ),
-      ],
-    );
+           LoginCubit.get(context).loginWithEmailAndPassword();
+            });    
   }
 }

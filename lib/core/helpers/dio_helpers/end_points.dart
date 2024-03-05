@@ -1,7 +1,7 @@
 abstract class EndPoint {
     static const String baseUrl = "https://renter-api.ksbgarage.com/";
   static const String LOGIN_END_POINT = "auth/login/mobile";
-  static const String REGISTER_END_POINT = "/auth/register/client";
+  static const String REGISTER_END_POINT = "/auth/register";
   static const String FACEBOOK_LOGIN_END_POINTS = "auth/social/callback";
   // ads
   static const String ADS_END_POINTS = "/users/ads";

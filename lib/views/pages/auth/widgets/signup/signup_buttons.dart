@@ -17,7 +17,10 @@ class SignupButtons extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        CustomElevatedButton(text: TextManager.signUp.tr(), onPressed: ()
+        CustomElevatedButton(
+          color: ColorsManager.white,
+          textColor: ColorsManager.primaryColor,
+          text: TextManager.signUp.tr(), onPressed: ()
         {
           if(RegisterCubitCubit.get(context).formKeyRegister.currentState!.validate())
           {
@@ -27,23 +30,7 @@ class SignupButtons extends StatelessWidget {
             customSnackBar(message: TextManager.pleaseFillAllOfData.tr(), snackBarType: SnackBarType.error, context: context);
           }
         }),
-        // SpaceManager.sizedBox16h(context),
-        // CutomOutlindSocialButton(
-        //   text: TextManager.signUpWithGoogle,
-        //   logo: AssetsManager.googleIcon,
-        //   textColor: ColorsManager.grayDark,
-        //   borderColor: ColorsManager.gray,
-        //   onPressed: () {},
-        // ),
-        // SpaceManager.sizedBox16h(context),
-        // CutomOutlindSocialButton(
-        //   text: TextManager.signUpWithFacebook,
-        //   logo: AssetsManager.faceBookIcon,
-        //   logoColor: ColorsManager.primaryColor,
-        //   textColor: ColorsManager.grayDark,
-        //   borderColor: ColorsManager.gray,
-        //   onPressed: () {},
-        // ),
+        
       
       ],
     );
