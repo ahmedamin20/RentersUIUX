@@ -34,7 +34,7 @@ class _MyOrderScreenLayOutState extends State<MyOrderScreenLayOut>
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text("My orders", style: TextStyleManager.textStyle16w500),
+        title: Text("My Request", style: TextStyleManager.textStyle16w500),
         bottom: TabBar(
           controller: _tabController,
           tabs: const [

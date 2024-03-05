@@ -49,6 +49,7 @@ class HomeScreen extends StatelessWidget {
                         null) {
                       return SizedBox(
                         height: 100.h,
+                        width: 50.w,
                         child: ListView.builder(
                           itemCount: CategoryCubit.get(context)
                               .categoryModel!
@@ -56,20 +57,25 @@ class HomeScreen extends StatelessWidget {
                               .length,
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {
-                            return Column(
-                              children: [
-                                Image(
-                                    image: NetworkImage(
-                                        CategoryCubit.get(context)
-                                            .categoryModel!
-                                            .data![index]
-                                            .image!
-                                            .toString())),
-                                Text(CategoryCubit.get(context)
-                                    .categoryModel!
-                                    .data![index]
-                                    .name!)
-                              ],
+                            return Padding(
+                              padding: const EdgeInsets.all(18.0),
+                              child: Column(
+                                children: [
+                                  Image(
+                                    width: 50.w,
+                                    height: 50.h,
+                                      image: NetworkImage(
+                                          CategoryCubit.get(context)
+                                              .categoryModel!
+                                              .data![index]
+                                              .image!
+                                              .toString())),
+                                  Text(CategoryCubit.get(context)
+                                      .categoryModel!
+                                      .data![index]
+                                      .name!)
+                                ],
+                              ),
                             );
                           },
                         ),
@@ -97,54 +103,52 @@ class HomeScreen extends StatelessWidget {
                       } else if (state is ProductError) {
                         return Text(state.error);
                       } else if (productCubit.productModel != null) {
-                        return Expanded(
-                          child: GridView.builder(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemCount: productCubit.productModel!.data!.length,
-                            gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 2,
-                                    childAspectRatio: 0.7,
-                                    crossAxisSpacing: 10,
-                                    mainAxisSpacing: 10),
-                            itemBuilder: (context, index) {
-                              return GestureDetector(
-                                onTap: () {
-                                  context.push(AppRouter.productDetailsScreen,
-                                      extra: productCubit
-                                          .productModel!.data![index].id);
-                                },
-                                child: Card(
-                                  child: Column(
-                                    children: [
-                                      Image.network(
-                                        productCubit.productModel!.data![index]
-                                            .mainImage!,
-                                        fit: BoxFit.cover,
-                                        height: 100.h,
-                                      ),
-                                      Text(
-                                        productCubit
-                                            .productModel!.data![index].name!,
-                                        style: TextStyleManager.textStyle16w500
+                        return GridView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: productCubit.productModel!.data!.length,
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2,
+                                  childAspectRatio: 0.7,
+                                  crossAxisSpacing: 10,
+                                  mainAxisSpacing: 10),
+                          itemBuilder: (context, index) {
+                            return GestureDetector(
+                              onTap: () {
+                                context.push(AppRouter.productDetailsScreen,
+                                    extra: productCubit
+                                        .productModel!.data![index].id);
+                              },
+                              child: Card(
+                                child: Column(
+                                  children: [
+                                    Image.network(
+                                      productCubit.productModel!.data![index]
+                                          .mainImage!,
+                                      fit: BoxFit.cover,
+                                      height: 100.h,
+                                    ),
+                                    Text(
+                                      productCubit
+                                          .productModel!.data![index].name!,
+                                      style: TextStyleManager.textStyle16w500
+                                          .copyWith(
+                                              color:
+                                                  ColorsManager.primaryColor),
+                                    ),
+                                    Text(
+                                        '${productCubit.productModel!.data![index].price!.toStringAsFixed(2)} EGP',
+                                        style: TextStyleManager
+                                            .textStyle14w400
                                             .copyWith(
-                                                color:
-                                                    ColorsManager.primaryColor),
-                                      ),
-                                      Text(
-                                          '${productCubit.productModel!.data![index].price!.toStringAsFixed(2)} EGP',
-                                          style: TextStyleManager
-                                              .textStyle14w400
-                                              .copyWith(
-                                                  color: ColorsManager
-                                                      .primaryColor)),
-                                    ],
-                                  ),
+                                                color: ColorsManager
+                                                    .primaryColor)),
+                                  ],
                                 ),
-                              );
-                            },
-                          ),
+                              ),
+                            );
+                          },
                         );
                       } else {
                         return const SizedBox();

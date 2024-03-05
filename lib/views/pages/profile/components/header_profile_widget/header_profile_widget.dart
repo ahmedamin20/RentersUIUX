@@ -93,7 +93,7 @@ class HeaderProfileWidget extends StatelessWidget {
                               context.push(AppRouter.profileSettingScreen),
                           child: SvgPicture.asset(
                             AssetsManager.settingsIcon,
-                            color: ColorsManager.colorText,
+                            color: ColorsManager.white,
                           ))
                       : const SizedBox.shrink(),
                 ],
@@ -115,7 +115,7 @@ class HeaderProfileWidget extends StatelessWidget {
             Text(
               userModel.name!,
               style: TextStyleManager.textStyle18w700
-                  .copyWith(color: ColorsManager.colorText),
+                  .copyWith(color: ColorsManager.white),
             ),
             SizedBox(
               height: SpaceManager.sizedBox16h(context).height,
@@ -124,7 +124,7 @@ class HeaderProfileWidget extends StatelessWidget {
             Text(
               userModel.type!.tr(),
               style: TextStyleManager.textStyle12w500
-                  .copyWith(color: ColorsManager.colorText),
+                  .copyWith(color: ColorsManager.white),
             ),
             SizedBox(
               height: SpaceManager.sizedBox16h(context).height,

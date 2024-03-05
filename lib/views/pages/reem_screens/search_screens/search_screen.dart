@@ -44,77 +44,81 @@ class _SearchScreenState extends State<SearchScreen> {
             SizedBox(
                 height: 50.h,
                 child: const CustomTextFormField(textHint: TextManager.searsh)),
-            Expanded(
-                child: ListView.separated(
-              itemCount: item.length,
-              itemBuilder: (context, index) {
-                final searchItems = item[index];
-                return InkWell(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const MyOrderScreenLayOut()));
-                  },
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        width: 80,
-                        height: 64,
-                        decoration: ShapeDecoration(
-                          image: DecorationImage(
-                            image: NetworkImage(searchItems.urlImage),
-                            fit: BoxFit.fill,
-                          ),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8)),
-                        ),
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            height: 12.h,
-                          ),
-                          Text(searchItems.title,
-                              style: TextStyleManager.textStyle14w500),
-                          SizedBox(
-                            height: 2.h,
-                          ),
-                          Text(
-                            searchItems.description,
-                            style: TextStyleManager.textStyle12w400.copyWith(
-                              color: ColorsManager.primaryColor,
-                            ),
-                            maxLines: 5,
-                            overflow: TextOverflow.ellipsis,
-                            softWrap: false,
-                          ),
-                          SizedBox(
-                            height: 10.h,
-                          ),
-                          Text(searchItems.price,
-                              style: TextStyleManager.textStyle14w500),
-                          SizedBox(
-                            height: 12.h,
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                );
-              },
-              separatorBuilder: (BuildContext context, int index) => Container(
-                width: 343.w,
-                height: 1.h,
-                padding: EdgeInsets.symmetric(
-                  horizontal: 16.w,
-                ),
-                decoration:
-                    const BoxDecoration(color: ColorsManager.greyScale600),
-              ),
-            ))
+          
+          Text("Soon"),
+            // Expanded(
+            //     child: ListView.separated(
+            //   itemCount: item.length,
+            //   itemBuilder: (context, index) {
+            //     final searchItems = item[index];
+            //     return InkWell(
+            //       onTap: () {
+            //         Navigator.push(
+            //             context,
+            //             MaterialPageRoute(
+            //                 builder: (context) => const MyOrderScreenLayOut()));
+            //       },
+            //       child: Row(
+            //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //         children: [
+            //           Container(
+            //             width: 80,
+            //             height: 64,
+            //             decoration: ShapeDecoration(
+            //               image: DecorationImage(
+            //                 image: NetworkImage(searchItems.urlImage),
+            //                 fit: BoxFit.fill,
+            //               ),
+            //               shape: RoundedRectangleBorder(
+            //                   borderRadius: BorderRadius.circular(8)),
+            //             ),
+            //           ),
+            //           Column(
+            //             crossAxisAlignment: CrossAxisAlignment.start,
+            //             children: [
+            //               SizedBox(
+            //                 height: 12.h,
+            //               ),
+            //               Text(searchItems.title,
+            //                   style: TextStyleManager.textStyle14w500),
+            //               SizedBox(
+            //                 height: 2.h,
+            //               ),
+            //               Text(
+            //                 searchItems.description,
+            //                 style: TextStyleManager.textStyle12w400.copyWith(
+            //                   color: ColorsManager.primaryColor,
+            //                 ),
+            //                 maxLines: 5,
+            //                 overflow: TextOverflow.ellipsis,
+            //                 softWrap: false,
+            //               ),
+            //               SizedBox(
+            //                 height: 10.h,
+            //               ),
+            //               Text(searchItems.price,
+            //                   style: TextStyleManager.textStyle14w500),
+            //               SizedBox(
+            //                 height: 12.h,
+            //               ),
+            //             ],
+            //           )
+            //         ],
+            //       ),
+            //     );
+            //   },
+            //   separatorBuilder: (BuildContext context, int index) => Container(
+            //     width: 343.w,
+            //     height: 1.h,
+            //     padding: EdgeInsets.symmetric(
+            //       horizontal: 16.w,
+            //     ),
+            //     decoration:
+            //         const BoxDecoration(color: ColorsManager.greyScale600),
+            //   ),
+            // ))
+      
+      
           ],
         ),
       ),

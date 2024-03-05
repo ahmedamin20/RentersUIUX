@@ -49,7 +49,7 @@ class BuildListViewInProgressItem extends StatelessWidget {
                     TextSpan(
                       children: [
                         TextSpan(
-                          text: 'Order number: ',
+                          text: 'Request number: ',
                           style: TextStyleManager.textStyle12w700,
                         ),
                         TextSpan(
@@ -66,7 +66,7 @@ class BuildListViewInProgressItem extends StatelessWidget {
                       color: AppColors.pink,
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    child: Text("In Progress",style:TextStyleManager.textStyle12w700,),
+                    child: Text("In Progress",style:TextStyleManager.textStyle12w700.copyWith(color: Colors.white),),
                   )
                 ],
               ),
@@ -100,8 +100,9 @@ class BuildListViewInProgressItem extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 14,),
-              AppButton(text: "Order details", onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>const OrderDetails()));
+              AppButton(text: "Request details", onTap: ()
+              {
+                // Navigator.push(context, MaterialPageRoute(builder: (context)=>const OrderDetails()));
               })
 
             ],
