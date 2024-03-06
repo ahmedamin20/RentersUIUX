@@ -18,6 +18,7 @@ import 'package:ksb/data/repository/cart_repo/cart_repo.dart';
 import 'package:ksb/data/repository/category_repo/category_repo.dart';
 import 'package:ksb/data/repository/favoutite_repo/favoutite_repo.dart';
 import 'package:ksb/data/repository/profile_repo/profile_repo.dart';
+import 'package:ksb/view_model/cubit/add_product_screen_cubit/cubit/add_product_screen_cubit.dart';
 import 'package:ksb/view_model/cubit/cart_cubit/cart_cubit.dart';
 import 'package:ksb/view_model/cubit/category_cubit/category_cubit.dart';
 import 'package:ksb/view_model/cubit/information_cubit/information_cubit.dart';
@@ -140,6 +141,7 @@ class _MyAppState extends State<MyApp> {
         BlocProvider(
             create: (context) =>
                 CategoryCubit(sl<CategoryRepoImpl>())..getCategory()),
+
       ],
       child: ScreenUtilInit(
         designSize: const Size(360, 690),

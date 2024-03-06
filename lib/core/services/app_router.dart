@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ksb/core/caching_data/cacshing_date.dart';
 import 'package:ksb/views/pages/abous_us/about_us_view.dart';
+import 'package:ksb/views/pages/add_product/view/add_product_screen.dart';
 import 'package:ksb/views/pages/all_restrunt_screen/view/screens.dart';
 import 'package:ksb/views/pages/auth/antoneos_auth/new_password_screen.dart';
 import 'package:ksb/views/pages/auth/create_new_password.dart';
@@ -79,7 +80,7 @@ abstract class AppRouter {
   static const String supportChat = "/supportChat";
   static const String productDetailsScreen = "/productDetailsScreen";
     static const String splashScreen = "/spalsh";
-
+    static const String addProductScreen = "/addProductScreen";
 
   static final router = GoRouter(
     initialLocation: splashScreen,
@@ -91,6 +92,10 @@ abstract class AppRouter {
     GoRoute(
       path: splashScreen,
       builder: (context, state) => const SplashScreen(),
+    ),
+    GoRoute(
+      path: addProductScreen,
+      builder: (context, state) => const AddProductScreen(),
     ),
     //     GoRoute(
     //   path: supportChat,

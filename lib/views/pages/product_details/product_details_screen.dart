@@ -112,6 +112,8 @@ class ProductDetails extends StatelessWidget {
                                    SizedBox(
                           height: 12.h,
                         ),
+
+                        
                            A2zCustomButton(buttonName: "Renter", onPressed: (){}),
                       ],
                     ),

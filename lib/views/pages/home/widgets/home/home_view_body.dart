@@ -35,11 +35,24 @@ class HomeScreen extends StatelessWidget {
             child: ListView(
               controller: ProductCubit.get(context).scrollController,
               children: [
-                const CustomTextFormField(
-
-                  textHint: "Search" , 
-                suffixIcon: Icons.search,
+                Row(children: 
+                [
+                  Expanded(
+                    child: const CustomTextFormField(
+                    
+                    textHint: "Search" , 
+                                    suffixIcon: Icons.search,
+                                    ),
+                  ),
+                IconButton(
+                  onPressed: () {
+                    context.push(AppRouter.addProductScreen);
+                  },
+                  icon: const Icon(Icons.add , 
+                  color: ColorsManager.primaryColor,
+                  ),
                 ),
+                ],),
                 SizedBox(
                   height: 15.h,
                 ),
