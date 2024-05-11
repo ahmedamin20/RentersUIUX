@@ -117,9 +117,11 @@ class MyProduct extends StatelessWidget {
                                   child: Align(
                                     alignment: Alignment.topRight,
                                     child: Column(
+                                      mainAxisSize: MainAxisSize.min,
                                       children: [
                                         IconButton(
                                           icon: const CircleAvatar(
+                                            radius: 15,
                                             backgroundColor: Colors.white,
                                             child: Icon(
                                               Icons.delete,
@@ -187,6 +189,7 @@ class MyProduct extends StatelessWidget {
                                         ),
                                         IconButton(
                                           icon: const CircleAvatar(
+                                            radius: 15,
                                             backgroundColor: Colors.white,
                                             child: Icon(
                                               Icons.edit,
