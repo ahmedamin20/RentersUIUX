@@ -1,30 +1,16 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ksb/core/helpers/cach_helpers/cach_helpers.dart';
-import 'package:ksb/core/resource/assets_manager.dart';
-import 'package:ksb/core/resource/colors_manager.dart';
-import 'package:ksb/core/resource/text_manager.dart';
-import 'package:ksb/core/resource/text_style_manager.dart';
-import 'package:ksb/data/model/profile_ui_model/profile_ui_model.dart';
 import 'package:ksb/view_model/cubit/profile_cubit/profile_cubit.dart';
-import 'package:ksb/views/componants/custom_cached_network_image/custom_cached_network_image.dart';
 import 'package:ksb/views/componants/custom_snack_bar/custom_snack_bar.dart';
-import 'package:lottie/lottie.dart';
 import '../../../../core/resource/space_manager.dart';
 import '../../../../core/services/app_router.dart';
-import '../../../../data/model/model_lanageuages/language_model.dart';
 import '../../../../view_model/cubit/layout_cubit/layout_cubit.dart';
 import '../../../componants/custom_easy_loading/custom_easy_loading.dart';
-import '../components/custom_card_profile/custom_card_profile.dart';
 import '../components/header_profile_widget/header_profile_widget.dart';
-import '../widget/profile_app_bar.dart';
 import '../widget/profile_items_listview.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -63,7 +49,6 @@ class ProfileScreen extends StatelessWidget {
             print(CacheHelper.getDataString(key: "password"));
             context.go(AppRouter.loginView);
           }
-        // TODO: implement listener
       },
       builder: (context, state)
       {

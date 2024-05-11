@@ -20,8 +20,8 @@ class AddProductScreenCubit extends Cubit<AddProductScreenState>
   TextEditingController descriptionController = TextEditingController();
   TextEditingController minimumDays = TextEditingController();
   TextEditingController maximumDays= TextEditingController();
-    TextEditingController health =  TextEditingController();
-    TextEditingController categpryID =  TextEditingController();
+  TextEditingController health =  TextEditingController();
+  TextEditingController categpryID =  TextEditingController();
 
 
     XFile ?mainImage;

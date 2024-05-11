@@ -1,9 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
-import 'package:ksb/core/caching_data/cacshing_date.dart';
-import 'package:ksb/views/pages/abous_us/about_us_view.dart';
 import 'package:ksb/views/pages/add_product/view/add_product_screen.dart';
-import 'package:ksb/views/pages/all_restrunt_screen/view/screens.dart';
 import 'package:ksb/views/pages/auth/antoneos_auth/new_password_screen.dart';
 import 'package:ksb/views/pages/auth/create_new_password.dart';
 import 'package:ksb/views/pages/auth/login_view.dart';
@@ -14,6 +11,8 @@ import 'package:ksb/views/pages/contuct_us/contuct_us_view.dart';
 import 'package:ksb/views/pages/edit_profile/edit_profile_screen.dart';
 import 'package:ksb/views/pages/home_layout/page/home_layout.dart';
 import 'package:ksb/views/pages/home/pick_interest.dart';
+import 'package:ksb/views/pages/my_product/my_product.dart';
+import 'package:ksb/views/pages/my_product/update_product.dart';
 import 'package:ksb/views/pages/onbording/hello_screen.dart';
 import 'package:ksb/views/pages/onbording/screen/Onboarding_screen.dart';
 import 'package:ksb/views/pages/profile/page/change_language_Screen.dart';
@@ -21,12 +20,11 @@ import 'package:ksb/views/pages/profile/page/change_password_screen.dart';
 import 'package:ksb/views/pages/profile/page/profile_settings_screen.dart';
 import 'package:ksb/views/pages/settings/pages/settings_screen.dart';
 import 'package:ksb/views/pages/start/start_view.dart';
-import 'package:ksb/views/pages/splash/splash_view.dart';
 import 'package:ksb/views/splash_screen/splash_screen.dart';
+import '../../data/model/product_model/product_model.dart';
 import '../../views/pages/abous_us/about_app_view.dart';
 import '../../views/pages/auth/antoneos_auth/congrats_screen.dart';
 import '../../views/pages/auth/antoneos_auth/reset_password_Screen.dart';
-import '../../views/pages/auth/antoneos_auth/widget/reset_password_widget.dart';
 import '../../views/pages/product_details/product_details_screen.dart';
 import '../../views/pages/profile/page/terms_and_condations.dart';
 
@@ -79,16 +77,19 @@ abstract class AppRouter {
   static const String contactUs = "/contactUs";
   static const String supportChat = "/supportChat";
   static const String productDetailsScreen = "/productDetailsScreen";
-    static const String splashScreen = "/spalsh";
-    static const String addProductScreen = "/addProductScreen";
+  static const String splashScreen = "/spalsh";
+  static const String addProductScreen = "/addProductScreen";
+  static const String updatePRoduct = "/addProductScreen";
 
-  static final router = GoRouter(
-    initialLocation: splashScreen,
-      routes: [
+  static const String myProduct = "/MyProduct";
+  // static const String addProductScreen = "/addProductScreen";
+
+  static final router = GoRouter(initialLocation: splashScreen, routes: [
     // GoRoute(
     //   path: splashView,
     //   builder: (context, state) => const SplashView(),
     // ),
+    GoRoute(path: myProduct, builder: (context, state) => const MyProduct()),
     GoRoute(
       path: splashScreen,
       builder: (context, state) => const SplashScreen(),
@@ -97,6 +98,15 @@ abstract class AppRouter {
       path: addProductScreen,
       builder: (context, state) => const AddProductScreen(),
     ),
+    GoRoute(
+      path: updatePRoduct,
+      builder: (context, state) {
+        return UpdateProduct(
+          productModel: state.extra as BaseProductModel,
+        );
+      },
+    ),
+
     //     GoRoute(
     //   path: supportChat,
     //   builder: (context, state) =>
@@ -203,31 +213,25 @@ abstract class AppRouter {
         path: changePasswordView,
         builder: (context, state) => const ChangePasswordScreen()),
 
-        GoRoute(
-            path: termsAndCondationView,
-            builder: (context, state) => const TermsAndCondationScreen()),
+    GoRoute(
+        path: termsAndCondationView,
+        builder: (context, state) => const TermsAndCondationScreen()),
 
-        GoRoute(
-            path: language,
-            builder: (context, state) => const LanguageScreen()),
-        GoRoute(
-            path: newPassword,
-            builder: (context, state) => const NewPasswordScreen()),
-        GoRoute(
-            path: aboutApp,
-            builder: (context, state) => const AboutUsScreen()),
-        GoRoute(
-            path: editProfile,
-            builder: (context, state) => const EditProfile()),
-        GoRoute(
-            path: contactUs,
-            builder: (context, state) => const ContactUs()),
-        GoRoute(
-            path: productDetailsScreen,
-            builder: (context, state) =>  ProductDetails(
+    GoRoute(
+        path: language, builder: (context, state) => const LanguageScreen()),
+    GoRoute(
+        path: newPassword,
+        builder: (context, state) => const NewPasswordScreen()),
+    GoRoute(path: aboutApp, builder: (context, state) => const AboutUsScreen()),
+    GoRoute(
+        path: editProfile, builder: (context, state) => const EditProfile()),
+    GoRoute(path: contactUs, builder: (context, state) => const ContactUs()),
+    GoRoute(
+        path: productDetailsScreen,
+        builder: (context, state) => ProductDetails(
               productId: state.extra as int,
             )),
-        // Gor
+    // Gor
   ]);
 
   static BuildContext? get ctx =>

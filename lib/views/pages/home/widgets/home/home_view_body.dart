@@ -151,7 +151,8 @@ class HomeScreen extends StatelessWidget {
                       } else if (state is ProductError) {
                         return Text(state.error);
                       } else if (productCubit.productModel != null) {
-                        return GridView.builder(
+                        return 
+                        GridView.builder(
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
                           itemCount: productCubit.productModel!.data!.length,

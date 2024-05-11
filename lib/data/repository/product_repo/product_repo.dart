@@ -18,7 +18,7 @@ class ProductRepoImpl extends ProductRepo {
   Future<Either<Failure, ProductModel>> getProduct(int page) async {
     try {
       Response response = await DioHelper.getData(
-          url: EndPoint.productEndPoint,
+          url: EndPoint.productPublicEndPoint,
           queryParameters: {
             'page': page,
           });
@@ -32,10 +32,11 @@ class ProductRepoImpl extends ProductRepo {
   }
 
   @override
-  Future<Either<Failure, ProductDetailsModel>> getProductDetails(int productID) async {
+  Future<Either<Failure, ProductDetailsModel>> getProductDetails(
+      int productID) async {
     try {
       Response response = await DioHelper.getData(
-        url: "${EndPoint.productEndPoint}/$productID",
+        url: "${EndPoint.productPublicEndPoint}/$productID",
       );
 
       return Right(ProductDetailsModel.fromJson(response.data));

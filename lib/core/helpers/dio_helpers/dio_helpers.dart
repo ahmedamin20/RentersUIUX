@@ -18,8 +18,7 @@ class DioHelper {
 
   //Here The Initialize of Dio and Start Connect to API Using baseUrl.
 
-  static init() 
-  {
+  static init() {
     dio = Dio(
       BaseOptions(
         //Here the URL of API.
@@ -36,12 +35,10 @@ class DioHelper {
       ),
     )..interceptors.addAll([
         InterceptorsWrapper(
-          onRequest: (options, handle) async
-          {
-            if(CachingData.instance.getCachedLogin()!=null)
-            {
+          onRequest: (options, handle) async {
+            if (CachingData.instance.getCachedLogin() != null) {
               options.headers['Authorization'] =
-              'Bearer ${CachingData.instance.getCachedLogin()?.data?.token }';
+                  'Bearer ${CachingData.instance.getCachedLogin()?.data?.token}';
             }
             return handle.next(options);
           },
@@ -50,7 +47,9 @@ class DioHelper {
                     "You are not authenticated" ||
                 error.response!.statusCode == 401) {
               CacheHelper.clearData();
-              AppRouter.ctx!.go(AppRouter.loginView,);
+              AppRouter.ctx!.go(
+                AppRouter.loginView,
+              );
               // Get.offAllNamed(PageName.LOG_IN);
             }
             return handle.next(error);
@@ -150,7 +149,6 @@ class DioHelper {
       debugPrint("-------------Response Data----------------");
       return response;
     } on DioError catch (e) {
-
       rethrow;
     }
   }

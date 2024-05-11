@@ -12,6 +12,8 @@ abstract class TextManager {
   static const String logIn = "Log in";
   static const String logout = "Log Out";
   static const String supportChat = "Support Chat";
+    static const String myProduct = "My Product";
+
   static const String signUp = "Sign Up";
     static const String categories= "Categories";
         static const String HpmeData= "Home Appliance";

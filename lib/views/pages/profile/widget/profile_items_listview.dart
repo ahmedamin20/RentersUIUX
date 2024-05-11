@@ -16,131 +16,67 @@ class ProfileItemListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<ProfileUiModel> profileItems=[
-      // ProfileUiModel(
-      //   ColorsManager.blackColor,
-      //   description: 'Description text will be here',
-      //   title:  TextManager.deliveryAddress.tr(),
-      //   iconData: AssetsManager.location2,
-      //   onTap: (){
-      //     context.push((AppRouter.deliveryAddress));
-      //   },
-      // ),
-      // ProfileUiModel(
-      //   ColorsManager.blackColor,
-      //   description: 'Description text will be here',
-      //   title:  TextManager.paymentMethod.tr(),
-      //   iconData: AssetsManager.wallet2,
-      //   onTap: ()
-      //   {
-      //     context.push((AppRouter.payment));
-      //   },
-      // ),
-      // ProfileUiModel(
-      //   ColorsManager.blackColor,
-      //
-      //   title:  TextManager.language.tr(),
-      //   description: 'english ',
-      //   iconData: AssetsManager.languageProfile,
-      //   onTap: ()
-      //   {
-      //     context.push((AppRouter.language));
-      //   },
-      // ),
-      // ProfileUiModel(
-      //   ColorsManager.blackColor,
-      //
-      //   title:  TextManager.notification.tr(),
-      //   iconData: AssetsManager.notification,
-      //   onTap: ()
-      //   {
-      //     context.push((AppRouter.notificationView));
-      //   },
-      // ),
-      // ProfileUiModel(
-      //   ColorsManager.blackColor,
-      //
-      //   title:  TextManager.wallet.tr(),
-      //   iconData: AssetsManager.wallet2,
-      //   onTap: ()
-      //   {
-      //     context.push((AppRouter.myWalletView));
-      //   },
-      // ),
-      // ProfileUiModel(
-      //   ColorsManager.blackColor,
-      //
-      //   title:  TextManager.notes.tr(),
-      //   iconData: AssetsManager.notes,
-      //   onTap: ()
-      //   {
-      //     context.push((AppRouter.notes));
-      //   },
-      // ),
+    List<ProfileUiModel> profileItems = [
       ProfileUiModel(
         ColorsManager.blackColor,
-
+        isArrow: false,
+        title: TextManager.myProduct.tr(),
+        iconData: AssetsManager.supportChat,
+        onTap: () {
+          context.push((AppRouter.myProduct));
+        },
+      ),
+      ProfileUiModel(
+        ColorsManager.blackColor,
         isArrow: true,
-        title:  TextManager.contactUs.tr(),
+        title: TextManager.contactUs.tr(),
         iconData: AssetsManager.terms,
-        onTap: ()
-        {
+        onTap: () {
           context.push((AppRouter.contactUs));
-
         },
       ),
-
       ProfileUiModel(
         ColorsManager.blackColor,
-
         isArrow: false,
-        title:  TextManager.terms.tr(),
+        title: TextManager.terms.tr(),
         iconData: AssetsManager.termsAndCondition,
-        onTap: ()
-        {
+        onTap: () {
           context.push((AppRouter.termsAndCondationView));
-
         },
       ),
       ProfileUiModel(
         ColorsManager.blackColor,
         isArrow: false,
-        title:  TextManager.aboutApp.tr(),
+        title: TextManager.aboutApp.tr(),
         iconData: AssetsManager.about,
-        onTap: ()
-        {
+        onTap: () {
           context.push((AppRouter.aboutApp));
         },
       ),
       ProfileUiModel(
         ColorsManager.blackColor,
         isArrow: false,
-        title:  TextManager.supportChat.tr(),
+        title: TextManager.supportChat.tr(),
         iconData: AssetsManager.supportChat,
-        onTap: ()
-        {
+        onTap: () {
           context.push((AppRouter.supportChat));
         },
       ),
-
-
     ];
-    return   ListView.builder(
-        itemCount:profileItems.length ,
+    return ListView.builder(
+        itemCount: profileItems.length,
         physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
-        itemBuilder:
-            (context,index){
+        itemBuilder: (context, index) {
           return CustomCardProfile(
-            description:profileItems[index].description,
+            description: profileItems[index].description,
             title: profileItems[index].title,
-            color:profileItems[index].color,
+            color: profileItems[index].color,
             iconData: profileItems[index].iconData,
             onTap: profileItems[index].onTap,
             isArrow: profileItems[index].isArrow,
           );
-        }
-    );
+        });
   }
 }
 // onTap: ()

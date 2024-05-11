@@ -3,15 +3,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 
-import '../../../data/model/ads_model/ads_model.dart';
 import '../../../data/model/contact_us_model/contact_us_model.dart';
-import '../../../data/repository/ads_repo/ads_repo.dart';
 import '../../../data/repository/contact_us_repo/conatct_us_repo.dart';
 
 part 'contact_us_state.dart';
 
-class ContactUsCubit extends Cubit<ContactUsState>
-{
+class ContactUsCubit extends Cubit<ContactUsState> {
   ContactUsCubit(this.contactUsRepo) : super(ContactUsInitial());
   static ContactUsCubit get(context) => BlocProvider.of(context);
   ContactUsRepo contactUsRepo;
@@ -20,16 +17,15 @@ class ContactUsCubit extends Cubit<ContactUsState>
   TextEditingController emailController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   TextEditingController messageController = TextEditingController();
-  void contactUs()
-  {
+  void contactUs() {
     emit(ContactUsLoading());
-    contactUsRepo.getContactUs(
-      email: emailController.text,
-      name: nameController.text,
-      phone: phoneController.text,
-      message: messageController.text
-    ).then((value)
-    {
+    contactUsRepo
+        .getContactUs(
+            email: emailController.text,
+            name: nameController.text,
+            phone: phoneController.text,
+            message: messageController.text)
+        .then((value) {
       value.fold((error) {
         emit(ContactUsError(error.toString()));
       }, (value) {
