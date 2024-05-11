@@ -19,9 +19,7 @@ class ProductRepoImpl extends ProductRepo {
     try {
       Response response = await DioHelper.getData(
           url: EndPoint.productPublicEndPoint,
-          queryParameters: {
-            'page': page,
-          });
+          queryParameters: {'page': page, 'per_page': 100});
 
       return Right(ProductModel.fromJson(response.data));
     } on DioException catch (e) {

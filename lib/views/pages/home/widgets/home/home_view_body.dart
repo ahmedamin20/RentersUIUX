@@ -35,24 +35,25 @@ class HomeScreen extends StatelessWidget {
             child: ListView(
               controller: ProductCubit.get(context).scrollController,
               children: [
-                Row(children: 
-                [
-                  Expanded(
-                    child: const CustomTextFormField(
-                    
-                    textHint: "Search" , 
-                                    suffixIcon: Icons.search,
-                                    ),
-                  ),
-                IconButton(
-                  onPressed: () {
-                    context.push(AppRouter.addProductScreen);
-                  },
-                  icon: const Icon(Icons.add , 
-                  color: ColorsManager.primaryColor,
-                  ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: const CustomTextFormField(
+                        textHint: "Search",
+                        suffixIcon: Icons.search,
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        context.push(AppRouter.addProductScreen);
+                      },
+                      icon: const Icon(
+                        Icons.add,
+                        color: ColorsManager.primaryColor,
+                      ),
+                    ),
+                  ],
                 ),
-                ],),
                 SizedBox(
                   height: 15.h,
                 ),
@@ -62,13 +63,11 @@ class HomeScreen extends StatelessWidget {
                 ),
                 Text(
                   TextManager.categories.tr(),
-                  style: TextStyleManager.textStyle18w600.copyWith(
-                      color: ColorsManager.blackColor),
+                  style: TextStyleManager.textStyle18w600
+                      .copyWith(color: ColorsManager.blackColor),
                 ),
                 BlocConsumer<CategoryCubit, CategoryState>(
-                  listener: (context, state) 
-                  {
-                  },
+                  listener: (context, state) {},
                   builder: (context, state) {
                     if (state is CategoryLoading) {
                       return const Center(child: CircularProgressIndicator());
@@ -93,26 +92,29 @@ class HomeScreen extends StatelessWidget {
                                   CircleAvatar(
                                     radius: 40.r,
                                     backgroundImage: CachedNetworkImageProvider(
-                                            CategoryCubit.get(context)
-                                                .categoryModel!
-                                                .data![index]
-                                                .image!
-                                                .toString()),
+                                        CategoryCubit.get(context)
+                                            .categoryModel!
+                                            .data![index]
+                                            .image!
+                                            .toString()),
                                   ),
-                                  const SizedBox(height: 10,),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
                                   SizedBox(
-                                    
                                     width: 100.w,
                                     child: Text(
-                                      
-                                      CategoryCubit.get(context)
-                                        .categoryModel!
-                                        .data![index]
-                                        .name! ,
+                                        CategoryCubit.get(context)
+                                            .categoryModel!
+                                            .data![index]
+                                            .name!,
                                         maxLines: 2,
                                         overflow: TextOverflow.ellipsis,
                                         textAlign: TextAlign.center,
-                                        style: TextStyleManager.textStyle16w500.copyWith(color: ColorsManager.primaryColor)),
+                                        style: TextStyleManager.textStyle16w500
+                                            .copyWith(
+                                                color: ColorsManager
+                                                    .primaryColor)),
                                   )
                                 ],
                               ),
@@ -128,12 +130,12 @@ class HomeScreen extends StatelessWidget {
                 SizedBox(
                   height: 12.h,
                 ),
-                 Text(
+                Text(
                   TextManager.HpmeData.tr(),
-                  style: TextStyleManager.textStyle18w600.copyWith(
-                      color: ColorsManager.blackColor),
+                  style: TextStyleManager.textStyle18w600
+                      .copyWith(color: ColorsManager.blackColor),
                 ),
-                 SizedBox(
+                SizedBox(
                   height: 12.h,
                 ),
                 BlocProvider.value(
@@ -151,8 +153,7 @@ class HomeScreen extends StatelessWidget {
                       } else if (state is ProductError) {
                         return Text(state.error);
                       } else if (productCubit.productModel != null) {
-                        return 
-                        GridView.builder(
+                        return GridView.builder(
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
                           itemCount: productCubit.productModel!.data!.length,
@@ -172,83 +173,81 @@ class HomeScreen extends StatelessWidget {
                               child: Card(
                                 color: Colors.white,
                                 shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  side: BorderSide(
-                                    color: ColorsManager.primaryColor.withOpacity(0.5),
-                                    width: 1,
-                                  
-                                  )),
+                                    borderRadius: BorderRadius.circular(10),
+                                    side: BorderSide(
+                                      color: ColorsManager.primaryColor
+                                          .withOpacity(0.5),
+                                      width: 1,
+                                    )),
                                 elevation: 5,
                                 child: Column(
                                   children: [
-                                   
-                                      
-                                      Expanded(
-                                        flex: 3,
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.only(
-                                              topLeft: Radius.circular(10),
-                                              topRight: Radius.circular(10),
-                                            ),
-                                            image: DecorationImage(
-                                              image: CachedNetworkImageProvider(
-                                                  productCubit
-                                                      .productModel!
-                                                      .data![index]
-                                                      .mainImage!),
-                                              fit: BoxFit.cover,
-                                            ),
+                                    Expanded(
+                                      flex: 3,
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.only(
+                                            topLeft: Radius.circular(10),
+                                            topRight: Radius.circular(10),
                                           ),
-                                        
+                                          image: DecorationImage(
+                                            image: CachedNetworkImageProvider(
+                                                productCubit.productModel!
+                                                    .data![index].mainImage!),
+                                            fit: BoxFit.cover,
+                                          ),
                                         ),
                                       ),
-                                      
+                                    ),
                                     Expanded(
                                       flex: 2,
                                       child: Padding(
-                                        padding: const EdgeInsets.only(left:5 , right: 5),
+                                        padding: const EdgeInsets.only(
+                                            left: 5, right: 5),
                                         child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: 
-                                         [
-                                          SizedBox(height: 10.h,),
-                                           Text(
-                                            productCubit
-                                                .productModel!.data![index].name!,
-                                                maxLines: 1,
-                                                overflow: TextOverflow.ellipsis,
-                                            style: TextStyleManager.textStyle16w500
-                                                .copyWith(
-                                                    color:
-                                                        ColorsManager.primaryColor),
-                                          ),
-                                          Row(children: 
-                                          [
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            SizedBox(
+                                              height: 10.h,
+                                            ),
                                             Text(
-                                              'EGP ${productCubit.productModel!.data![index].price!.toStringAsFixed(2)}',
+                                              productCubit.productModel!
+                                                  .data![index].name!,
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
                                               style: TextStyleManager
-                                                  .textStyle14w400
+                                                  .textStyle16w500
                                                   .copyWith(
                                                       color: ColorsManager
-                                                          .primaryColor)),
-                                                          const Spacer(),
-                                                       const   CircleAvatar(
-                                                        backgroundColor: ColorsManager.primaryColor,
-                                                            radius: 14,
-                                                            child: Icon(Icons.add ,
-                                                            color: ColorsManager.white,
-                                                            size: 15,
-                                                            ),
-                                                          ),
-                                        
-                                                          
-                                          ],)
-                                        
-                                         ],),
+                                                          .primaryColor),
+                                            ),
+                                            Row(
+                                              children: [
+                                                Text(
+                                                    'EGP ${productCubit.productModel!.data![index].price!.toStringAsFixed(2)}',
+                                                    style: TextStyleManager
+                                                        .textStyle14w400
+                                                        .copyWith(
+                                                            color: ColorsManager
+                                                                .primaryColor)),
+                                                const Spacer(),
+                                                const CircleAvatar(
+                                                  backgroundColor: ColorsManager
+                                                      .primaryColor,
+                                                  radius: 14,
+                                                  child: Icon(
+                                                    Icons.add,
+                                                    color: ColorsManager.white,
+                                                    size: 15,
+                                                  ),
+                                                ),
+                                              ],
+                                            )
+                                          ],
+                                        ),
                                       ),
                                     ),
-                                   
                                   ],
                                 ),
                               ),

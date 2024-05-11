@@ -45,239 +45,247 @@ class MyProduct extends StatelessWidget {
           appBar: AppBar(
             title: const Text('My Product'),
           ),
-          body: BlocConsumer<ProductUserCubit, ProductUserState>(
-            listener: (context, state) {
-              if (state is ProductError) {
-                ScaffoldMessenger.of(context)
-                    .showSnackBar(SnackBar(content: Text(state.error)));
-              } else if (state is ProductDeleteLoading) {
-                customEasyLoading();
-              } else if (state is ProductDeleted) {
+          body: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: BlocConsumer<ProductUserCubit, ProductUserState>(
+              listener: (context, state) {
+                if (state is ProductError) {
+                  ScaffoldMessenger.of(context)
+                      .showSnackBar(SnackBar(content: Text(state.error)));
+                } else if (state is ProductDeleteLoading) {
+                  customEasyLoading();
+                } else if (state is ProductDeleted) {
+                  ProductUserCubit productCubit = ProductUserCubit.get(context);
+                  productCubit.getProduct();
+                  EasyLoading.dismiss();
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      content: Text('Product Deleted Successfully')));
+                } else if (state is ProductDeleteError) {
+                  EasyLoading.dismiss();
+                  ScaffoldMessenger.of(context)
+                      .showSnackBar(SnackBar(content: Text(state.error)));
+                }
+              },
+              builder: (context, state) {
                 ProductUserCubit productCubit = ProductUserCubit.get(context);
-                productCubit.getProduct();
-                EasyLoading.dismiss();
-                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                    content: Text('Product Deleted Successfully')));
-              } else if (state is ProductDeleteError) {
-                EasyLoading.dismiss();
-                ScaffoldMessenger.of(context)
-                    .showSnackBar(SnackBar(content: Text(state.error)));
-              }
-            },
-            builder: (context, state) {
-              ProductUserCubit productCubit = ProductUserCubit.get(context);
-              if (state is ProductLoading) {
-                return const Center(child: CircularProgressIndicator());
-              } else if (state is ProductError) {
-                return Text(state.error);
-              } else if (productCubit.productModel != null) {
-                return GridView.builder(
-                  controller: productCubit.scrollController,
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: productCubit.productModel!.data!.length,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      childAspectRatio: 0.85,
-                      crossAxisSpacing: 10,
-                      mainAxisSpacing: 10),
-                  itemBuilder: (context, index) {
-                    return GestureDetector(
-                      onTap: () {
-                        context.push(AppRouter.productDetailsScreen,
-                            extra: productCubit.productModel!.data![index].id);
-                      },
-                      child: Card(
-                        color: Colors.white,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            side: BorderSide(
-                              color:
-                                  ColorsManager.primaryColor.withOpacity(0.5),
-                              width: 1,
-                            )),
-                        elevation: 5,
-                        child: Column(
-                          children: [
-                            Expanded(
-                              flex: 3,
-                              child: Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: const BorderRadius.only(
-                                      topLeft: Radius.circular(10),
-                                      topRight: Radius.circular(10),
+                if (state is ProductLoading) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (state is ProductError) {
+                  return Text(state.error);
+                } else if (productCubit.productModel != null) {
+                  return GridView.builder(
+                    controller: productCubit.scrollController,
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: productCubit.productModel!.data!.length,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            childAspectRatio: 0.85,
+                            crossAxisSpacing: 10,
+                            mainAxisSpacing: 10),
+                    itemBuilder: (context, index) {
+                      return GestureDetector(
+                        onTap: () {
+                          context.push(AppRouter.productDetailsScreen,
+                              extra:
+                                  productCubit.productModel!.data![index].id);
+                        },
+                        child: Card(
+                          color: Colors.white,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              side: BorderSide(
+                                color:
+                                    ColorsManager.primaryColor.withOpacity(0.5),
+                                width: 1,
+                              )),
+                          elevation: 1,
+                          child: Column(
+                            children: [
+                              Expanded(
+                                flex: 3,
+                                child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: const BorderRadius.only(
+                                        topLeft: Radius.circular(10),
+                                        topRight: Radius.circular(10),
+                                      ),
+                                      image: DecorationImage(
+                                        image: CachedNetworkImageProvider(
+                                            productCubit.productModel!
+                                                .data![index].mainImage!),
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
-                                    image: DecorationImage(
-                                      image: CachedNetworkImageProvider(
-                                          productCubit.productModel!
-                                              .data![index].mainImage!),
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                  child: Align(
-                                    alignment: Alignment.topRight,
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        IconButton(
-                                          icon: const CircleAvatar(
-                                            radius: 15,
-                                            backgroundColor: Colors.white,
-                                            child: Icon(
-                                              Icons.delete,
-                                              color: Colors.red,
+                                    child: Align(
+                                      alignment: Alignment.topRight,
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          IconButton(
+                                            icon: const CircleAvatar(
+                                              radius: 15,
+                                              backgroundColor: Colors.white,
+                                              child: Icon(
+                                                Icons.delete,
+                                                color: Colors.red,
+                                              ),
                                             ),
+                                            onPressed: () {
+                                              showDialog(
+                                                context: context,
+                                                builder: (_) {
+                                                  return AlertDialog(
+                                                    title: const Text(
+                                                        'Delete Product'),
+                                                    content: Text(
+                                                      'Are you sure you want to delete this product?',
+                                                      style: TextStyle(
+                                                          color: ColorsManager
+                                                              .primaryColor,
+                                                          fontSize: 16.sp,
+                                                          fontWeight:
+                                                              FontWeight.w500),
+                                                    ),
+                                                    actions: [
+                                                      TextButton(
+                                                        onPressed: () {
+                                                          productCubit
+                                                              .deleteProduct(
+                                                                  productCubit
+                                                                      .productModel!
+                                                                      .data![
+                                                                          index]
+                                                                      .id!
+                                                                      .toInt());
+                                                          GoRouter.of(context)
+                                                              .pop();
+                                                        },
+                                                        child: Text('Yes',
+                                                            style: TextStyle(
+                                                                color:
+                                                                    Colors.red,
+                                                                fontSize: 16.sp,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500)),
+                                                      ),
+                                                      TextButton(
+                                                        onPressed: () {
+                                                          GoRouter.of(context)
+                                                              .pop();
+                                                        },
+                                                        child: const Text('No',
+                                                            style: TextStyle(
+                                                                color: ColorsManager
+                                                                    .primaryColor,
+                                                                fontSize: 16,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500)),
+                                                      ),
+                                                    ],
+                                                  );
+                                                },
+                                              );
+                                              // productCubit.deleteProduct(productCubit.productModel!.data![index].id!);
+                                            },
                                           ),
-                                          onPressed: () {
-                                            showDialog(
-                                              context: context,
-                                              builder: (_) {
-                                                return AlertDialog(
-                                                  title: const Text(
-                                                      'Delete Product'),
-                                                  content: Text(
-                                                    'Are you sure you want to delete this product?',
-                                                    style: TextStyle(
-                                                        color: ColorsManager
-                                                            .primaryColor,
-                                                        fontSize: 16.sp,
-                                                        fontWeight:
-                                                            FontWeight.w500),
-                                                  ),
-                                                  actions: [
-                                                    TextButton(
-                                                      onPressed: () {
-                                                        productCubit
-                                                            .deleteProduct(
+                                          IconButton(
+                                            icon: const CircleAvatar(
+                                              radius: 15,
+                                              backgroundColor: Colors.white,
+                                              child: Icon(
+                                                Icons.edit,
+                                                color: Colors.green,
+                                              ),
+                                            ),
+                                            onPressed: () async {
+                                              var value = await Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          UpdateProduct(
+                                                            productModel:
                                                                 productCubit
                                                                     .productModel!
-                                                                    .data![
-                                                                        index]
-                                                                    .id!
-                                                                    .toInt());
-                                                        GoRouter.of(context)
-                                                            .pop();
-                                                      },
-                                                      child: Text('Yes',
-                                                          style: TextStyle(
-                                                              color: Colors.red,
-                                                              fontSize: 16.sp,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w500)),
-                                                    ),
-                                                    TextButton(
-                                                      onPressed: () {
-                                                        GoRouter.of(context)
-                                                            .pop();
-                                                      },
-                                                      child: const Text('No',
-                                                          style: TextStyle(
-                                                              color: ColorsManager
-                                                                  .primaryColor,
-                                                              fontSize: 16,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w500)),
-                                                    ),
-                                                  ],
-                                                );
-                                              },
-                                            );
-                                            // productCubit.deleteProduct(productCubit.productModel!.data![index].id!);
-                                          },
-                                        ),
-                                        IconButton(
-                                          icon: const CircleAvatar(
-                                            radius: 15,
-                                            backgroundColor: Colors.white,
+                                                                    .data![index],
+                                                          )));
+
+                                              if (value != null) {
+                                                ProductUserCubit productCubit =
+                                                    ProductUserCubit.get(
+                                                        context);
+                                                productCubit.getProduct();
+                                              }
+
+                                              // productCubit.deleteProduct(productCubit.productModel!.data![index].id!);
+                                            },
+                                          ),
+                                        ],
+                                      ),
+                                    )),
+                              ),
+                              Expanded(
+                                flex: 2,
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.only(left: 5, right: 5),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      SizedBox(
+                                        height: 10.h,
+                                      ),
+                                      Text(
+                                        productCubit
+                                            .productModel!.data![index].name!,
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TextStyleManager.textStyle16w500
+                                            .copyWith(
+                                                color:
+                                                    ColorsManager.primaryColor),
+                                      ),
+                                      Row(
+                                        children: [
+                                          Text(
+                                              'EGP ${productCubit.productModel!.data![index].price!.toStringAsFixed(2)}',
+                                              style: TextStyleManager
+                                                  .textStyle14w400
+                                                  .copyWith(
+                                                      color: ColorsManager
+                                                          .primaryColor)),
+                                          const Spacer(),
+                                          const CircleAvatar(
+                                            backgroundColor:
+                                                ColorsManager.primaryColor,
+                                            radius: 14,
                                             child: Icon(
-                                              Icons.edit,
-                                              color: Colors.green,
+                                              Icons.add,
+                                              color: ColorsManager.white,
+                                              size: 15,
                                             ),
                                           ),
-                                          onPressed: () async {
-                                            var value = await Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        UpdateProduct(
-                                                          productModel:
-                                                              productCubit
-                                                                  .productModel!
-                                                                  .data![index],
-                                                        )));
-
-                                            if (value != null) {
-                                              ProductUserCubit productCubit =
-                                                  ProductUserCubit.get(context);
-                                              productCubit.getProduct();
-                                            }
-
-                                            // productCubit.deleteProduct(productCubit.productModel!.data![index].id!);
-                                          },
-                                        ),
-                                      ],
-                                    ),
-                                  )),
-                            ),
-                            Expanded(
-                              flex: 2,
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 5, right: 5),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    SizedBox(
-                                      height: 10.h,
-                                    ),
-                                    Text(
-                                      productCubit
-                                          .productModel!.data![index].name!,
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyleManager.textStyle16w500
-                                          .copyWith(
-                                              color:
-                                                  ColorsManager.primaryColor),
-                                    ),
-                                    Row(
-                                      children: [
-                                        Text(
-                                            'EGP ${productCubit.productModel!.data![index].price!.toStringAsFixed(2)}',
-                                            style: TextStyleManager
-                                                .textStyle14w400
-                                                .copyWith(
-                                                    color: ColorsManager
-                                                        .primaryColor)),
-                                        const Spacer(),
-                                        const CircleAvatar(
-                                          backgroundColor:
-                                              ColorsManager.primaryColor,
-                                          radius: 14,
-                                          child: Icon(
-                                            Icons.add,
-                                            color: ColorsManager.white,
-                                            size: 15,
-                                          ),
-                                        ),
-                                      ],
-                                    )
-                                  ],
+                                        ],
+                                      )
+                                    ],
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                    );
-                  },
-                );
-              } else {
-                return const SizedBox();
-              }
-            },
+                      );
+                    },
+                  );
+                } else {
+                  return const SizedBox();
+                }
+              },
+            ),
           ),
         ));
   }

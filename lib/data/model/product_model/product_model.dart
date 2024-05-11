@@ -1,151 +1,77 @@
-import 'package:ksb/data/model/show_one_product_model/show_one_product_model.dart';
-
 class ProductModel {
-  ProductModel({
-      this.data, 
-      this.links, 
-      this.meta, 
-      this.message, 
-      this.code, 
-      this.type,});
-
-  ProductModel.fromJson(dynamic json) {
-    if (json['data'] != null) {
-      data = [];
-      json['data'].forEach((v) {
-        data?.add(BaseProductModel.fromJson(v));
-      });
-    }
-    links = json['links'] != null ? Links.fromJson(json['links']) : null;
-    meta = json['meta'] != null ? Meta.fromJson(json['meta']) : null;
-    message = json['message'];
-    code = json['code'];
-    type = json['type'];
-  }
   List<BaseProductModel>? data;
   Links? links;
   Meta? meta;
   String? message;
-  num? code;
+  int? code;
   String? type;
-ProductModel copyWith({  List<BaseProductModel>? data,
-  Links? links,
-  Meta? meta,
-  String? message,
-  num? code,
-  String? type,
-}) => ProductModel(  data: data ?? this.data,
-  links: links ?? this.links,
-  meta: meta ?? this.meta,
-  message: message ?? this.message,
-  code: code ?? this.code,
-  type: type ?? this.type,
-);
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    if (data != null) {
-      map['data'] = data?.map((v) => v.toJson()).toList();
+
+  ProductModel(
+      {this.data, this.links, this.meta, this.message, this.code, this.type});
+
+  ProductModel.fromJson(Map<String, dynamic> json) {
+    if (json['data'] != null) {
+      data = <BaseProductModel>[];
+      json['data'].forEach((v) {
+        data!.add(new BaseProductModel.fromJson(v));
+      });
     }
-    if (links != null) {
-      map['links'] = links?.toJson();
-    }
-    if (meta != null) {
-      map['meta'] = meta?.toJson();
-    }
-    map['message'] = message;
-    map['code'] = code;
-    map['type'] = type;
-    return map;
+    links = json['links'] != null ? new Links.fromJson(json['links']) : null;
+    meta = json['meta'] != null ? new Meta.fromJson(json['meta']) : null;
+    message = json['message'];
+    code = json['code'];
+    type = json['type'];
   }
 
-}
-
-class Meta {
-  Meta({
-      this.currentPage, 
-      this.from, 
-      this.lastPage,});
-
-  Meta.fromJson(dynamic json) {
-    currentPage = json['current_page'];
-    from = json['from'];
-    lastPage = json['last_page'];
-  }
-  num? currentPage;
-  num? from;
-  num? lastPage;
-Meta copyWith({  num? currentPage,
-  num? from,
-  num? lastPage,
-}) => Meta(  currentPage: currentPage ?? this.currentPage,
-  from: from ?? this.from,
-  lastPage: lastPage ?? this.lastPage,
-);
   Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['current_page'] = currentPage;
-    map['from'] = from;
-    map['last_page'] = lastPage;
-    return map;
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    if (this.data != null) {
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
+    }
+    if (this.links != null) {
+      data['links'] = this.links!.toJson();
+    }
+    if (this.meta != null) {
+      data['meta'] = this.meta!.toJson();
+    }
+    data['message'] = this.message;
+    data['code'] = this.code;
+    data['type'] = this.type;
+    return data;
   }
-
-}
-
-class Links {
-  Links({
-      this.first, 
-      this.last, 
-      this.next, 
-      this.prev,});
-
-  Links.fromJson(dynamic json) {
-    first = json['first'];
-    last = json['last'];
-    next = json['next'];
-    prev = json['prev'];
-  }
-  String? first;
-  String? last;
-  String? next;
-  dynamic prev;
-Links copyWith({  String? first,
-  String? last,
-  String? next,
-  dynamic prev,
-}) => Links(  first: first ?? this.first,
-  last: last ?? this.last,
-  next: next ?? this.next,
-  prev: prev ?? this.prev,
-);
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['first'] = first;
-    map['last'] = last;
-    map['next'] = next;
-    map['prev'] = prev;
-    return map;
-  }
-
 }
 
 class BaseProductModel {
-  BaseProductModel({
-      this.id, 
-      this.name, 
-      this.minimumDays, 
-      this.maximumDays, 
-      this.ratingAverage, 
-      this.health, 
-      this.categoryId, 
-      this.description, 
-      this.category, 
-      this.price, 
-      this.mainImage, 
-      this.user,
-    this.otherImages
-  });
+  int? id;
+  String? name;
+  String? minimumDays;
+  String? maximumDays;
+  int? ratingAverage;
+  int? health;
+  int? categoryId;
+  String? description;
+  Category? category;
+  int? price;
+  String? mainImage;
+  Category? user;
+  List<OtherImages>? otherImages;
 
-  BaseProductModel.fromJson(dynamic json) {
+  BaseProductModel(
+      {this.id,
+      this.name,
+      this.minimumDays,
+      this.maximumDays,
+      this.ratingAverage,
+      this.health,
+      this.categoryId,
+      this.description,
+      this.category,
+      this.price,
+      this.mainImage,
+      this.user,
+      this.otherImages});
+
+  BaseProductModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     minimumDays = json['minimum_days'];
@@ -154,132 +80,126 @@ class BaseProductModel {
     health = json['health'];
     categoryId = json['category_id'];
     description = json['description'];
-    category = json['category'] != null ? Category.fromJson(json['category']) : null;
+    category = json['category'] != null
+        ? new Category.fromJson(json['category'])
+        : null;
     price = json['price'];
     mainImage = json['main_image'];
-    user = json['user'] != null ? User.fromJson(json['user']) : null;
-    otherImages = json['other_images'] != null ? (json['other_images'] as List).map((e) => OtherImages.fromJson(e)).toList() : null;
-  }
-  num? id;
-  String? name;
-  num? minimumDays;
-  num? maximumDays;
-  num? ratingAverage;
-  num? health;
-  num? categoryId;
-  String? description;
-  Category? category;
-  num? price;
-  String? mainImage;
-  User? user;
-  List<OtherImages> ? otherImages ;
-
-BaseProductModel copyWith({  num? id,
-  String? name,
-  num? minimumDays,
-  num? maximumDays,
-  num? ratingAverage,
-  num? health,
-  num? categoryId,
-  String? description,
-  Category? category,
-  num? price,
-  String? mainImage,
-  User? user,
-  List<OtherImages> ? otherImages,
-}) => BaseProductModel(  id: id ?? this.id,
-  name: name ?? this.name,
-  minimumDays: minimumDays ?? this.minimumDays,
-  maximumDays: maximumDays ?? this.maximumDays,
-  ratingAverage: ratingAverage ?? this.ratingAverage,
-  health: health ?? this.health,
-  categoryId: categoryId ?? this.categoryId,
-  description: description ?? this.description,
-  category: category ?? this.category,
-  price: price ?? this.price,
-  mainImage: mainImage ?? this.mainImage,
-  user: user ?? this.user,
-
-);
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['id'] = id;
-    map['name'] = name;
-    map['minimum_days'] = minimumDays;
-    map['maximum_days'] = maximumDays;
-    map['rating_average'] = ratingAverage;
-    map['health'] = health;
-    map['category_id'] = categoryId;
-    map['description'] = description;
-    if (category != null) {
-      map['category'] = category?.toJson();
+    user = json['user'] != null ? new Category.fromJson(json['user']) : null;
+    if (json['other_images'] != null) {
+      otherImages = <OtherImages>[];
+      json['other_images'].forEach((v) {
+        otherImages!.add(new OtherImages.fromJson(v));
+      });
     }
-    map['price'] = price;
-    map['main_image'] = mainImage;
-    if (user != null) {
-      map['user'] = user?.toJson();
-    }
-    return map;
   }
 
-}
-class OtherImages
-{
-  String ?id;
-  String ?image;
-  OtherImages({this.id, this.image});
-  OtherImages.fromJson(dynamic json)
-  {
-    id = json['id'];
-    image = json['url'];
-  }
-}
-class User {
-  User({
-      this.id, 
-      this.name,});
-
-  User.fromJson(dynamic json) {
-    id = json['id'];
-    name = json['name'];
-  }
-  num? id;
-  String? name;
-User copyWith({  num? id,
-  String? name,
-}) => User(  id: id ?? this.id,
-  name: name ?? this.name,
-);
   Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['id'] = id;
-    map['name'] = name;
-    return map;
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['name'] = this.name;
+    data['minimum_days'] = this.minimumDays;
+    data['maximum_days'] = this.maximumDays;
+    data['rating_average'] = this.ratingAverage;
+    data['health'] = this.health;
+    data['category_id'] = this.categoryId;
+    data['description'] = this.description;
+    if (this.category != null) {
+      data['category'] = this.category!.toJson();
+    }
+    data['price'] = this.price;
+    data['main_image'] = this.mainImage;
+    if (this.user != null) {
+      data['user'] = this.user!.toJson();
+    }
+    if (this.otherImages != null) {
+      data['other_images'] = this.otherImages!.map((v) => v.toJson()).toList();
+    }
+    return data;
   }
-
 }
 
 class Category {
-  Category({
-      this.id, 
-      this.name,});
+  int? id;
+  String? name;
 
-  Category.fromJson(dynamic json) {
+  Category({this.id, this.name});
+
+  Category.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
   }
-  num? id;
-  String? name;
-Category copyWith({  num? id,
-  String? name,
-}) => Category(  id: id ?? this.id,
-  name: name ?? this.name,
-);
+
   Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['id'] = id;
-    map['name'] = name;
-    return map;
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['name'] = this.name;
+    return data;
+  }
+}
+
+class OtherImages {
+  int? id;
+  String? url;
+
+  OtherImages({this.id, this.url});
+
+  OtherImages.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    url = json['url'];
   }
 
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['url'] = this.url;
+    return data;
+  }
+}
+
+class Links {
+  String? first;
+  String? last;
+  Null? next;
+  Null? prev;
+
+  Links({this.first, this.last, this.next, this.prev});
+
+  Links.fromJson(Map<String, dynamic> json) {
+    first = json['first'];
+    last = json['last'];
+    next = json['next'];
+    prev = json['prev'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['first'] = this.first;
+    data['last'] = this.last;
+    data['next'] = this.next;
+    data['prev'] = this.prev;
+    return data;
+  }
+}
+
+class Meta {
+  int? currentPage;
+  int? from;
+  int? lastPage;
+
+  Meta({this.currentPage, this.from, this.lastPage});
+
+  Meta.fromJson(Map<String, dynamic> json) {
+    currentPage = json['current_page'];
+    from = json['from'];
+    lastPage = json['last_page'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['current_page'] = this.currentPage;
+    data['from'] = this.from;
+    data['last_page'] = this.lastPage;
+    return data;
+  }
 }
