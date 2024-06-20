@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
+import 'package:ksb/core/caching_data/cacshing_date.dart';
 import 'package:ksb/views/pages/add_product/view/add_product_screen.dart';
 import 'package:ksb/views/pages/auth/antoneos_auth/new_password_screen.dart';
 import 'package:ksb/views/pages/auth/create_new_password.dart';
@@ -7,6 +8,7 @@ import 'package:ksb/views/pages/auth/login_view.dart';
 import 'package:ksb/views/pages/auth/reset_password_view.dart';
 import 'package:ksb/views/pages/auth/sign_up_view.dart';
 import 'package:ksb/views/pages/auth/verification_view.dart';
+import 'package:ksb/views/pages/chat/presentation/ui/screen/chat_screen.dart';
 import 'package:ksb/views/pages/contuct_us/contuct_us_view.dart';
 import 'package:ksb/views/pages/edit_profile/edit_profile_screen.dart';
 import 'package:ksb/views/pages/home_layout/page/home_layout.dart';
@@ -82,14 +84,16 @@ abstract class AppRouter {
   static const String updatePRoduct = "/addProductScreen";
 
   static const String myProduct = "/MyProduct";
+  static const String chatScreen = "/chatScreen";
   // static const String addProductScreen = "/addProductScreen";
 
-  static final router = GoRouter(initialLocation: splashScreen, routes: [
+  static final router = GoRouter(initialLocation:  splashScreen, routes: [
     // GoRoute(
     //   path: splashView,
     //   builder: (context, state) => const SplashView(),
     // ),
     GoRoute(path: myProduct, builder: (context, state) => const MyProduct()),
+    GoRoute(path: chatScreen, builder: (context, state) => const ChatScreen()),
     GoRoute(
       path: splashScreen,
       builder: (context, state) => const SplashScreen(),

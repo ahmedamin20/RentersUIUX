@@ -44,8 +44,8 @@ class ProductModel {
 class BaseProductModel {
   int? id;
   String? name;
-  String? minimumDays;
-  String? maximumDays;
+  int? minimumDays;
+  int? maximumDays;
   int? ratingAverage;
   int? health;
   int? categoryId;
@@ -54,7 +54,6 @@ class BaseProductModel {
   int? price;
   String? mainImage;
   Category? user;
-  List<OtherImages>? otherImages;
 
   BaseProductModel(
       {this.id,
@@ -68,8 +67,7 @@ class BaseProductModel {
       this.category,
       this.price,
       this.mainImage,
-      this.user,
-      this.otherImages});
+      this.user});
 
   BaseProductModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -86,12 +84,6 @@ class BaseProductModel {
     price = json['price'];
     mainImage = json['main_image'];
     user = json['user'] != null ? new Category.fromJson(json['user']) : null;
-    if (json['other_images'] != null) {
-      otherImages = <OtherImages>[];
-      json['other_images'].forEach((v) {
-        otherImages!.add(new OtherImages.fromJson(v));
-      });
-    }
   }
 
   Map<String, dynamic> toJson() {
@@ -112,9 +104,6 @@ class BaseProductModel {
     if (this.user != null) {
       data['user'] = this.user!.toJson();
     }
-    if (this.otherImages != null) {
-      data['other_images'] = this.otherImages!.map((v) => v.toJson()).toList();
-    }
     return data;
   }
 }
@@ -134,25 +123,6 @@ class Category {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
     data['name'] = this.name;
-    return data;
-  }
-}
-
-class OtherImages {
-  int? id;
-  String? url;
-
-  OtherImages({this.id, this.url});
-
-  OtherImages.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    url = json['url'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['url'] = this.url;
     return data;
   }
 }

@@ -123,10 +123,16 @@ class DioHelper {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
     String? ContentType,
+    Map<String , dynamic> ? headers
   }) async {
     dio.options.headers = {
       'Authorization': 'Bearer ${token ?? ''}',
     };
+      
+      if(headers != null)
+      {
+        dio.options.headers.addAll(headers);
+      }
     debugPrint("-------------End Point----------------");
     debugPrint(url);
     debugPrint("-------------End Point----------------");
