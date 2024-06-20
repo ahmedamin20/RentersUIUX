@@ -24,12 +24,10 @@ class _SplashScreenState extends State<SplashScreen> {
       if(CachingData.instance.getCachedLogin()!=null) 
       {
         context.go(AppRouter.homeLayOut);
-                context.go(AppRouter.chatScreen);
 
 
       }else{
       context.go(AppRouter.loginView);
-              context.go(AppRouter.chatScreen);
 
 
       }

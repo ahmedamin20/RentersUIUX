@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ksb/core/resource/colors_manager.dart';
+import 'package:ksb/views/pages/chat/presentation/ui/screen/chat_screen.dart';
 import 'package:ksb/views/pages/home/widgets/home/home_view_body.dart';
 import 'package:ksb/views/pages/reem_screens/cart_screen/cart_screen.dart';
 import 'package:meta/meta.dart';
@@ -33,6 +34,7 @@ class LayoutCubit extends Cubit<LayoutState> {
     const MyOrderScreenLayOut(),
     SearchScreen(),
     const ProfileScreen(),
+    const ChatScreen()
   ];
 
   void changeBottomNavBar(int index) {
