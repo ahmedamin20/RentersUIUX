@@ -37,8 +37,8 @@ class HomeScreen extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    Expanded(
-                      child: const CustomTextFormField(
+                   const  Expanded(
+                      child:  CustomTextFormField(
                         textHint: "Search",
                         suffixIcon: Icons.search,
                       ),
@@ -76,7 +76,7 @@ class HomeScreen extends StatelessWidget {
                     } else if (CategoryCubit.get(context).categoryModel !=
                         null) {
                       return SizedBox(
-                        height: 160.h,
+                        height: 200.h,
                         width: 100.w,
                         child: ListView.builder(
                           itemCount: CategoryCubit.get(context)

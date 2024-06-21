@@ -39,6 +39,10 @@ class CustomTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onTapOutside: (pointerDownEvent) 
+      {
+        FocusScope.of(context).unfocus();
+      },
       obscuringCharacter: obscuringCharacter,
       style: TextStyleManager.textStyle14w500
           .copyWith( color:ColorsManager.gray2),

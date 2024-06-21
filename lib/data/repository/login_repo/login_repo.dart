@@ -28,7 +28,7 @@ class LoginRepoImpl extends LoginRepo
       {
         Response response = await 
          DioHelper.
-         postData(url: EndPoint.LOGIN_END_POINT, 
+         postData(url: "https://renters-api.ksbgarage.com/auth/login/mobile", 
          data:
           {
             "email" : email,

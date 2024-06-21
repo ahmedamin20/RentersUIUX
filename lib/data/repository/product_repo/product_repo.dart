@@ -24,8 +24,10 @@ class ProductRepoImpl extends ProductRepo {
       return Right(ProductModel.fromJson(response.data));
     } on DioException catch (e) {
       return Left(ServerFailure.fromDioError(e));
-    } catch (e) {
-      return Left(FailureLocal(message: e.toString()));
+    } catch (e) 
+    {
+       rethrow;
+      // return Left(FailureLocal(message: e.toString()));
     }
   }
 

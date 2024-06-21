@@ -220,11 +220,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ksb/core/resource/colors_manager.dart';
 
 import '../../../../core/resource/assets_manager.dart';
 import '../../../../core/resource/text_manager.dart';
 import '../../../../core/resource/text_style_manager.dart';
+import '../../../../core/services/app_router.dart';
 import '../../../../view_model/cubit/layout_cubit/layout_cubit.dart';
 
 class HomeLayout extends StatelessWidget {
@@ -248,6 +250,14 @@ class HomeLayout extends StatelessWidget {
         LayoutCubit cubit = LayoutCubit.get(context);
         return Scaffold(
           body: cubit.bottomScreens[cubit.currentIndex],
+          floatingActionButtonLocation:  FloatingActionButtonLocation.centerDocked,
+          floatingActionButton:  FloatingActionButton(
+            onPressed: () {
+              context.go(AppRouter.chatScreen);
+            },
+            child: const Icon(Icons.chat),
+            backgroundColor: ColorsManager.primaryColor,
+          ),
           bottomNavigationBar: BottomNavigationBar(
             onTap: (index) {
 
