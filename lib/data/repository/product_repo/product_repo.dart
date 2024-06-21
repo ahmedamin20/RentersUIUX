@@ -8,18 +8,23 @@ import '../../model/product_model/product_detiles/product_details_model.dart';
 import '../../model/product_model/product_model.dart';
 
 abstract class ProductRepo {
-  Future<Either<Failure, ProductModel>> getProduct(int page);
+  Future<Either<Failure, ProductModel>> getProduct(int page , {
+    int ? categoryID
+  });
 
   Future<Either<Failure, ProductDetailsModel>> getProductDetails(int productID);
 }
 
 class ProductRepoImpl extends ProductRepo {
   @override
-  Future<Either<Failure, ProductModel>> getProduct(int page) async {
+  Future<Either<Failure, ProductModel>> getProduct(int page , {int ? categoryID}) async {
     try {
       Response response = await DioHelper.getData(
           url: EndPoint.productPublicEndPoint,
-          queryParameters: {'page': page, 'per_page': 100});
+          queryParameters: {'page': page, 'per_page': 100 , 
+          "category_id" : categoryID
+          
+          });
 
       return Right(ProductModel.fromJson(response.data));
     } on DioException catch (e) {

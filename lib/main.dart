@@ -40,8 +40,7 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   print("Handling a background message: ${message.messageId}");
 }
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+void main() async {  WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await DioHelper.init();
   await CacheHelper.init();

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ksb/core/resource/colors_manager.dart';
+import 'package:ksb/view_model/cubit/product_cubit/product_cubit.dart';
 import 'package:ksb/views/componants/a2z_custom_button.dart';
 import 'package:ksb/views/componants/custom_text_form_field.dart';
 
@@ -31,6 +32,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   content: Text("Product Added successfuly"),
                   backgroundColor: ColorsManager.green,
                 ));
+                context.read<ProductCubit>().getProduct();
                 Navigator.pop(context, true);
               } else if (state is AddProductScreenError) {
                 ScaffoldMessenger.of(context).showSnackBar(
@@ -235,5 +237,4 @@ class _AddProductScreenState extends State<AddProductScreen> {
           ),
         ));
   }
-
 }

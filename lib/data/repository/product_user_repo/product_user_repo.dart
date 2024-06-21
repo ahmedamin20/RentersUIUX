@@ -29,7 +29,7 @@ class ProductUserRepoImpl extends UserProductRepo {
     } on DioException catch (e) {
       return Left(ServerFailure.fromDioError(e));
     } catch (e) {
-      return Left(FailureLocal(message: e.toString()));
+      rethrow;
     }
   }
 
@@ -51,7 +51,6 @@ class ProductUserRepoImpl extends UserProductRepo {
 
   @override
   Future<Either<Failure, bool>> deleteProduct(int productID) async {
-    
     try {
       Response response = await DioHelper.deleteData(
         url: "${EndPoint.productClientEndPoint}/$productID",

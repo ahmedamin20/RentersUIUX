@@ -22,26 +22,23 @@ class ProductCubit extends Cubit<ProductState> {
     scrollController.addListener(() {
       if (scrollController.position.pixels ==
           scrollController.position.maxScrollExtent) {
-
-          if(productModel!.meta!.currentPage! < productModel!.meta!.lastPage!)
-          {
-            pageScroll++;
-        getProduct();
-          }
-     
+        if (productModel!.meta!.currentPage! < productModel!.meta!.lastPage!) {
+          pageScroll++;
+          getProduct();
+        }
       }
     });
   }
 
   ProductModel? productModel;
 
-  getProduct() async {
+  getProduct({int? categoryID}) async {
     if (pageScroll == 1) {
       emit(ProductLoading());
     }
-    final response = await productRepo.getProduct(pageScroll);
-    response.fold((error) 
-    {
+    final response =
+        await productRepo.getProduct(pageScroll, categoryID: categoryID);
+    response.fold((error) {
       print(error.message);
       emit(ProductError(error.toString()));
     }, (data) {

@@ -130,8 +130,8 @@ class Category {
 class Links {
   String? first;
   String? last;
-  Null? next;
-  Null? prev;
+  String? next;
+  String? prev;
 
   Links({this.first, this.last, this.next, this.prev});
 

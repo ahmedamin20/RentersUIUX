@@ -87,9 +87,12 @@ class MyProduct extends StatelessWidget {
                     itemBuilder: (context, index) {
                       return GestureDetector(
                         onTap: () {
-                          context.push(AppRouter.productDetailsScreen,
-                              extra:
-                                  productCubit.productModel!.data![index].id);
+                          context.push(AppRouter.productDetailsScreen, extra: {
+                            "productID":
+                                productCubit.productModel!.data![index].id,
+                            "userID":
+                                productCubit.productModel!.data![index].user!.id
+                          });
                         },
                         child: Card(
                           color: Colors.white,

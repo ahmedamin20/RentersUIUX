@@ -102,6 +102,7 @@ class BuildListViewInProgressItem extends StatelessWidget {
                   )
                 ],
               ),
+              
               Text.rich(
                 TextSpan(
                   children: [

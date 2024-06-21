@@ -14,9 +14,11 @@ class CategoryRepoImpl extends CategoryRepo {
   @override
   Future<Either<Failure, CategoryModel>> getCategories() async {
     try {
-      var ressposne = await DioHelper.getData(
-        url: "mobile/categories",
-      );
+      var ressposne =
+          await DioHelper.getData(url: "mobile/categories", queryParameters: {
+        "page": 1,
+        "per_page": 100,
+      });
       return Right(CategoryModel.fromJson(ressposne.data));
     } on DioException catch (e) {
       return Left(ServerFailure.fromDioError(e));

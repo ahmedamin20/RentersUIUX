@@ -37,8 +37,8 @@ class HomeScreen extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                   const  Expanded(
-                      child:  CustomTextFormField(
+                    const Expanded(
+                      child: CustomTextFormField(
                         textHint: "Search",
                         suffixIcon: Icons.search,
                       ),
@@ -87,36 +87,48 @@ class HomeScreen extends StatelessWidget {
                           itemBuilder: (context, index) {
                             return Padding(
                               padding: const EdgeInsets.all(18.0),
-                              child: Column(
-                                children: [
-                                  CircleAvatar(
-                                    radius: 40.r,
-                                    backgroundImage: CachedNetworkImageProvider(
-                                        CategoryCubit.get(context)
-                                            .categoryModel!
-                                            .data![index]
-                                            .image!
-                                            .toString()),
-                                  ),
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                  SizedBox(
-                                    width: 100.w,
-                                    child: Text(
-                                        CategoryCubit.get(context)
-                                            .categoryModel!
-                                            .data![index]
-                                            .name!,
-                                        maxLines: 2,
-                                        overflow: TextOverflow.ellipsis,
-                                        textAlign: TextAlign.center,
-                                        style: TextStyleManager.textStyle16w500
-                                            .copyWith(
-                                                color: ColorsManager
-                                                    .primaryColor)),
-                                  )
-                                ],
+                              child: InkWell(
+                                onTap: () {
+                                  ProductCubit.get(context).getProduct(
+                                      categoryID: CategoryCubit.get(context)
+                                          .categoryModel!
+                                          .data![index]
+                                          .id!
+                                          .toInt()!);
+                                },
+                                child: Column(
+                                  children: [
+                                    CircleAvatar(
+                                      radius: 40.r,
+                                      backgroundImage:
+                                          CachedNetworkImageProvider(
+                                              CategoryCubit.get(context)
+                                                  .categoryModel!
+                                                  .data![index]
+                                                  .image!
+                                                  .toString()),
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    SizedBox(
+                                      width: 100.w,
+                                      child: Text(
+                                          CategoryCubit.get(context)
+                                              .categoryModel!
+                                              .data![index]
+                                              .name!,
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          textAlign: TextAlign.center,
+                                          style: TextStyleManager
+                                              .textStyle16w500
+                                              .copyWith(
+                                                  color: ColorsManager
+                                                      .primaryColor)),
+                                    )
+                                  ],
+                                ),
                               ),
                             );
                           },
@@ -167,8 +179,12 @@ class HomeScreen extends StatelessWidget {
                             return GestureDetector(
                               onTap: () {
                                 context.push(AppRouter.productDetailsScreen,
-                                    extra: productCubit
-                                        .productModel!.data![index].id);
+                                    extra: {
+                                      "productID": productCubit
+                                          .productModel!.data![index].id,
+                                      "userID": productCubit
+                                          .productModel!.data![index].user!.id
+                                    });
                               },
                               child: Card(
                                 color: Colors.white,

@@ -2,15 +2,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:ksb/core/caching_data/cacshing_date.dart';
 import 'package:ksb/core/resource/colors_manager.dart';
 import 'package:ksb/view_model/cubit/product_cubit/product_cubit.dart';
 import 'package:ksb/view_model/cubit/requests_cubit/requests_cubit.dart';
 import 'package:ksb/views/componants/a2z_custom_button.dart';
 
 class ProductDetails extends StatefulWidget {
-  ProductDetails({super.key, required this.productId});
+  ProductDetails({super.key, required this.productId, required this.userID});
 
   final int productId;
+  final int userID;
 
   @override
   State<ProductDetails> createState() => _ProductDetailsState();
@@ -46,17 +48,21 @@ class _ProductDetailsState extends State<ProductDetails> {
                       children: [
                         SizedBox(
                           height: 300.h,
-                          child: PageView.builder(
-                            itemCount: productCubit
-                                .productDetails!.data!.otherImages!.length,
-                            itemBuilder: (context, index) {
-                              return Image.network(
-                                productCubit.productDetails!.data!
-                                    .otherImages![index].url!,
-                                fit: BoxFit.cover,
-                              );
-                            },
+                          child: Image.network(
+                            productCubit.productDetails!.data!.mainImage!,
+                            fit: BoxFit.cover,
                           ),
+                          // child: PageView.builder(
+                          //   itemCount: productCubit
+                          //       .productDetails!.data!.otherImages!.length,
+                          //   itemBuilder: (context, index) {
+                          //     return Image.network(
+                          //       productCubit.productDetails!.data!
+                          //           .otherImages![index].url!,
+                          //       fit: BoxFit.cover,
+                          //     );
+                          //   },
+                          // ),
                         ),
                         SizedBox(
                           height: 10.h,
@@ -133,78 +139,88 @@ class _ProductDetailsState extends State<ProductDetails> {
                           style: TextStyle(
                               fontSize: 20.sp, color: ColorsManager.blackColor),
                         ),
-                        BlocConsumer<RequestsCubit, RequestsState>(
-                          listener: (context, state) {
-                            if (state is MakeOrderRequestLoading) {
-                              showDialog(
-                                context: context,
-                                builder: (context) {
-                                  return const AlertDialog(
-                                    title: Text('Rent'),
-                                    content: Center(
-                                        child: CircularProgressIndicator()),
+                        (CachingData.instance.getCachedLogin()!.data!.id !=
+                                widget.userID)
+                            ? BlocConsumer<RequestsCubit, RequestsState>(
+                                listener: (context, state) {
+                                  if (state is MakeOrderRequestLoading) {
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return const AlertDialog(
+                                          title: Text('Rent'),
+                                          content: Center(
+                                              child:
+                                                  CircularProgressIndicator()),
+                                        );
+                                      },
+                                    );
+                                  } else if (state is MakeOrderRequestSuccess) {
+                                    Navigator.of(context).pop();
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                        content: Text('Order has been made'),
+                                      ),
+                                    );
+                                  } else if (state is MakeOrderRequestError) {
+                                    Navigator.of(context).pop();
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(state.message),
+                                      ),
+                                    );
+                                  }
+                                },
+                                builder: (context, state) {
+                                  return Column(
+                                    children: [
+                                      A2zCustomButton(
+                                          buttonName: "Select Date",
+                                          onPressed: () {
+                                            showDateRangePicker(
+                                                    context: context,
+                                                    firstDate: DateTime.now(),
+                                                    lastDate: DateTime.now()
+                                                        .add(const Duration(
+                                                            days: 30)))
+                                                .then((value) {
+                                              setState(() {
+                                                fromDate =
+                                                    value!.start.toString();
+                                                toDate = value.end.toString();
+                                              });
+                                            });
+                                          }),
+                                      SizedBox(
+                                        height: 12.h,
+                                      ),
+                                      A2zCustomButton(
+                                          buttonName: "Renter",
+                                          onPressed: () {
+                                            if (fromDate.isNotEmpty &&
+                                                toDate.isNotEmpty) {
+                                              RequestsCubit.get(context)
+                                                  .makeOrder(
+                                                      productCubit
+                                                          .productDetails!
+                                                          .data!
+                                                          .id!
+                                                          .toInt(),
+                                                      fromDate.split(' ')[0],
+                                                      toDate.split(' ')[0]);
+                                            } else {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(const SnackBar(
+                                                content:
+                                                    Text('Please select date'),
+                                              ));
+                                            }
+                                          }),
+                                    ],
                                   );
                                 },
-                              );
-                            } else if (state is MakeOrderRequestSuccess) {
-                              Navigator.of(context).pop();
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text('Order has been made'),
-                                ),
-                              );
-                            } else if (state is MakeOrderRequestError) {
-                              Navigator.of(context).pop();
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(state.message),
-                                ),
-                              );
-                            }
-                          },
-                          builder: (context, state) {
-                            return Column(
-                              children: [
-                                A2zCustomButton(
-                                    buttonName: "Select Date",
-                                    onPressed: () {
-                                      showDateRangePicker(
-                                              context: context,
-                                              firstDate: DateTime.now(),
-                                              lastDate: DateTime.now().add(
-                                                  const Duration(days: 30)))
-                                          .then((value) {
-                                        setState(() {
-                                          fromDate = value!.start.toString();
-                                          toDate = value.end.toString();
-                                        });
-                                      });
-                                    }),
-                                SizedBox(
-                                  height: 12.h,
-                                ),
-                                A2zCustomButton(
-                                    buttonName: "Renter",
-                                    onPressed: () {
-                                      if (fromDate.isNotEmpty &&
-                                          toDate.isNotEmpty) {
-                                        RequestsCubit.get(context).makeOrder(
-                                            productCubit
-                                                .productDetails!.data!.id!
-                                                .toInt(),
-                                            fromDate.split(' ')[0],
-                                            toDate.split(' ')[0]);
-                                      } else {
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(const SnackBar(
-                                          content: Text('Please select date'),
-                                        ));
-                                      }
-                                    }),
-                              ],
-                            );
-                          },
-                        ),
+                              )
+                            : SizedBox()
                       ],
                     ),
                   ),

@@ -87,7 +87,7 @@ abstract class AppRouter {
   static const String chatScreen = "/chatScreen";
   // static const String addProductScreen = "/addProductScreen";
 
-  static final router = GoRouter(initialLocation:  splashScreen, routes: [
+  static final router = GoRouter(initialLocation: splashScreen, routes: [
     // GoRoute(
     //   path: splashView,
     //   builder: (context, state) => const SplashView(),
@@ -232,9 +232,15 @@ abstract class AppRouter {
     GoRoute(path: contactUs, builder: (context, state) => const ContactUs()),
     GoRoute(
         path: productDetailsScreen,
-        builder: (context, state) => ProductDetails(
-              productId: state.extra as int,
-            )),
+        builder: (context, state) {
+          final mapData = state.extra as Map;
+          final userID = mapData["userID"];
+          final product = mapData["productID"] as int;
+          return ProductDetails(
+            productId: product,
+            userID: userID,
+          );
+        }),
     // Gor
   ]);
 
