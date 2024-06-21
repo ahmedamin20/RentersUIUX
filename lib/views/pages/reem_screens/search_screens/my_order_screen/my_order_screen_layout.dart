@@ -36,8 +36,8 @@ class _MyOrderScreenLayOutState extends State<MyOrderScreenLayOut>
         bottom: TabBar(
           controller: _tabController,
           tabs: const [
-            Tab(text: 'Incoming Request'),
             Tab(text: 'OutComing Request'),
+            Tab(text: 'Incoming Request'),
           ],
           indicatorColor: AppColors.pink,
           labelColor: AppColors.pink,

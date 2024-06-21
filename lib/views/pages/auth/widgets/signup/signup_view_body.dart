@@ -34,6 +34,7 @@ class SignupViewBody extends StatelessWidget {
         ),
               const SignupFormBody(),
               SpaceManager.sizedBox12h(context),
+              
               // const TermsAndPolicy(),
               SpaceManager.sizedBox12h(context),
               const SignupButtons(),
