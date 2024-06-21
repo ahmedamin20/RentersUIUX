@@ -102,7 +102,6 @@ class BuildListViewInProgressItem extends StatelessWidget {
                   )
                 ],
               ),
-              
               Text.rich(
                 TextSpan(
                   children: [
@@ -156,7 +155,19 @@ class BuildListViewInProgressItem extends StatelessWidget {
                                 ),
                                 body: ListView(children: [
                                   UserDetailsWidget(
-                                      user: baseShowOrderModel.toUser!),
+                                      user: baseShowOrderModel.toUser ??
+                                          ToUser(
+                                              id: baseShowOrderModel
+                                                  .fromUser!.id!,
+                                              name: baseShowOrderModel
+                                                  .fromUser!.name!,
+                                              status: baseShowOrderModel
+                                                  .fromUser!.status!,
+                                              identityVerified: false,
+                                              email: baseShowOrderModel
+                                                  .fromUser!.email!,
+                                              type: baseShowOrderModel
+                                                  .fromUser!.type!)),
                                   ProductDetailsWidget(
                                       data: baseShowOrderModel),
                                 ]),

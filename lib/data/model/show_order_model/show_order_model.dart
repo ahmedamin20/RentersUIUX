@@ -49,7 +49,7 @@ class BaseShowOrderModel {
   String? toDate;
   String? createdAt;
   ProductOrder? product;
-  ToUser? fromUser;
+  FromUser? fromUser;
   ToUser? toUser;
 
   BaseShowOrderModel(
@@ -73,7 +73,9 @@ class BaseShowOrderModel {
     product = json['product'] != null
         ? new ProductOrder.fromJson(json['product'])
         : null;
-    fromUser = json['from_user'];
+    fromUser = json['from_user'] != null
+        ? new FromUser.fromJson(json['from_user'])
+        : null;
     toUser =
         json['to_user'] != null ? new ToUser.fromJson(json['to_user']) : null;
   }
@@ -165,6 +167,88 @@ class Category {
   }
 }
 
+class FromUser {
+  int? id;
+  String? name;
+  bool? status;
+  bool? identityVerified;
+  String? email;
+  String? type;
+  FrontNationalId? frontNationalId;
+  BackNationalId? backNationalId;
+
+  FromUser(
+      {required this.id,
+      required this.name,
+      required this.status,
+      required this.identityVerified,
+      required this.email,
+      required this.type,
+      required this.frontNationalId,
+      required this.backNationalId});
+
+  FromUser.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+    status = json['status'];
+    identityVerified = json['identity_verified'];
+    email = json['email'];
+    type = json['type'];
+    // frontNationalId = FrontNationalId.fromJson(json['front_national_id']);
+    // backNationalId = BackNationalId.fromJson(json['back_national_id']);
+  }
+}
+
+class FrontNationalId {
+  String? idF;
+  String? name;
+  String? factotry;
+  String? birth;
+  String? address;
+
+  FrontNationalId(
+      {this.idF, this.name, this.factotry, this.birth, this.address});
+
+  FrontNationalId.fromJson(Map<String, dynamic> json) {
+    idF = json['id'];
+    name = json['name'];
+    factotry = json['factotry'];
+    birth = json['birth'];
+    address = json['address'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.idF;
+    data['name'] = this.name;
+    data['factotry'] = this.factotry;
+    data['birth'] = this.birth;
+    data['address'] = this.address;
+    return data;
+  }
+}
+
+class BackNationalId {
+  String? Gender;
+  String? Rel;
+  String? start;
+  String? oocup;
+  String? status;
+  String? end;
+
+  BackNationalId(
+      {this.Gender, this.Rel, this.start, this.oocup, this.status, this.end});
+
+  BackNationalId.fromJson(Map<String, dynamic> json) {
+    Gender = json['Gender'];
+    Rel = json['Rel'];
+    start = json['start'];
+    oocup = json['oocup'];
+    status = json['status'];
+    end = json['end'];
+  }
+}
+
 class ToUser {
   int? id;
   String? name;
@@ -172,8 +256,8 @@ class ToUser {
   bool? identityVerified;
   String? email;
   String? type;
-  Null? frontNationalId;
-  Null? backNationalId;
+  FrontNationalId? frontNationalId;
+  BackNationalId? backNationalId;
 
   ToUser(
       {this.id,
@@ -213,8 +297,8 @@ class ToUser {
 class Links {
   String? first;
   String? last;
-  Null? next;
-  Null? prev;
+  String? next;
+  String? prev;
 
   Links({this.first, this.last, this.next, this.prev});
 
