@@ -4,17 +4,27 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ksb/core/resource/colors_manager.dart';
 import 'package:ksb/view_model/cubit/product_cubit/product_cubit.dart';
+import 'package:ksb/view_model/cubit/requests_cubit/requests_cubit.dart';
 import 'package:ksb/views/componants/a2z_custom_button.dart';
 
-class ProductDetails extends StatelessWidget {
-  const ProductDetails({super.key, required this.productId});
+class ProductDetails extends StatefulWidget {
+  ProductDetails({super.key, required this.productId});
 
   final int productId;
 
   @override
+  State<ProductDetails> createState() => _ProductDetailsState();
+}
+
+class _ProductDetailsState extends State<ProductDetails> {
+  String fromDate = '';
+
+  String toDate = '';
+
+  @override
   Widget build(BuildContext context) {
     return BlocProvider.value(
-        value: ProductCubit.get(context)..getProductDetails(productId),
+        value: ProductCubit.get(context)..getProductDetails(widget.productId),
         child: Scaffold(
           appBar: AppBar(
             title: const Text('Product Details'),
@@ -94,14 +104,12 @@ class ProductDetails extends StatelessWidget {
                         SizedBox(
                           height: 12.h,
                         ),
-                        Text("Description"  ,
-                        style: TextStyle(
-                            fontSize: 20.sp,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xff06004F))
-
-                        ),
-                          SizedBox(
+                        Text("Description",
+                            style: TextStyle(
+                                fontSize: 20.sp,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xff06004F))),
+                        SizedBox(
                           height: 12.h,
                         ),
                         Text(productCubit.productDetails!.data!.description!,
@@ -109,12 +117,94 @@ class ProductDetails extends StatelessWidget {
                                 fontSize: 16.sp,
                                 fontWeight: FontWeight.bold,
                                 color: ColorsManager.blackColor)),
-                                   SizedBox(
+                        SizedBox(
                           height: 12.h,
                         ),
-
-                        
-                           A2zCustomButton(buttonName: "Renter", onPressed: (){}),
+                        Text(
+                          "From : ${fromDate.split(' ')[0]}",
+                          style: TextStyle(
+                              fontSize: 20.sp, color: ColorsManager.blackColor),
+                        ),
+                        SizedBox(
+                          height: 12.h,
+                        ),
+                        Text(
+                          "To : ${toDate.split(' ')[0].toString()}",
+                          style: TextStyle(
+                              fontSize: 20.sp, color: ColorsManager.blackColor),
+                        ),
+                        BlocConsumer<RequestsCubit, RequestsState>(
+                          listener: (context, state) {
+                            if (state is MakeOrderRequestLoading) {
+                              showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const AlertDialog(
+                                    title: Text('Rent'),
+                                    content: Center(
+                                        child: CircularProgressIndicator()),
+                                  );
+                                },
+                              );
+                            } else if (state is MakeOrderRequestSuccess) {
+                              Navigator.of(context).pop();
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text('Order has been made'),
+                                ),
+                              );
+                            } else if (state is MakeOrderRequestError) {
+                              Navigator.of(context).pop();
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(state.message),
+                                ),
+                              );
+                            }
+                          },
+                          builder: (context, state) {
+                            return Column(
+                              children: [
+                                A2zCustomButton(
+                                    buttonName: "Select Date",
+                                    onPressed: () {
+                                      showDateRangePicker(
+                                              context: context,
+                                              firstDate: DateTime.now(),
+                                              lastDate: DateTime.now().add(
+                                                  const Duration(days: 30)))
+                                          .then((value) {
+                                        setState(() {
+                                          fromDate = value!.start.toString();
+                                          toDate = value.end.toString();
+                                        });
+                                      });
+                                    }),
+                                SizedBox(
+                                  height: 12.h,
+                                ),
+                                A2zCustomButton(
+                                    buttonName: "Renter",
+                                    onPressed: () {
+                                      if (fromDate.isNotEmpty &&
+                                          toDate.isNotEmpty) {
+                                        RequestsCubit.get(context).makeOrder(
+                                            productCubit
+                                                .productDetails!.data!.id!
+                                                .toInt(),
+                                            fromDate.split(' ')[0],
+                                            toDate.split(' ')[0]);
+                                      } else {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(const SnackBar(
+                                          content: Text('Please select date'),
+                                        ));
+                                      }
+                                    }),
+                              ],
+                            );
+                          },
+                        ),
                       ],
                     ),
                   ),

@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/resource/text_style_manager.dart';
 import '../../core/app_colors.dart';
-import 'canceled/canceled_screen.dart';
-import 'completed/completed_screen.dart';
 import 'in_progress/in_progress_screen.dart';
 
 class MyOrderScreenLayOut extends StatefulWidget {
@@ -38,9 +36,8 @@ class _MyOrderScreenLayOutState extends State<MyOrderScreenLayOut>
         bottom: TabBar(
           controller: _tabController,
           tabs: const [
-            Tab(text: 'In Progress'),
-            Tab(text: 'Completed'),
-            Tab(text: 'Canceled'),
+            Tab(text: 'Incoming Request'),
+            Tab(text: 'OutComing Request'),
           ],
           indicatorColor: AppColors.pink,
           labelColor: AppColors.pink,
@@ -51,32 +48,14 @@ class _MyOrderScreenLayOutState extends State<MyOrderScreenLayOut>
         padding: const EdgeInsets.only(top: 33),
         child: Column(
           children: [
-            // Padding(
-            //   padding: const EdgeInsets.symmetric(horizontal: 24),
-            //   child: Container(
-            //     padding:
-            //     const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-            //     width: double.infinity,
-            //     decoration: BoxDecoration(
-            //         color: AppColors.lightGrey,
-            //         borderRadius: BorderRadius.circular(50)),
-            //     child: Row(
-            //       mainAxisAlignment: MainAxisAlignment.spaceAround,
-            //       children: [
-            //         buildButton(1, '1'),
-            //         buildButton(2, '2'),
-            //         buildButton(3, '3'),
-            //       ],
-            //     ),
-            //   ),
-            // ),
             Expanded(
               child: TabBarView(
                 controller: _tabController,
-                children: const [
-                  InProgressScreen(),
-                  CompletedScreen(),
-                  CanceledScreen(),
+                children: [
+                  InProgressScreen(status: 1),
+                  InProgressScreen(
+                    status: 0,
+                  ),
                 ],
               ),
             ),
