@@ -16,9 +16,7 @@ import 'package:ksb/core/theme/app_theme.dart';
 import 'package:ksb/data/repository/Information_repo/information_repo.dart';
 import 'package:ksb/data/repository/cart_repo/cart_repo.dart';
 import 'package:ksb/data/repository/category_repo/category_repo.dart';
-import 'package:ksb/data/repository/favoutite_repo/favoutite_repo.dart';
 import 'package:ksb/data/repository/profile_repo/profile_repo.dart';
-import 'package:ksb/view_model/cubit/add_product_screen_cubit/cubit/add_product_screen_cubit.dart';
 import 'package:ksb/view_model/cubit/cart_cubit/cart_cubit.dart';
 import 'package:ksb/view_model/cubit/category_cubit/category_cubit.dart';
 import 'package:ksb/view_model/cubit/information_cubit/information_cubit.dart';
@@ -30,6 +28,7 @@ import 'package:lottie/lottie.dart';
 import 'core/BlocObserver.dart';
 import 'core/services/app_router.dart';
 import 'firebase_options.dart';
+import 'view_model/cubit/requests_cubit/requests_cubit.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
@@ -41,8 +40,7 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   print("Handling a background message: ${message.messageId}");
 }
 
-void main() async 
-{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await DioHelper.init();
@@ -141,7 +139,9 @@ class _MyAppState extends State<MyApp> {
         BlocProvider(
             create: (context) =>
                 CategoryCubit(sl<CategoryRepoImpl>())..getCategory()),
-
+        BlocProvider(
+          create: (context) => RequestsCubit()..getOrder(1),
+        )
       ],
       child: ScreenUtilInit(
         designSize: const Size(360, 690),
@@ -164,7 +164,7 @@ class _MyAppState extends State<MyApp> {
                         builder: EasyLoading.init(),
                         routerConfig: AppRouter.router,
                         debugShowCheckedModeBanner: false,
-                        theme: AppTheme.light,
+                        // theme: AppTheme.light,
                         title: 'Renters',
                       )
                     : MaterialApp(

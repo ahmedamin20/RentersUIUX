@@ -235,13 +235,10 @@ class HomeLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<LayoutCubit, LayoutState>(
-      buildWhen: (previous, current)
-      {
-        if(current is LayoutChangeBottomNavBar)
-          {
-            return true;
-          }else
-        {
+      buildWhen: (previous, current) {
+        if (current is LayoutChangeBottomNavBar) {
+          return true;
+        } else {
           return false;
         }
       },
@@ -250,36 +247,41 @@ class HomeLayout extends StatelessWidget {
         LayoutCubit cubit = LayoutCubit.get(context);
         return Scaffold(
           body: cubit.bottomScreens[cubit.currentIndex],
-          floatingActionButtonLocation:  FloatingActionButtonLocation.centerDocked,
-          floatingActionButton:  FloatingActionButton(
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerDocked,
+          floatingActionButton: FloatingActionButton(
             onPressed: () {
-              context.go(AppRouter.chatScreen);
+              context.push(AppRouter.chatScreen);
             },
-            child: const Icon(Icons.chat),
+            child: Icon(
+              Icons.chat,
+              color: Colors.white,
+            ),
             backgroundColor: ColorsManager.primaryColor,
           ),
           bottomNavigationBar: BottomNavigationBar(
             onTap: (index) {
-
-                print('-----------');
-                LayoutCubit.get(context).changeBottomNavBar(index);
+              print('-----------');
+              LayoutCubit.get(context).changeBottomNavBar(index);
             },
             type: BottomNavigationBarType.fixed,
             elevation: 8,
             selectedItemColor: ColorsManager.primaryColor,
             unselectedItemColor: ColorsManager.gray2,
-            currentIndex: cubit.currentIndex,backgroundColor: ColorsManager.white,
+            currentIndex: cubit.currentIndex,
+            backgroundColor: ColorsManager.white,
             //fixedColor: ColorManager.colorWhite,
-            unselectedLabelStyle:
-            TextStyleManager.textStyle16w500.copyWith(fontSize: 12, color: ColorsManager.gray2),
-            selectedLabelStyle:
-            TextStyleManager.textStyle16w500.copyWith(color: ColorsManager.primaryColor, fontSize: 12),
+            unselectedLabelStyle: TextStyleManager.textStyle16w500
+                .copyWith(fontSize: 12, color: ColorsManager.gray2),
+            selectedLabelStyle: TextStyleManager.textStyle16w500
+                .copyWith(color: ColorsManager.primaryColor, fontSize: 12),
             items: [
               BottomNavigationBarItem(
                 icon: SvgPicture.asset(
                   AssetsManager.home,
-                  color:
-                  cubit.currentIndex == 0 ? ColorsManager.primaryColor : ColorsManager.gray2,
+                  color: cubit.currentIndex == 0
+                      ? ColorsManager.primaryColor
+                      : ColorsManager.gray2,
                 ),
                 label: TextManager.home,
               ),
@@ -307,7 +309,6 @@ class HomeLayout extends StatelessWidget {
                           ? ColorsManager.primaryColor
                           : ColorsManager.gray2),
                   label: TextManager.profile),
-
             ],
           ),
         );

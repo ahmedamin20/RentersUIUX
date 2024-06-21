@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:ksb/core/helpers/cach_helpers/cach_helpers.dart';
 import 'package:ksb/core/services/app_router.dart';
 import 'package:ksb/view_model/cubit/profile_cubit/profile_cubit.dart';
 
@@ -60,6 +61,16 @@ class ProfileItemListView extends StatelessWidget {
         iconData: AssetsManager.supportChat,
         onTap: () {
           context.push((AppRouter.supportChat));
+        },
+      ),
+      ProfileUiModel(
+        ColorsManager.blackColor,
+        isArrow: false,
+        title: "Logout",
+        iconData: AssetsManager.supportChat,
+        onTap: () async {
+          await CacheHelper.clearData();
+          context.go(AppRouter.loginView);
         },
       ),
     ];
