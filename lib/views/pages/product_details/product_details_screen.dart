@@ -91,7 +91,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                           style: TextStyle(
                               fontSize: 20.sp, color: ColorsManager.blackColor),
                         ),
-                        SizedBox(
+                        SizedBox
+                        (
                           height: 14.h,
                         ),
                         Text(

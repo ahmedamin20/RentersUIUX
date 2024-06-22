@@ -17,7 +17,11 @@ class RequestsCubit extends Cubit<RequestsState> {
     emit(RequestsLoading());
     try {
       Response response =
-          await DioHelper.getData(url: '/api/orders?incoming=$status');
+          await DioHelper.getData(url: '/api/orders?incoming=$status',
+          queryParameters: {
+            "per_page": "100",
+          }
+          );
       showOrderModel = ShowOrderModel.fromJson(response.data);
       emit(RequestsSuccess(showOrderModel!));
     } catch (e) {

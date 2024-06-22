@@ -123,14 +123,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                     const SizedBox(
                       height: 10,
                     ),
-                    const Text("Name Product",
-                        style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: ColorsManager.blackColor)),
-                    const SizedBox(
-                      height: 10,
-                    ),
+
                     const Text(
                       "select Category",
                       style: TextStyle(
@@ -158,9 +151,17 @@ class _AddProductScreenState extends State<AddProductScreen> {
                               ))
                           .toList(),
                     ),
+                    const Text("Name Product",
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: ColorsManager.blackColor)),
+                    const SizedBox(
+                      height: 10,
+                    ),
 
                     CustomTextFormField(
-                      textHint: "price Product",
+                      textHint: "Name Product",
                       controller: cubit.nameController,
                     ),
                     const SizedBox(
