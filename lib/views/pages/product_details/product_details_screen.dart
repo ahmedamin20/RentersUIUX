@@ -95,7 +95,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                           height: 14.h,
                         ),
                         Text(
-                          "Minimum days : ${productCubit.productDetails!.data!.maximumDays}",
+                          "Mindays : ${productCubit.productDetails!.data!.minimumDays}",
                           style: TextStyle(
                               fontSize: 20.sp, color: ColorsManager.blackColor),
                         ),
@@ -103,7 +103,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                           height: 12.h,
                         ),
                         Text(
-                          "Maximum days : ${productCubit.productDetails!.data!.maximumDays}",
+                          "Max days : ${productCubit.productDetails!.data!.maximumDays}",
                           style: TextStyle(
                               fontSize: 20.sp, color: ColorsManager.blackColor),
                         ),

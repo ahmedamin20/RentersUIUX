@@ -11,7 +11,7 @@ class CategoryModel {
     if (json['data'] != null) {
       data = [];
       json['data'].forEach((v) {
-        data?.add(Data.fromJson(v));
+        data?.add(BaseCategoryModel.fromJson(v));
       });
     }
     links = json['links'] != null ? Links.fromJson(json['links']) : null;
@@ -20,13 +20,13 @@ class CategoryModel {
     code = json['code'];
     type = json['type'];
   }
-  List<Data>? data;
+  List<BaseCategoryModel>? data;
   Links? links;
   Meta? meta;
   String? message;
   num? code;
   String? type;
-CategoryModel copyWith({  List<Data>? data,
+CategoryModel copyWith({  List<BaseCategoryModel>? data,
   Links? links,
   Meta? meta,
   String? message,
@@ -126,13 +126,13 @@ Links copyWith({  String? first,
 
 }
 
-class Data {
-  Data({
+class BaseCategoryModel {
+  BaseCategoryModel({
       this.id, 
       this.name, 
       this.image,});
 
-  Data.fromJson(dynamic json) {
+  BaseCategoryModel.fromJson(dynamic json) {
     id = json['id'];
     name = json['name'];
     image = json['image'];
@@ -140,10 +140,10 @@ class Data {
   num? id;
   String? name;
   String? image;
-Data copyWith({  num? id,
+BaseCategoryModel copyWith({  num? id,
   String? name,
   String? image,
-}) => Data(  id: id ?? this.id,
+}) => BaseCategoryModel(  id: id ?? this.id,
   name: name ?? this.name,
   image: image ?? this.image,
 );

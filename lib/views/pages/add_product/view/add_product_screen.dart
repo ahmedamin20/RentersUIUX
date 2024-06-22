@@ -2,12 +2,15 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ksb/core/resource/colors_manager.dart';
 import 'package:ksb/view_model/cubit/product_cubit/product_cubit.dart';
 import 'package:ksb/views/componants/a2z_custom_button.dart';
 import 'package:ksb/views/componants/custom_text_form_field.dart';
 
+import '../../../../data/model/category_model/category_model.dart';
 import '../../../../view_model/cubit/add_product_screen_cubit/cubit/add_product_screen_cubit.dart';
+import '../../../../view_model/cubit/category_cubit/category_cubit.dart';
 
 class AddProductScreen extends StatefulWidget {
   const AddProductScreen({super.key});
@@ -57,7 +60,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                       "Main Image",
                     ),
                     SizedBox(
-                      height: 10,
+                      height: 10.h,
                     ),
 
                     cubit.mainImage == null
@@ -125,8 +128,35 @@ class _AddProductScreenState extends State<AddProductScreen> {
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
                             color: ColorsManager.blackColor)),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
+                    ),
+                    const Text(
+                      "select Category",
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: ColorsManager.blackColor),
+                    ),
+
+                    DropdownButton<BaseCategoryModel>(
+                      onChanged: (value) {
+                        setState(() {
+                          cubit.categpryID = value;
+                        });
+                      },
+                      value: cubit.categpryID?.name == null
+                          ? null
+                          : cubit.categpryID,
+                      items: context
+                          .read<CategoryCubit>()
+                          .categoryModel!
+                          .data!
+                          .map((e) => DropdownMenuItem(
+                                value: e,
+                                child: Text(e.name!),
+                              ))
+                          .toList(),
                     ),
 
                     CustomTextFormField(

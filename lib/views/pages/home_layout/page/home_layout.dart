@@ -253,7 +253,7 @@ class HomeLayout extends StatelessWidget {
             onPressed: () {
               context.push(AppRouter.chatScreen);
             },
-            child: const Icon(
+            child:  const Icon(
               Icons.chat,
               color: Colors.white,
             ),

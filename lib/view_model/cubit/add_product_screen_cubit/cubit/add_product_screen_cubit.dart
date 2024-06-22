@@ -8,6 +8,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:ksb/core/helpers/dio_helpers/dio_helpers.dart';
 
+import '../../../../data/model/category_model/category_model.dart';
+
 part 'add_product_screen_state.dart';
 
 class AddProductScreenCubit extends Cubit<AddProductScreenState> {
@@ -20,7 +22,7 @@ class AddProductScreenCubit extends Cubit<AddProductScreenState> {
   TextEditingController minimumDays = TextEditingController();
   TextEditingController maximumDays = TextEditingController();
   TextEditingController health = TextEditingController();
-  TextEditingController categpryID = TextEditingController();
+  BaseCategoryModel? categpryID;
 
   XFile? mainImage;
   List<XFile> otherImages = [];
@@ -59,7 +61,7 @@ class AddProductScreenCubit extends Cubit<AddProductScreenState> {
       "minimum_days": minimumDays.text,
       "maximum_days": maximumDays.text,
       "health": health.text,
-      "category_id": 1,
+      "category_id": categpryID!.id,
       "main_image": await MultipartFile.fromFile(mainImage!.path),
     });
     formData.files.addAll(otherImages.map((e) => MapEntry(
