@@ -22,7 +22,7 @@ class ProfileItemListView extends StatelessWidget {
         ColorsManager.blackColor,
         isArrow: false,
         title: TextManager.myProduct.tr(),
-        iconData: AssetsManager.supportChat,
+        iconData: AssetsManager.eye,
         onTap: () {
           context.push((AppRouter.myProduct));
         },
@@ -54,20 +54,20 @@ class ProfileItemListView extends StatelessWidget {
           context.push((AppRouter.aboutApp));
         },
       ),
-      ProfileUiModel(
-        ColorsManager.blackColor,
-        isArrow: false,
-        title: TextManager.supportChat.tr(),
-        iconData: AssetsManager.supportChat,
-        onTap: () {
-          context.push((AppRouter.supportChat));
-        },
-      ),
+      // ProfileUiModel(
+      //   ColorsManager.blackColor,
+      //   isArrow: false,
+      //   title: TextManager.supportChat.tr(),
+      //   iconData: AssetsManager.supportChat,
+      //   onTap: () {
+      //     context.push((AppRouter.supportChat));
+      //   },
+      // ),
       ProfileUiModel(
         ColorsManager.blackColor,
         isArrow: false,
         title: "Logout",
-        iconData: AssetsManager.supportChat,
+        iconData: AssetsManager.logOut,
         onTap: () async {
           await CacheHelper.clearData();
           context.go(AppRouter.loginView);
