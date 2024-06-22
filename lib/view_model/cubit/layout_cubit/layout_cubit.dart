@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ksb/core/resource/colors_manager.dart';
 import 'package:ksb/views/pages/chat/presentation/ui/screen/chat_screen.dart';
 import 'package:ksb/views/pages/home/widgets/home/home_view_body.dart';
+import 'package:ksb/views/pages/my_product/my_product.dart';
 import 'package:ksb/views/pages/reem_screens/cart_screen/cart_screen.dart';
 import 'package:meta/meta.dart';
 
@@ -28,11 +29,10 @@ class LayoutCubit extends Cubit<LayoutState> {
     'Visitor Car',
     'Favorites',
   ];
-  List<Widget> bottomScreens =
-  [
+  List<Widget> bottomScreens = [
     const HomeScreen(),
     const MyOrderScreenLayOut(),
-    SearchScreen(),
+    const MyProduct(),
     const ProfileScreen(),
     const ChatScreen()
   ];
@@ -47,8 +47,7 @@ class LayoutCubit extends Cubit<LayoutState> {
   void changeDarkMood({fromShared}) {
     if (fromShared != null) {
       isDark = fromShared;
-    }
-    else {
+    } else {
       isDark = !isDark;
       CacheHelper.put(key: 'isDark', value: isDark);
       emit(ChangeMood());
@@ -56,16 +55,11 @@ class LayoutCubit extends Cubit<LayoutState> {
   }
 
   Color color = Colors.grey;
-  void colornev (int index)
-  {
-    if (index == currentIndex)
-      {
-        color = ColorsManager.primaryColor;
-      }
-    else
-      {
-        color= Colors.grey;
-      }
+  void colornev(int index) {
+    if (index == currentIndex) {
+      color = ColorsManager.primaryColor;
+    } else {
+      color = Colors.grey;
+    }
   }
-
 }

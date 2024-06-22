@@ -80,42 +80,42 @@ class _AddProductScreenState extends State<AddProductScreen> {
                               cubit.pickImage();
                             },
                             child: Image.file(File(cubit.mainImage!.path))),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
 
-                    InkWell(
-                      onTap: () {
-                        cubit.pickImageMutiImage();
-                      },
-                      child: const Text(
-                        "Add Other images",
-                        style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: ColorsManager.blackColor),
-                      ),
-                    ),
+                    // InkWell(
+                    //   onTap: () {
+                    //     cubit.pickImageMutiImage();
+                    //   },
+                    //   child: const Text(
+                    //     "Add Other images",
+                    //     style: TextStyle(
+                    //         fontSize: 20,
+                    //         fontWeight: FontWeight.bold,
+                    //         color: ColorsManager.blackColor),
+                    //   ),
+                    // ),
 
-                    SizedBox(
-                      height: 100,
-                      width: 500,
-                      child: ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: cubit.otherImages.length,
-                          itemBuilder: (context, index) {
-                            return Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: InkWell(
-                                  onTap: () {
-                                    setState(() =>
-                                        cubit.otherImages.removeAt(index));
-                                  },
-                                  child: Image.file(
-                                      File(cubit.otherImages[index].path))),
-                            );
-                          }),
-                    ),
+                    // SizedBox(
+                    //   height: 100,
+                    //   width: 500,
+                    //   child: ListView.builder(
+                    //       scrollDirection: Axis.horizontal,
+                    //       itemCount: cubit.otherImages.length,
+                    //       itemBuilder: (context, index) {
+                    //         return Padding(
+                    //           padding: const EdgeInsets.all(8.0),
+                    //           child: InkWell(
+                    //               onTap: () {
+                    //                 setState(() =>
+                    //                     cubit.otherImages.removeAt(index));
+                    //               },
+                    //               child: Image.file(
+                    //                   File(cubit.otherImages[index].path))),
+                    //         );
+                    //       }),
+                    // ),
 
                     const SizedBox(
                       height: 10,

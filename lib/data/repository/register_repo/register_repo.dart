@@ -13,7 +13,9 @@ abstract class RegisterRepo {
       required String phone,
       required String address,
       required String frontID,
-      required String backId});
+      required String backId,
+      required String avatar
+      });
 }
 
 class RegisterRepoImpl extends RegisterRepo {
@@ -25,7 +27,9 @@ class RegisterRepoImpl extends RegisterRepo {
       required String phone,
       required String address,
       required String frontID,
-      required String backId}) async {
+      required String backId,
+      required String avatar
+      }) async {
     try {
       FormData formData = FormData.fromMap({
         "name": name,
@@ -37,6 +41,7 @@ class RegisterRepoImpl extends RegisterRepo {
         "password_confirmation": password,
         "front_national_id": await MultipartFile.fromFile(frontID),
         "back_national_id": await MultipartFile.fromFile(backId),
+        "avatar": await MultipartFile.fromFile(avatar),
       });
       Response response = await DioHelper.postData(
           url: EndPoint.REGISTER_END_POINT, data: formData);

@@ -20,6 +20,7 @@ class RegisterCubitCubit extends Cubit<RegisterCubitState> {
   GlobalKey<FormState> formKeyRegister = GlobalKey<FormState>();
   XFile? frontID;
   XFile? backID;
+  XFile? avatar;
 
   Future<void> pickImage(bool isFront) async {
     final ImagePicker picker = ImagePicker();
@@ -27,10 +28,20 @@ class RegisterCubitCubit extends Cubit<RegisterCubitState> {
     if (image != null) {
       if (isFront) {
         frontID = image;
+        emit(PickImageSuccess(image.path));
       } else {
         backID = image;
+        emit(PickBackImageSuccess(image.path));
       }
-      emit(PickImageSuccess(image.path));
+    }
+  }
+
+  Future<void> pickImageAvatar(bool isFront) async {
+    final ImagePicker picker = ImagePicker();
+    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+    if (image != null) {
+      avatar = image;
+      emit(PickAvatarImageSuccess(image.path));
     }
   }
 
@@ -44,6 +55,7 @@ class RegisterCubitCubit extends Cubit<RegisterCubitState> {
       address: addressController.text,
       backId: backID!.path,
       frontID: frontID!.path,
+      avatar: avatar!.path,
     );
     response.fold((error) {
       emit(RegisterErrorState(error.message));

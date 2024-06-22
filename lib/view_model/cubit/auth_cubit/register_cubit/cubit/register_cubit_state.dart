@@ -1,10 +1,7 @@
 part of 'register_cubit_cubit.dart';
 
-sealed class RegisterCubitState extends Equatable {
+sealed class RegisterCubitState {
   const RegisterCubitState();
-
-  @override
-  List<Object> get props => [];
 }
 
 final class RegisterCubitInitial extends RegisterCubitState {}
@@ -21,4 +18,14 @@ final class RegisterErrorState extends RegisterCubitState {
 final class PickImageSuccess extends RegisterCubitState {
   String pickImage;
   PickImageSuccess(this.pickImage);
+}
+
+final class PickBackImageSuccess extends RegisterCubitState {
+  String pickImage;
+  PickBackImageSuccess(this.pickImage);
+}
+
+final class PickAvatarImageSuccess extends RegisterCubitState {
+  String pickImage;
+  PickAvatarImageSuccess(this.pickImage);
 }

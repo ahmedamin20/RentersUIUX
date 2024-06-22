@@ -22,6 +22,7 @@ class RequestsCubit extends Cubit<RequestsState> {
       emit(RequestsSuccess(showOrderModel!));
     } catch (e) {
       emit(RequestsError(e.toString()));
+      rethrow;
     }
   }
 
@@ -61,15 +62,13 @@ class RequestsCubit extends Cubit<RequestsState> {
     }
   }
 
-  Future<void> makeOrder(int productId, String fromDate, String toDate) async 
-  {
+  Future<void> makeOrder(int productId, String fromDate, String toDate) async {
     emit(MakeOrderRequestLoading());
     await DioHelper.postData(url: '/api/orders', data: {
       'product_id': productId,
       'from_date': fromDate,
       'to_date': toDate
-    }).then((value) 
-    {
+    }).then((value) {
       emit(MakeOrderRequestSuccess());
     }).catchError((e) {
       emit(MakeOrderRequestError(e.toString()));

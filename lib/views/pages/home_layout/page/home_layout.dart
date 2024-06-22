@@ -253,7 +253,7 @@ class HomeLayout extends StatelessWidget {
             onPressed: () {
               context.push(AppRouter.chatScreen);
             },
-            child: Icon(
+            child: const Icon(
               Icons.chat,
               color: Colors.white,
             ),
@@ -298,11 +298,13 @@ class HomeLayout extends StatelessWidget {
               //             : ColorsManager.gray2),
               //     label: TextManager.cart),
               BottomNavigationBarItem(
-                  icon: SvgPicture.asset(AssetsManager.search,
-                      color: cubit.currentIndex == 2
-                          ? ColorsManager.primaryColor
-                          : ColorsManager.gray2),
-                  label: TextManager.search),
+                  icon: Icon(
+                    Icons.production_quantity_limits_outlined,
+                    color: cubit.currentIndex == 2
+                        ? ColorsManager.primaryColor
+                        : ColorsManager.gray2,
+                  ),
+                  label: "My Product"),
               BottomNavigationBarItem(
                   icon: SvgPicture.asset(AssetsManager.profile,
                       color: cubit.currentIndex == 3

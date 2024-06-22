@@ -35,6 +35,49 @@ class _SignupFormBodyState extends State<SignupFormBody> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                SizedBox(
+                  height: 40.h,
+                ),
+                GestureDetector(
+                  onTap: () =>
+                      context.read<RegisterCubitCubit>().pickImageAvatar(true),
+                  child: Center(
+                    child: CircleAvatar(
+                      radius: 50.r,
+                      backgroundColor: Colors.white,
+                      child: context.read<RegisterCubitCubit>().avatar != null
+                          ? Stack(
+                              children: [
+                                CircleAvatar(
+                                  radius: 50.r,
+                                  backgroundImage: FileImage(File(context
+                                      .read<RegisterCubitCubit>()
+                                      .avatar!
+                                      .path)),
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      context
+                                          .read<RegisterCubitCubit>()
+                                          .avatar = null;
+                                    });
+                                  },
+                                  child: const Icon(
+                                    Icons.delete,
+                                    color: Colors.red,
+                                  ),
+                                ),
+                              ],
+                            )
+                          : Icon(
+                              Icons.person,
+                              color: Colors.blue,
+                              size: 50.w,
+                            ),
+                    ),
+                  ),
+                ),
                 Text(
                   TextManager.name,
                   style: TextStyleManager.textStyle12w700,
@@ -72,6 +115,19 @@ class _SignupFormBodyState extends State<SignupFormBody> {
                       : !emailRegex.hasMatch(p0)
                           ? TextManager.pleaseEnterValidEmail.tr()
                           : null,
+                ),
+                SpaceManager.sizedBox16h(context),
+                Text(
+                  "Address",
+                  style: TextStyleManager.textStyle12w700,
+                ),
+                SpaceManager.sizedBox12h(context),
+
+                CustomTextFormField(
+                  textHint: "Enter your address",
+                  prefixIcon: Icons.email_outlined,
+                  obscureText: false,
+                  controller: RegisterCubitCubit.get(context).addressController,
                 ),
                 SpaceManager.sizedBox16h(context),
 

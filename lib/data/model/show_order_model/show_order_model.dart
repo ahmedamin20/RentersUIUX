@@ -174,18 +174,19 @@ class FromUser {
   bool? identityVerified;
   String? email;
   String? type;
-  FrontNationalId? frontNationalId;
-  BackNationalId? backNationalId;
+  // FrontNationalId? frontNationalId;
+  // BackNationalId? backNationalId;
 
-  FromUser(
-      {required this.id,
-      required this.name,
-      required this.status,
-      required this.identityVerified,
-      required this.email,
-      required this.type,
-      required this.frontNationalId,
-      required this.backNationalId});
+  FromUser({
+    required this.id,
+    required this.name,
+    required this.status,
+    required this.identityVerified,
+    required this.email,
+    required this.type,
+    // required this.frontNationalId,
+    // required this.backNationalId
+  });
 
   FromUser.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -276,8 +277,8 @@ class ToUser {
     identityVerified = json['identity_verified'];
     email = json['email'];
     type = json['type'];
-    frontNationalId = json['front_national_id'];
-    backNationalId = json['back_national_id'];
+    // frontNationalId = json['front_national_id'];
+    // backNationalId = json['back_national_id'];
   }
 
   Map<String, dynamic> toJson() {
