@@ -151,6 +151,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                               ))
                           .toList(),
                     ),
+                 
                     const Text("Name Product",
                         style: TextStyle(
                             fontSize: 20,

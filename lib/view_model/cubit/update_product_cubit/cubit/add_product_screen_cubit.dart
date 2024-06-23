@@ -8,6 +8,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:ksb/core/helpers/dio_helpers/dio_helpers.dart';
 import 'package:ksb/data/model/product_model/product_detiles/product_details_model.dart';
 
+import '../../../../data/model/category_model/category_model.dart';
+
 part 'add_product_screen_state.dart';
 
 class UpdateProductScreenCubit extends Cubit<UpdateProductScreenState> {
@@ -20,8 +22,7 @@ class UpdateProductScreenCubit extends Cubit<UpdateProductScreenState> {
   TextEditingController minimumDays = TextEditingController();
   TextEditingController maximumDays = TextEditingController();
   TextEditingController health = TextEditingController();
-  TextEditingController categpryID = TextEditingController();
-
+  BaseCategoryModel? categpryID;
   XFile? mainImage;
   List<XFile> otherImages = [];
   Future<void> pickImage() async {
@@ -60,7 +61,7 @@ class UpdateProductScreenCubit extends Cubit<UpdateProductScreenState> {
       "minimumDays": minimumDays.text,
       "maximumDays": maximumDays.text,
       "health": health.text,
-      "category_id": 1,
+      "category_id": categpryID!.id,
     });
     if (removeMainImage) {
       formData.files.add(

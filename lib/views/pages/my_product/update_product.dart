@@ -7,9 +7,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ksb/data/model/product_model/product_model.dart';
+import 'package:ksb/view_model/cubit/category_cubit/category_cubit.dart';
 import 'package:ksb/views/componants/custom_easy_loading/custom_easy_loading.dart';
 import 'package:ksb/views/componants/custom_icon_button.dart';
 import '../../../core/resource/colors_manager.dart';
+import '../../../data/model/category_model/category_model.dart';
 import '../../../view_model/cubit/update_product_cubit/cubit/add_product_screen_cubit.dart';
 import '../../componants/a2z_custom_button.dart';
 import '../../componants/custom_text_form_field.dart';
@@ -66,6 +68,7 @@ class _UpdateProductState extends State<UpdateProduct> {
               cubit.maximumDays.text =
                   state.productDetails.data!.maximumDays.toString();
               cubit.health.text = state.productDetails.data!.health.toString();
+
               EasyLoading.dismiss();
             } else if (state is GetProductDetailsError) {
               EasyLoading.dismiss();
@@ -180,84 +183,81 @@ class _UpdateProductState extends State<UpdateProduct> {
                     height: 10,
                   ),
 
-                  InkWell(
-                    onTap: () {
-                      cubit.pickImageMutiImage();
+                  BlocConsumer<CategoryCubit, CategoryState>(
+                    listener: (context, state) {
+                      // TODO: implement listener
                     },
-                    child: Text(
-                      "Current images",
-                      style: TextStyle(
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.bold,
-                          color: ColorsManager.blackColor),
-                    ),
-                  ),
-
-                  cubit.productDetails != null
-                      ? SizedBox(
-                          height: 200.h,
-                          width: 500.w,
-                          child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              itemCount: cubit
-                                  .productDetails!.data!.otherImages!.length,
-                              itemBuilder: (context, index) {
-                                return Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: InkWell(
-                                        onTap: () {
-                                          setState(() {
-                                            deletImage.add(cubit.productDetails!
-                                                .data!.otherImages![index].id!
-                                                .toInt());
-
-                                            cubit.productDetails!.data!
-                                                .otherImages!
-                                                .removeAt(index);
-                                          });
-                                        },
-                                        child: Image(
-                                          image: NetworkImage(cubit
-                                              .productDetails!
-                                              .data!
-                                              .otherImages![index]
-                                              .url!),
-                                        )));
-                              }),
-                        )
-                      : SizedBox(),
-                  InkWell(
-                    onTap: () {
-                      cubit.pickImageMutiImage();
+                    builder: (context, state) {
+                      CategoryCubit categoryCubit =
+                          context.read<CategoryCubit>();
+                      return DropdownButton<BaseCategoryModel>(
+                        onChanged: (value) {
+                          setState(() {
+                            cubit.categpryID = value;
+                          });
+                        },
+                        value: cubit.categpryID?.name == null
+                            ? null
+                            : cubit.categpryID,
+                        items: context
+                            .read<CategoryCubit>()
+                            .categoryModel!
+                            .data!
+                            .map((e) => DropdownMenuItem(
+                                  value: e,
+                                  child: Text(e.name!),
+                                ))
+                            .toList(),
+                      );
                     },
-                    child: const Text(
-                      "Add Other images",
-                      style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: ColorsManager.blackColor),
-                    ),
                   ),
 
-                  SizedBox(
-                    height: 200.h,
-                    width: 500.w,
-                    child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: cubit.otherImages.length,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: InkWell(
-                                onTap: () {
-                                  setState(
-                                      () => cubit.otherImages.removeAt(index));
-                                },
-                                child: Image.file(
-                                    File(cubit.otherImages[index].path))),
-                          );
-                        }),
-                  ),
+                  // InkWell(
+                  //   onTap: () {
+                  //     cubit.pickImageMutiImage();
+                  //   },
+                  //   child: Text(
+                  //     "Current images",
+                  //     style: TextStyle(
+                  //         fontSize: 20.sp,
+                  //         fontWeight: FontWeight.bold,
+                  //         color: ColorsManager.blackColor),
+                  //   ),
+                  // ),
+
+                  // cubit.productDetails != null
+                  //     ? SizedBox(
+                  //         height: 200.h,
+                  //         width: 500.w,
+                  //         child: ListView.builder(
+                  //             scrollDirection: Axis.horizontal,
+                  //             itemCount: cubit
+                  //                 .productDetails!.data!.otherImages!.length,
+                  //             itemBuilder: (context, index) {
+                  //               return Padding(
+                  //                   padding: const EdgeInsets.all(8.0),
+                  //                   child: InkWell(
+                  //                       onTap: () {
+                  //                         setState(() {
+                  //                           deletImage.add(cubit.productDetails!
+                  //                               .data!.otherImages![index].id!
+                  //                               .toInt());
+
+                  //                           cubit.productDetails!.data!
+                  //                               .otherImages!
+                  //                               .removeAt(index);
+                  //                         });
+                  //                       },
+                  //                       child: Image(
+                  //                         image: NetworkImage(cubit
+                  //                             .productDetails!
+                  //                             .data!
+                  //                             .otherImages![index]
+                  //                             .url!),
+                  //                       )));
+                  //             }),
+                  //       )
+                  //     : SizedBox(),
 
                   const SizedBox(
                     height: 10,
